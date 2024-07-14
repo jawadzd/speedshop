@@ -75,7 +75,6 @@ $spacing-unit: 0.625rem;
     background-color: #0056b3;
 }
 
-
 .navbar-dropdown {
     display: flex;
 }
@@ -119,4 +118,24 @@ $spacing-unit: 0.625rem;
 .arrow {
     font-size: 0.625rem; 
     margin-left: 0.3125rem; /* 5px equivalent in rem */
+}
+
+@media (max-width: 768px) {
+    *{
+        margin: 2px;
+    }
+    .navbar-search img {
+        display: none;
+    }
+
+    .navbar-location img,
+    .navbar-cart img {
+        width: 1.5rem; /* Adjusted size for smaller screens */
+        height: 1.5rem;
+    }
+
+    .navbar-search input {
+        width: 100%; /* Adjust width to fit with the icon */
+    }
+
 }
