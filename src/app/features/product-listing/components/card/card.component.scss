@@ -1,0 +1,35 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem;
+    max-width: 300px; /* Adjust width as needed */
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-price {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  

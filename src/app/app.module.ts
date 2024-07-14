@@ -3,17 +3,21 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './core/auth/login/login.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { CardComponent } from './features/product-listing/components/card/card.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    NavbarComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
