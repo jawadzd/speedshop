@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ILoginResponse } from '../models/login-response.model';
+import { ILoginRequest } from '../models/login-request.model';
+import { environment } from '../../../../../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private loginUrl = 'http://173.249.40.235:5005/api/User/Login()';
+  private authUrl = environment.authenticationApi;
 
   constructor(private http:HttpClient) { }
 
-  login(username:string,password:string):Observable<any>{
-
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = {username,password};
-
-    return this.http.post<any>(`${this.loginUrl}`,body,{headers});
+  login(request: ILoginRequest):Observable<ILoginResponse>{
+    return this.http.post<ILoginResponse>(`${this.authUrl}User/Login()`, request);
   }
 }
