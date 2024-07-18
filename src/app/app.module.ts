@@ -10,6 +10,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { LoginComponent } from './core/auth/login/login.component';
 import { LandingPageComponent } from './features/landing-page/landing-page.component';
 import { ProductListingComponent } from './features/product-listing/product-listing.component';
+import { FooterComponent } from './core/app-shell/footer/footer.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProductListingComponent } from './features/product-listing/product-list
     CardComponent,
     LoginComponent,
     LandingPageComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    FooterComponent
 
   ],
   imports: [
