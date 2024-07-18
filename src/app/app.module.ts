@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarComponent } from './core/app-shell/navbar/navbar.component';
 import { CardComponent } from './features/product-listing/components/card/card.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { LoginComponent } from './core/auth/login/login.component';
+import { LandingPageComponent } from './features/landing-page/landing-page.component';
+import { ProductListingComponent } from './features/product-listing/product-listing.component';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import { LoginComponent } from './core/auth/login/login.component';
     AppComponent,
     NavbarComponent,
     CardComponent,
-    LoginComponent
+    LoginComponent,
+    LandingPageComponent,
+    ProductListingComponent
+
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import { LoginComponent } from './core/auth/login/login.component';
     FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+
   ],
   bootstrap: [AppComponent]
 })

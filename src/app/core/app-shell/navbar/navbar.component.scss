@@ -1,10 +1,11 @@
+@use "sass:math";
 $spacing-unit: 0.625rem; 
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px $spacing-unit / 2 $spacing-unit rgba(0, 0, 0, 0.1);
+    box-shadow: 0px math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
