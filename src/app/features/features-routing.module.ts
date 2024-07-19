@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShellComponent } from './core/app-shell/shell.component';
+import { ProductListingComponent } from './product-listing/product-listing.component';
 
 const routes: Routes = [
-  { path: '', component: ShellComponent },
+  { path: '', component: ProductListingComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class FeaturesRoutingModule { }

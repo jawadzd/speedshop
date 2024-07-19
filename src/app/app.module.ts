@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ShellModule } from './core/app-shell/shell.module';
 import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ShellModule
 
   ],
   providers: [
