@@ -5,8 +5,9 @@ import { ProductListingComponent } from './product-listing/product-listing.compo
 const routes: Routes = [
   { path: '', component: ProductListingComponent }
 ];
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class FeaturesRoutingModule { }
