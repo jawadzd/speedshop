@@ -6,6 +6,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ShellComponent } from './shell.component';
+import { SignupComponent } from '../auth/signup/signup.component';
 
 
 
@@ -17,6 +18,7 @@ import { ShellComponent } from './shell.component';
     NavbarComponent,
     FooterComponent,
     ShellComponent,
+    SignupComponent,
 
     
     
