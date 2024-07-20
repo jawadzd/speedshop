@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShellModule } from './core/app-shell/shell.module';
 import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
   ],
   providers: [
     provideClientHydration(),
+    CookieService
 
   ],
   bootstrap: [AppComponent]
