@@ -2,16 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px); /* Adjust the height to fit within the screen */
+  height: calc(100vh - 80px); 
   width: 100%;
   box-sizing: border-box;
-  padding: 20px; /* Adjust padding if needed */
+  padding: 20px; 
 }
 
 .login-form-container {
   width: 100%;
-  max-width: 400px; /* Set a max-width to control form size */
-  margin-right: 20px; /* Space between the form and the image */
+  max-width: 400px; 
+  margin-right: 20px;
 }
 
 .login-form {

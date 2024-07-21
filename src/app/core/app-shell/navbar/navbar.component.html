@@ -28,7 +28,7 @@
   </div>
 
   <div class="navbar-button">
-    <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button>
+    <div *ngIf="!showLocationAndDropdown"> <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button></div>
     <button *ngIf="isAuthenticated" (click)="onSignOut()">SIGN OUT</button>
   </div>
 </nav>

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
 import { ILoginRequest } from './models/login-request.model';
 import { ILoginResponse } from './models/login-response.model';
-import { CookieService } from 'ngx-cookie-service'; 
 import { AuthService } from '../services/auth.service';
 
 @Component({
