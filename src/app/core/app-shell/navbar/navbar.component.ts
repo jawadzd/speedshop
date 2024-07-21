@@ -1,6 +1,6 @@
-// navbar.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router ,NavigationEnd} from '@angular/router';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +9,29 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   showLocationAndDropdown: boolean = false;
+  isAuthenticated: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe(() => {
-      this.showLocationAndDropdown = this.router.url === '/shell/login';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showLocationAndDropdown = this.router.url === '/shell/login';
+      }
+      this.checkAuthentication();
     });
+
+    // Initial check for authentication
+    this.checkAuthentication();
+  }
+
+  checkAuthentication(): void {
+    this.isAuthenticated = this.authService.isAuthenticated;
+  }
+
+  onSignOut(): void {
+    this.authService.removeToken();
+    this.isAuthenticated = false;
+    this.router.navigate(['/shell/login']);
   }
 }

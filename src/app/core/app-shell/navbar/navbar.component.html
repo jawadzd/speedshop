@@ -1,36 +1,34 @@
-<!-- navbar.component.html -->
 <nav class="navbar">
-    <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
-      <img src="assets/navbar/logo.png" alt="logo" />
-    </div>
-  
-    <div class="navbar-location">
-      <img src="assets/navbar/location.png" alt="location-icon">
-    </div>
-  
-    <div class="navbar-search" *ngIf="!showLocationAndDropdown">
-      <input type="text" placeholder="Search...">
-      <img src="assets/navbar/search.png" alt="search-icon" />
-    </div>
-  
-    <div class="navbar-dropdown">
-      <div class="dropdown">
-        <button class="dropbtn">EN <span class="arrow">&#9660;</span></button>
-        <div class="dropdown-content">
-          <a href="#">English</a>
-          <a href="#">French</a>
-          <a href="#">Arabic</a>
-        </div>
+  <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
+    <img src="assets/navbar/logo.png" alt="logo" />
+  </div>
+
+  <div class="navbar-location" *ngIf="showLocationAndDropdown">
+    <img src="assets/navbar/location.png" alt="location-icon">
+  </div>
+
+  <div class="navbar-search" *ngIf="!showLocationAndDropdown">
+    <input type="text" placeholder="Search...">
+    <img src="assets/navbar/search.png" alt="search-icon" />
+  </div>
+
+  <div class="navbar-dropdown">
+    <div class="dropdown">
+      <button class="dropbtn">EN <span class="arrow">&#9660;</span></button>
+      <div class="dropdown-content">
+        <a href="#">English</a>
+        <a href="#">French</a>
+        <a href="#">Arabic</a>
       </div>
     </div>
-  
-    <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
-      <img src="assets/navbar/cart.png" alt="cart-icon" />
-    </div>
-  
-    <div class="navbar-button" *ngIf="!showLocationAndDropdown">
-      <button routerLink="/shell/login">LOG IN</button>
-    </div>
+  </div>
 
-  </nav>
-  
+  <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
+    <img src="assets/navbar/cart.png" alt="cart-icon" />
+  </div>
+
+  <div class="navbar-button">
+    <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button>
+    <button *ngIf="isAuthenticated" (click)="onSignOut()">SIGN OUT</button>
+  </div>
+</nav>
