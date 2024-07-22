@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router ,NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
@@ -16,9 +16,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showLocationAndDropdown = this.router.url === '/shell/login';
+        if (this.router.url === '/shell/login' || this.router.url === '/shell/signup') {
+          this.showLocationAndDropdown = true;
+        } else {
+          this.showLocationAndDropdown = false;
+          this.checkAuthentication();
+        }
       }
-      this.checkAuthentication();
     });
 
     // Initial check for authentication

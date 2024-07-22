@@ -1,7 +1,9 @@
 <nav class="navbar">
-  <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
-    <img src="assets/navbar/logo.png" alt="logo" />
-  </div>
+  <a [routerLink]="['/shell/features']" class="navbar-logo-link">
+    <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
+      <img src="assets/navbar/logo.png" alt="logo" />
+    </div>
+  </a>
 
   <div class="navbar-location" *ngIf="showLocationAndDropdown">
     <img src="assets/navbar/location.png" alt="location-icon">
