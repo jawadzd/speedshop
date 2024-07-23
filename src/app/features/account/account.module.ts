@@ -7,6 +7,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ChipComponent } from './components/data/components/chip/chip.component';
 import { EditorComponent } from './components/data/components/editor/editor.component';
 import { FormsModule } from '@angular/forms';
+import { DeleteComponent } from './components/data/components/delete/delete.component';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     AccountComponent,
     DataComponent,
     ChipComponent,
-    EditorComponent
+    EditorComponent,
+    DeleteComponent
   ],
   imports: [
     CommonModule,
