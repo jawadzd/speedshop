@@ -4,7 +4,9 @@ import { AccountRoutingModule } from './account-routing.module';
 import { AccountComponent } from './account.component';
 import { DataComponent } from './components/data/data.component';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ChipComponent } from './components/data/chip/chip.component';
+import { ChipComponent } from './components/data/components/chip/chip.component';
+import { EditorComponent } from './components/data/components/editor/editor.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,12 +14,14 @@ import { ChipComponent } from './components/data/chip/chip.component';
   declarations: [
     AccountComponent,
     DataComponent,
-    ChipComponent
+    ChipComponent,
+    EditorComponent
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
-    AgGridAngular
+    AgGridAngular,
+    FormsModule
     
   ]
 })

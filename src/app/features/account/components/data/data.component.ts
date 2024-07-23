@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ColDef } from 'ag-grid-community';
-import { ChipComponent } from './chip/chip.component';
+import { ChipComponent } from './components/chip/chip.component';
+import { EditorComponent } from './components/editor/editor.component';
 
 
 @Component({
@@ -15,14 +16,15 @@ export class DataComponent implements OnInit {
 
   colDefs: ColDef[] = [
     { field: "name", sortable: true, filter: true  },
-    { field: "description", sortable: true, filter: true  },
+    { field: "description", sortable: true, filter: true ,editable: true, cellEditor: 'descriptionEditor' },
     { field: "price" , sortable: true, filter: true },
     { field: "category" , sortable: true, filter: true },
     { field: "isAvailable" , sortable: true, filter: true,cellRenderer:'chipRenderer' }
   ];
 
   frameworkComponents: any = {
-    chipRenderer: ChipComponent
+    chipRenderer: ChipComponent,
+    descriptionEditor:EditorComponent
   };
   
 
