@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { ShellModule } from './core/app-shell/shell.module';
 import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
+
+
 
 @NgModule({
   declarations: [
@@ -15,7 +18,9 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AgGridModule,
     ShellModule
+   
 
   ],
   providers: [
