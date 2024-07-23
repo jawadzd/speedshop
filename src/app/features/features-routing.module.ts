@@ -6,8 +6,8 @@ import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   { path: '', component: ProductListingComponent },
-  { path: '', redirectTo: 'Account', pathMatch: 'full' },
-  { path: 'Account', component: AccountComponent, loadChildren: () => import('../features/account/account.module').then(m => m.AccountModule) }
+  { path: '', redirectTo: 'account', pathMatch: 'full' },
+  { path: 'account', component: AccountComponent, loadChildren: () => import('../features/account/account.module').then(m => m.AccountModule) }
 ];
 
 @NgModule({
