@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ColDef } from 'ag-grid-community';
+import { ChipComponent } from './chip/chip.component';
+
 
 @Component({
   selector: 'app-data',
@@ -16,8 +18,13 @@ export class DataComponent implements OnInit {
     { field: "description", sortable: true, filter: true  },
     { field: "price" , sortable: true, filter: true },
     { field: "category" , sortable: true, filter: true },
-    { field: "isAvailable" , sortable: true, filter: true }
+    { field: "isAvailable" , sortable: true, filter: true,cellRenderer:'chipRenderer' }
   ];
+
+  frameworkComponents: any = {
+    chipRenderer: ChipComponent
+  };
+  
 
   constructor(private http: HttpClient) {}
 

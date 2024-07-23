@@ -1,0 +1,3 @@
+<span [ngClass]="{'available': params.value, 'out-of-stock': !params.value}">
+    {{ params.value ? 'Available' : 'Out of Stock' }}
+  </span>
