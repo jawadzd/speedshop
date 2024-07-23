@@ -1,24 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ColDef } from 'ag-grid-community';
-
 
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
-  styleUrl: './data.component.scss'
+  styleUrls: ['./data.component.scss'] // Corrected 'styleUrl' to 'styleUrls'
 })
-export class DataComponent {
+export class DataComponent implements OnInit {
 
-  rowData = [
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-  ];
- 
+  rowData: any[] = []; // Initialize as an empty array
+
   colDefs: ColDef[] = [
-    { field: "make" },
-    { field: "model" },
+    { field: "name" },
+    { field: "description" },
     { field: "price" },
-    { field: "electric" }
+    { field: "category" },
+    { field: "isAvailable" }
   ];
- }
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.http.get<any[]>('assets/data.json').subscribe(data => {
+      this.rowData = data;
+    });
+  }
+}
