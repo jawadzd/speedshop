@@ -5,18 +5,18 @@ import { ColDef } from 'ag-grid-community';
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss'] // Corrected 'styleUrl' to 'styleUrls'
+  styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
 
   rowData: any[] = []; // Initialize as an empty array
 
   colDefs: ColDef[] = [
-    { field: "name" },
-    { field: "description" },
-    { field: "price" },
-    { field: "category" },
-    { field: "isAvailable" }
+    { field: "name", sortable: true, filter: true  },
+    { field: "description", sortable: true, filter: true  },
+    { field: "price" , sortable: true, filter: true },
+    { field: "category" , sortable: true, filter: true },
+    { field: "isAvailable" , sortable: true, filter: true }
   ];
 
   constructor(private http: HttpClient) {}
