@@ -17,7 +17,7 @@ export class DataComponent implements OnInit {
   colDefs: ColDef[] = [
     { field: "name", sortable: true, filter: true  },
     { field: "description", sortable: true, filter: true ,editable: true, cellEditor: 'descriptionEditor' },
-    { field: "price" , sortable: true, filter: true },
+    { field: "price" , sortable: true, filter: true , valueFormatter: this.currencyFormatter },
     { field: "category" , sortable: true, filter: true },
     { field: "isAvailable" , sortable: true, filter: true,cellRenderer:'chipRenderer' }
   ];
@@ -38,5 +38,9 @@ export class DataComponent implements OnInit {
     this.http.get<any[]>('assets/data.json').subscribe(data => {
       this.rowData = data;
     });
+  }
+  currencyFormatter(params: any): string {
+    const value = params.value;
+    return `$${value.toFixed(2)}`; // Format as currency
   }
 }
