@@ -2,13 +2,13 @@ import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 import { ILoginResponse } from '../models/login-response.model';
 
-export interface AuthState {
+export interface IAuthState {
   user: ILoginResponse | null;
   error: string | null;
   loading: boolean;
 }
 
-export const initialState: AuthState = {
+export const initialState: IAuthState = {
   user: null,
   error: null,
   loading: false,

@@ -2,9 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { login } from './store/auth.actions';
-import { AuthState } from './store/auth.reducer';
+import { IAuthState } from './store/auth.reducer';
 import { ILoginRequest } from './models/login-request.model';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 
@@ -21,7 +20,7 @@ export class LoginComponent implements OnDestroy {
   username: string = '';
   password: string = '';
 
-  constructor(private store: Store<{ auth: AuthState }>, private router: Router) { }
+  constructor(private store: Store<{ auth: IAuthState }>, private router: Router) { }
 
   onSubmit(): void {
     const request: ILoginRequest = {

@@ -7,6 +7,8 @@ import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { authReducer } from './core/auth/login/store/auth.reducer';
 import { AuthEffects } from './core/auth/login/store/auth.effects';
+import { signupReducer } from './core/auth/signup/store/signup.reducer';
+import { SignupEffects } from './core/auth/signup/store/signup.effects';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -20,8 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     HttpClientModule,
     ShellModule,
-    StoreModule.forRoot({ auth: authReducer }),
-    EffectsModule.forRoot([AuthEffects])
+    StoreModule.forRoot({ auth: authReducer, signup: signupReducer }),
+    EffectsModule.forRoot([AuthEffects, SignupEffects])
 
   ],
   providers: [

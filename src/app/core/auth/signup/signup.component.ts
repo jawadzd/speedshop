@@ -1,23 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ISignupRequest } from './models/signup-request.model';
-import { ISignupResponse } from './models/signup-response.model';
-import { SignupService } from './services/signup.service';
 import { Router } from '@angular/router';
+import { signup } from './store/signup.actions';
+import { ISignupState } from './store/signup.reducer';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent {
+export class SignupComponent implements OnDestroy {
+  private unsubscribe$ = new Subject<void>();
 
   firstname: string = '';
   lastname: string = '';
   email: string = '';
   password: string = '';
-  constructor(private signupService: SignupService, private router: Router) { }
+  private signupAttempted: boolean = false;
+
+  constructor(private store: Store<{ signup: ISignupState }>, private router: Router) {
+    // Move the subscription to the constructor to ensure it is only created once
+    this.store.select(state => state.signup)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(signupState => {
+        if (this.signupAttempted) {
+          if (signupState.user && signupState.user.id) {
+            alert('Signup successful, please login to continue');
+            this.router.navigate(['/shell/login']);
+          } else  {
+            alert('Signup failed. Please try again.');
+          }
+        }
+      }, error => {
+        if (this.signupAttempted) {
+          alert('An error occurred. Please try again later.');
+        }
+      });
+  }
 
   onSubmit(): void {
+    this.signupAttempted = true; 
     const request: ISignupRequest = {
       firstname: this.firstname,
       lastname: this.lastname,
@@ -25,20 +50,11 @@ export class SignupComponent {
       password: this.password
     };
 
-    this.signupService.signup(request).subscribe((response: ISignupResponse) => {
-      if (response && response.id) {
-        alert('Signup successful , please login to continue');
-        this.router.navigate(['/shell/login']); // Redirect to login page
-      } else {
-        alert('Signup failed. Please try again.');
-      }
-    }, error => {
-      alert('An error occurred. Please try again later.');
-    });
-
+    this.store.dispatch(signup({ request }));
   }
 
-
-
-
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
