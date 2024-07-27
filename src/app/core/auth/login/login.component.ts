@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { LoginService } from './services/login.service';
+import { login } from './store/auth.actions';
+import { AuthState } from './store/auth.reducer';
 import { ILoginRequest } from './models/login-request.model';
-import { ILoginResponse } from './models/login-response.model';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService, private authService: AuthService, private router: Router) { }
+  constructor(private store: Store<{ auth: AuthState }>, private router: Router) { }
 
   onSubmit(): void {
     const request: ILoginRequest = {
@@ -22,16 +22,15 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.loginService.login(request).subscribe((response: ILoginResponse) => {
-      if (response && response.Login && response.Login.AccessToken) {
-        this.authService.setToken(response.Login.AccessToken);
+    this.store.dispatch(login({ request: request }));
+
+    this.store.select(state => state.auth).subscribe(authState => {
+      if (authState.user && authState.user.Login && authState.user.Login.AccessToken) {
         alert('Login successful');
-        this.router.navigate(['/']); // Redirect to home page or another route
-      } else {
+        this.router.navigate(['/shell/feature/account']); // Redirect to home page or another route
+      } else if (authState.error) {
         alert('Login failed. Please check your username and password.');
       }
-    }, error => {
-      alert('An error occurred. Please try again later.');
     });
   }
 }
