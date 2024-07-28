@@ -4,6 +4,7 @@ import { loadItems } from './store/item.actions';
 import { Observable } from 'rxjs';
 import { IItem } from './models/item.model';
 import { ItemState } from './store/item.reducer';
+import { selectAllItems } from './store/item.selectors';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ProductListingComponent implements OnInit {
 
 
   constructor(private store: Store<{ itemState: ItemState }>) {
-    this.items$ = store.pipe(select(state => state.itemState.items));
+    this.items$ = this.store.pipe(select(selectAllItems));
   }
 
   ngOnInit(){

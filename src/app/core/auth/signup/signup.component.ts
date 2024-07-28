@@ -1,10 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { signup } from './store/signup.actions';
 import { ISignupState } from './store/signup.reducer';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { selectSignupUser ,selectSignupError} from './store/signup.selectors';
 
 @Component({
   selector: 'app-signup',
@@ -18,20 +19,30 @@ export class SignupComponent implements OnDestroy {
   email: string = '';
   password: string = '';
 
-  constructor(private store: Store<{ signup: ISignupState }>, private router: Router) {
-    this.store.select(state => state.signup).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(signupState => {
-      if (signupState.user && signupState.user.id) {
-        alert('Signup successful, please login to continue');
-        this.router.navigate(['/shell/login']);
-      } else if (signupState.error) {
-        alert('Signup failed. Please try again.');
-      }
-    }, error => {
-      alert('An error occurred. Please try again later.');
-    });
+
+  user$ = this.store.pipe(select(selectSignupUser));
+  error$ = this.store.pipe(select(selectSignupError));
+
+
+  constructor(private store: Store<ISignupState>, private router: Router) {
+    this.user$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(user => {
+        if (user && user.id) {
+          alert('Signup successful, please login to continue');
+          this.router.navigate(['/shell/login']);
+        }
+      });
+
+    this.error$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(error => {
+        if (error) {
+          alert('Signup failed. Please try again.');
+        }
+      });
   }
+
 
   onSubmit(): void {
     const request = {

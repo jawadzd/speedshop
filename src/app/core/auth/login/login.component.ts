@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store ,select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { login } from './store/auth.actions';
 import { IAuthState } from './store/auth.reducer';
 import { ILoginRequest } from './models/login-request.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { selectAuthUser, selectAuthError, selectAuthLoading } from './store/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -18,16 +19,26 @@ export class LoginComponent implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
 
+  user$ = this.store.pipe(select(selectAuthUser));
+  error$ = this.store.pipe(select(selectAuthError));
+  loading$ = this.store.pipe(select(selectAuthLoading));
+
   constructor(private store: Store<{ auth: IAuthState }>, private router: Router) {}
 
   ngOnInit(): void {
-    this.store.select(state => state.auth)
+    this.user$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(authState => {
-        if (authState.user && authState.user.Login && authState.user.Login.AccessToken) {
+      .subscribe(user => {
+        if (user && user.Login && user.Login.AccessToken) {
           alert('Login successful');
           this.router.navigate(['/shell/feature/account']);
-        } else if (authState.error) {
+        }
+      });
+
+    this.error$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(error => {
+        if (error) {
           alert('Login failed. Please check your username and password.');
         }
       });
