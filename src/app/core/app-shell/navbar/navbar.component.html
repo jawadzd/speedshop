@@ -30,7 +30,12 @@
   </div>
 
   <div class="navbar-button">
-    <div *ngIf="!showLocationAndDropdown"> <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button></div>
+    <div *ngIf="!showLocationAndDropdown"> 
+      <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button>
+    </div>
     <button *ngIf="isAuthenticated" (click)="onSignOut()">SIGN OUT</button>
+    <button (click)="toggleKeyboardControl()">
+      {{ keyboardControlEnabled ? 'Disable' : 'Enable' }} Keyboard Control
+    </button>
   </div>
 </nav>

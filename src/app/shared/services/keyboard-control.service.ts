@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Subject, fromEvent } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { filter, share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KeyboardControlService {
-  private keydown$ = fromEvent<KeyboardEvent>(window, 'keydown');
   private arrowKeySubject = new Subject<string>();
   private enterKeySubject = new Subject<void>();
+  private enabled = false;
+
+  arrowKey$: Observable<string> = this.arrowKeySubject.asObservable();
+  enterKey$: Observable<void> = this.enterKeySubject.asObservable();
 
   constructor() {
-    this.keydown$
-      .pipe(filter(event => event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Enter'))
+    fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(
+        filter(() => this.enabled),
+        share()
+      )
       .subscribe(event => {
-        if (event.key === 'Enter') {
-          this.enterKeySubject.next();
-        } else {
+        if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
           this.arrowKeySubject.next(event.key);
+        } else if (event.key === 'Enter') {
+          this.enterKeySubject.next();
         }
       });
   }
 
-  get arrowKey$() {
-    return this.arrowKeySubject.asObservable();
+  setEnabled(enabled: boolean) {
+    this.enabled = enabled;
   }
 
-  get enterKey$() {
-    return this.enterKeySubject.asObservable();
+  isEnabled(): boolean {
+    return this.enabled;
   }
 }

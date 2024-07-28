@@ -1,4 +1,3 @@
-// src/app/navbar/navbar.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -8,6 +7,7 @@ import { selectAuthUser } from '../../auth/login/store/auth.selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { signout } from '../../auth/login/store/auth.actions';
+import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';  // Adjust the path to your service
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +17,15 @@ import { signout } from '../../auth/login/store/auth.actions';
 export class NavbarComponent implements OnInit, OnDestroy {
   showLocationAndDropdown: boolean = false;
   isAuthenticated: boolean = false;
+  keyboardControlEnabled: boolean = false;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private router: Router, private authService: AuthService, private store: Store<IAuthState>) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private store: Store<IAuthState>,
+    private keyboardControlService: KeyboardControlService
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
@@ -41,6 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
 
     this.checkAuthentication();
+    this.keyboardControlEnabled = this.keyboardControlService.isEnabled();
   }
 
   checkAuthentication(): void {
@@ -50,6 +57,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onSignOut(): void {
     this.store.dispatch(signout());
     this.router.navigate(['/shell/login']);
+  }
+
+  toggleKeyboardControl(): void {
+    this.keyboardControlEnabled = !this.keyboardControlEnabled;
+    this.keyboardControlService.setEnabled(this.keyboardControlEnabled);
   }
 
   ngOnDestroy(): void {
