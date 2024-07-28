@@ -6,8 +6,7 @@ import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
   { path: '', component: ProductListingComponent },
-  { path: '', redirectTo: 'account', pathMatch: 'full' },
-  { path: 'shell/feature/item/:id', component: ItemComponent },
+  { path: 'item/:id', component: ItemComponent },
   { path: 'account',canActivate: [LoginGuard],loadChildren: () => import('../features/account/account.module').then(m => m.AccountModule) }
 ];
 
