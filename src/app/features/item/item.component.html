@@ -1,8 +1,15 @@
 <div *ngIf="item" class="item-card">
-    <h1>{{ item.title }}</h1>
+  <div class="item-card-image">
     <img [src]="item.image" alt="{{ item.title }}">
-    <p>{{ item.description }}</p>
-    <p>Price: {{ item.price | currency }}</p>
-    <p>Category: {{ item.category }}</p>
   </div>
-  
+
+  <div class="item-card-body">
+    <h1 class="item-title">{{ item.title }}</h1>
+    <p class="item-category">
+      <span class="category-icon">✔</span>
+      {{ item.category }}
+    </p>
+    <p class="item-price">{{ item.price | currency }}</p>
+    <p class="item-description">{{ item.description }}</p>
+  </div>
+</div>
