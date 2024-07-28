@@ -14,3 +14,8 @@
     width: 100%; // Make the card take the full width of the wrapper
   }
   
+  .card-wrapper.selected {
+    border: 2px solid blue; /* Or any other visual highlight */
+    outline: none; /* Remove default outline if any */
+  }
+  
