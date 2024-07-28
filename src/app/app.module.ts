@@ -14,9 +14,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { itemReducer } from './features/product-listing/store/item.reducer';
 import { ItemEffects } from './features/product-listing/store/item.effects';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
+
 
   ],
   imports: [

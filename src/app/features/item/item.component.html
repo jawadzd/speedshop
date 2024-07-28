@@ -5,7 +5,7 @@
 
   <div class="item-card-body">
     <h1 class="item-title">{{ item.title }}</h1>
-    <p class="item-category">
+    <p class="item-category" [ngClass]="item.category | categoryColor">
       <span class="category-icon">✔</span>
       {{ item.category }}
     </p>
