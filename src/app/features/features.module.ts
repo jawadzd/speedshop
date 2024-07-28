@@ -5,11 +5,13 @@ import { ProductListingComponent } from './product-listing/product-listing.compo
 import { CardComponent } from './product-listing/components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { AccountModule } from './account/account.module';
+import { ItemComponent } from './item/item.component';
 @NgModule({
   declarations: [
   FeatureComponent,
   ProductListingComponent,
   CardComponent,
+  ItemComponent,
     
   ],
   imports: [

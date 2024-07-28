@@ -1,0 +1,8 @@
+<div *ngIf="item" class="item-card">
+    <h1>{{ item.title }}</h1>
+    <img [src]="item.image" alt="{{ item.title }}">
+    <p>{{ item.description }}</p>
+    <p>Price: {{ item.price | currency }}</p>
+    <p>Category: {{ item.category }}</p>
+  </div>
+  

@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { IItem } from '../../shared/models/item.model';
 import { ItemState } from './store/item.reducer';
 import { selectAllItems } from './store/item.selectors';
-import { KeyboardControlService } from '../../shared/services/keyboard-control.service';  // Adjust the path to your service
+import { KeyboardControlService } from '../../shared/services/keyboard-control.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -79,5 +79,13 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   trackByItemId(index: number, item: IItem): number {
     return item.id;
+  }
+
+  goToItem(id: number): void {
+    this.router.navigate(['/shell/feature/item', id]);
+  }
+
+  onDoubleClick(id: number): void {
+    this.goToItem(id);
   }
 }

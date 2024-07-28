@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListingComponent } from './product-listing/product-listing.component';
 import { LoginGuard } from '../core/auth/guards/login.guard';
+import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
   { path: '', component: ProductListingComponent },
   { path: '', redirectTo: 'account', pathMatch: 'full' },
+  { path: 'shell/feature/item/:id', component: ItemComponent },
   { path: 'account',canActivate: [LoginGuard],loadChildren: () => import('../features/account/account.module').then(m => m.AccountModule) }
 ];
 

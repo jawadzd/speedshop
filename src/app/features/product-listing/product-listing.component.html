@@ -3,6 +3,7 @@
     *ngFor="let item of items$ | async; trackBy: trackByItemId; let i = index" 
     class="card-wrapper" 
     (click)="onCardClick(i)" 
+    (dblclick)="onDoubleClick(item.id)"
     [class.selected]="i === selectedItemIndex">
     <app-card [item]="item"></app-card>
   </div>
