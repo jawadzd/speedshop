@@ -1,34 +1,34 @@
-import { Component ,OnInit,OnDestroy} from '@angular/core';
-import { Store ,select } from '@ngrx/store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { loadItems } from './store/item.actions';
-import { Observable ,Subscription} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { IItem } from './models/item.model';
 import { ItemState } from './store/item.reducer';
 import { selectAllItems } from './store/item.selectors';
-import { KeyboardControlService } from '../../shared/services/keyboard-control.service';
-
+import { KeyboardControlService } from '../../shared/services/keyboard-control.service';  // Adjust the path to your service
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-listing',
   templateUrl: './product-listing.component.html',
-  styleUrl: './product-listing.component.scss'
+  styleUrls: ['./product-listing.component.scss']
 })
-export class ProductListingComponent implements OnInit ,OnDestroy{
+export class ProductListingComponent implements OnInit, OnDestroy {
   title = 'speedshop';
   items$: Observable<IItem[]>;
   selectedItemIndex: number = 0;
   private subscriptions: Subscription = new Subscription();
 
-
-
-  constructor(private store: Store<{ itemState: ItemState }>, private keyboardControlService: KeyboardControlService) {
+  constructor(
+    private store: Store<{ itemState: ItemState }>,
+    private keyboardControlService: KeyboardControlService,
+    private router: Router
+  ) {
     this.items$ = this.store.pipe(select(selectAllItems));
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.store.dispatch(loadItems());
-  
-    
 
     this.subscriptions.add(
       this.keyboardControlService.arrowKey$.subscribe(key => {
@@ -68,14 +68,16 @@ export class ProductListingComponent implements OnInit ,OnDestroy{
   selectCurrentItem(): void {
     this.items$.subscribe(items => {
       const selectedItem = items[this.selectedItemIndex];
-      // Perform the desired action with the selected item, e.g., navigate to its detail page
-      console.log('Selected Item:', selectedItem);
+      // Navigate to the item's detail page
+      this.router.navigate(['/shell/feature/item', selectedItem.id]);
     });
   }
-  
+
+  onCardClick(index: number): void {
+    this.selectedItemIndex = index;
+  }
 
   trackByItemId(index: number, item: IItem): number {
     return item.id;
   }
-
 }
