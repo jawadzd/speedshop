@@ -7,6 +7,6 @@ import { Component , Input} from '@angular/core';
 })
 export class CardComponent {
 
-  @Input() item: any; //define input property this will reveive the data
+  @Input() item: any; 
 
 }
