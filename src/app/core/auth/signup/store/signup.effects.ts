@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { signup, signupSuccess, signupFailure } from './signup.actions';

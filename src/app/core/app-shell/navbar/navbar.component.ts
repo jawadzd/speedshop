@@ -1,4 +1,3 @@
-// src/app/navbar/navbar.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store, select } from '@ngrx/store';

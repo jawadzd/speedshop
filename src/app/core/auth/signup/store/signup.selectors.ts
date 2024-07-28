@@ -1,4 +1,3 @@
-
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ISignupState } from './signup.reducer';
 

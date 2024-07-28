@@ -1,7 +1,5 @@
 import { createReducer ,on } from "@ngrx/store";
 import * as SignupActions from "./signup.actions";
-import { ISignupResponse } from "../models/signup-response.model";
-
 export interface ISignupState {
     user: any; 
     error: string | null;
