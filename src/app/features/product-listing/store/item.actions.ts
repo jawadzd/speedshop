@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IItem } from '../models/item.model';
+import { IItem } from '../../../shared/models/item.model';
 
 export const loadItems = createAction('[Item] Load Items');
 export const loadItemsSuccess = createAction(

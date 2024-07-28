@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { loadItems } from './store/item.actions';
 import { Observable, Subscription } from 'rxjs';
-import { IItem } from './models/item.model';
+import { IItem } from '../../shared/models/item.model';
 import { ItemState } from './store/item.reducer';
 import { selectAllItems } from './store/item.selectors';
 import { KeyboardControlService } from '../../shared/services/keyboard-control.service';  // Adjust the path to your service

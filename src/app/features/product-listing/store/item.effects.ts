@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ItemService } from '../services/item.service';
 import { loadItems, loadItemsSuccess, loadItemsFailure } from './item.actions';
-import { IItem } from '../models/item.model';
+import { IItem } from '../../../shared/models/item.model';
 
 @Injectable()
 export class ItemEffects {
