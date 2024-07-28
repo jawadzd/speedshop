@@ -20,8 +20,14 @@ export class ProductListingComponent implements OnInit {
   constructor(private store: Store<{ itemState: ItemState }>) {
     this.items$ = store.pipe(select(state => state.itemState.items));
   }
-  items: any[] = [];
+
   ngOnInit(){
     this.store.dispatch(loadItems());
   }
+
+
+  trackByItemId(index: number, item: IItem): number {
+    return item.id;
+  }
+
 }
