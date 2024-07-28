@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IItem } from '../models/item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
 
-  getItems(): Observable<any[]> {
-    return this.http.get<any[]>(this.url);
+  getItems(): Observable<IItem[]> {
+    return this.http.get<IItem[]>(this.url);
   }
 }

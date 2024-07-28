@@ -11,6 +11,8 @@ import { signupReducer } from './core/auth/signup/store/signup.reducer';
 import { SignupEffects } from './core/auth/signup/store/signup.effects';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { itemReducer } from './features/product-listing/store/item.reducer';
+import { ItemEffects } from './features/product-listing/store/item.effects';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,8 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     HttpClientModule,
     ShellModule,
-    StoreModule.forRoot({ auth: authReducer, signup: signupReducer }),
-    EffectsModule.forRoot([AuthEffects, SignupEffects])
+    StoreModule.forRoot({ auth: authReducer, signup: signupReducer ,itemState: itemReducer}),
+    EffectsModule.forRoot([AuthEffects, SignupEffects,ItemEffects])
 
   ],
   providers: [
