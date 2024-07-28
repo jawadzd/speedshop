@@ -75,6 +75,14 @@ $spacing-unit: 0.625rem;
     margin-right: 1.25rem; 
 }
 
+.navbar-button .on {
+    background-color: green;
+}
+
+.navbar-button .off {
+    background-color: red;
+}
+
 .navbar-button button:hover {
     background-color: #0056b3;
 }
