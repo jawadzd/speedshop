@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { itemReducer } from './features/product-listing/store/item.reducer';
 import { ItemEffects } from './features/product-listing/store/item.effects';
+import { AuthInterceptor } from './core/auth/services/interceptors/auth-interceptor.service';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ItemEffects } from './features/product-listing/store/item.effects';
   ],
   providers: [
     provideClientHydration(),
-    CookieService
+    CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
 
   ],
   bootstrap: [AppComponent]

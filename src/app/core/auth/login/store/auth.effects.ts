@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { LoginService } from '../services/login.service';
 import { AuthService } from '../../services/auth.service';
-import { login, loginSuccess, loginFailure,signout } from './auth.actions';
+import { login, loginSuccess, loginFailure, signout } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -28,12 +28,13 @@ export class AuthEffects {
       )
     )
   );
+
   signout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signout),
       map(() => {
         this.authService.removeToken();
-        return { type: '[Auth] Signout Success' }; 
+        return { type: '[Auth] Signout Success' };
       })
     )
   );
