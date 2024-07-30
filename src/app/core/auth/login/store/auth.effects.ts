@@ -33,7 +33,7 @@ export class AuthEffects {
       ofType(signout),
       map(() => {
         this.authService.removeToken();
-        return { type: '[Auth] Signout Success' };  // You can define a specific signout success action if needed
+        return { type: '[Auth] Signout Success' }; 
       })
     )
   );
