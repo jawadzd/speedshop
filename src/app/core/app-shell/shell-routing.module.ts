@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../auth/login/login.component';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { authGuard } from '../auth/guards/auth.guard';
+import { LoginGuard } from '../auth/guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'feature', pathMatch: 'full' },
@@ -13,12 +14,12 @@ const routes: Routes = [
   { 
     path: 'login', 
     component: LoginComponent, 
-    canActivate: [authGuard] 
+    canActivate: [LoginGuard] 
   },
   { 
     path: 'signup', 
     component: SignupComponent, 
-    canActivate: [authGuard] 
+    canActivate: [LoginGuard] 
   }
 ];
 
