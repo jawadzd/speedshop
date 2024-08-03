@@ -52,6 +52,7 @@ export class AuthService {
     const token = this.cookieService.get(this.tokenKey);
     return token || null;
   }
+  
 
   getRefreshToken(): string | null {
     const refreshToken = this.cookieService.get(this.refreshTokenKey);
