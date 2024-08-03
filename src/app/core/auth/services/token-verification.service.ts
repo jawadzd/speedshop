@@ -1,22 +1,41 @@
 import { Injectable } from '@angular/core';
+import {jwtDecode} from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ILoginResponse } from '../login/models/login-response.model';
 import { environment } from '../../../../environments/environment.dev';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenVerificationService {
-  private verifyUrl = `${environment.authenticationApi}User/VerifyToken`;
   private refreshUrl = `${environment.authenticationApi}User/RefreshToken`;
 
   constructor(private http: HttpClient) {}
 
-  verifyToken(token: string): Observable<{ valid: boolean }> {
-    return this.http.post<{ valid: boolean }>(this.verifyUrl, { token });
+  // Decodes the JWT and returns its payload
+  private decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (e) {
+      return null;
+    }
   }
 
+  // Checks if the token is expired
+  isTokenExpired(token: string): boolean {
+    const decoded = this.decodeToken(token);
+    if (!decoded || !decoded.exp) {
+      return true;
+    }
+
+    const expirationDate = new Date(0);
+    expirationDate.setUTCSeconds(decoded.exp);
+
+    return expirationDate < new Date();
+  }
+
+  // Refreshes the token using the refresh endpoint
   refreshToken(refreshToken: string): Observable<ILoginResponse> {
     return this.http.post<ILoginResponse>(this.refreshUrl, { refreshToken });
   }

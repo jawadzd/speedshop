@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import jwt_decode from 'jwt-decode';
-import { TokenVerificationService } from './token-verification.service';
 import { Observable, of, throwError } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { loginSuccess, signout } from '../login/store/auth.actions';
 import { ILoginResponse } from '../login/models/login-response.model';
+import { TokenVerificationService } from './token-verification.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private readonly tokenKey = 'authToken';
@@ -24,25 +23,17 @@ export class AuthService {
   get isAuthenticated(): Observable<boolean> {
     const token = this.getToken();
     if (token) {
-      return this.tokenVerificationService.verifyToken(token).pipe(
-        switchMap(response => {
-          if (response.valid) {
-            return of(true);
-          } else {
-            return this.refreshToken().pipe(
-              map(() => true),
-              catchError(() => {
-                this.signout();
-                return of(false);
-              })
-            );
-          }
-        }),
-        catchError(() => {
-          this.signout();
-          return of(false);
-        })
-      );
+      if (!this.tokenVerificationService.isTokenExpired(token)) {
+        return of(true);
+      } else {
+        return this.refreshToken().pipe(
+          map(() => true),
+          catchError(() => {
+            this.signout();
+            return of(false);
+          })
+        );
+      }
     }
     return of(false);
   }
@@ -71,12 +62,12 @@ export class AuthService {
     const refreshToken = this.getRefreshToken();
     if (refreshToken) {
       return this.tokenVerificationService.refreshToken(refreshToken).pipe(
-        map(response => {
+        map((response) => {
           this.setToken(response.Login.AccessToken, response.Login.RefreshToken);
           this.store.dispatch(loginSuccess({ response }));
           return response;
         }),
-        catchError(error => {
+        catchError((error) => {
           this.signout();
           return throwError(error);
         })
