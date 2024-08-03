@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
     return this.authService.isAuthenticated.pipe(
       map(isAuthenticated => {
         if (isAuthenticated) {
-          this.router.navigate(['/main-feature-page']); // Replace with your main feature route
+          this.router.navigate(['/shell/feature']); 
           return false;
         } else {
           return true;
