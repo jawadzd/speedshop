@@ -3,7 +3,8 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShellModule } from './core/app-shell/shell.module';
-import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS, HttpClient  } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CookieService } from 'ngx-cookie-service';
 import { authReducer } from './core/auth/login/store/auth.reducer';
 import { AuthEffects } from './core/auth/login/store/auth.effects';
@@ -15,6 +16,12 @@ import { itemReducer } from './features/product-listing/store/item.reducer';
 import { ItemEffects } from './features/product-listing/store/item.effects';
 import { AuthInterceptor } from './core/auth/services/interceptors/auth-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShellModule,
     StoreModule.forRoot({ auth: authReducer, signup: signupReducer ,itemState: itemReducer}),
     EffectsModule.forRoot([AuthEffects, SignupEffects,ItemEffects]),
-    NgbModule
+    NgbModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
   ],
   providers: [

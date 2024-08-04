@@ -6,11 +6,11 @@
   </a>
 
   <div class="navbar-location" *ngIf="showLocationAndDropdown">
-    <img src="assets/navbar/location.png" alt="location-icon_pic">
+    <img src="assets/navbar/location.png" alt="location-icon_pic" />
   </div>
 
   <div class="navbar-search" *ngIf="!showLocationAndDropdown">
-    <input type="text" placeholder="Search...">
+    <input type="text" placeholder="Search..." />
     <img src="assets/navbar/search.png" alt="search-icon_pic" />
   </div>
 
@@ -18,9 +18,9 @@
     <div class="dropdown">
       <button class="dropbtn">EN <span class="arrow">&#9660;</span></button>
       <div class="dropdown-content">
-        <a href="#">English</a>
-        <a href="#">French</a>
-        <a href="#">Arabic</a>
+        <a href="#" (click)="changeLanguage('en')">{{ 'ENGLISH' | translate }}</a>
+        <a href="#" (click)="changeLanguage('fr')">{{ 'FRENCH' | translate }}</a>
+        <a href="#" (click)="changeLanguage('ru')">{{ 'RUSSIAN' | translate }}</a>
       </div>
     </div>
   </div>
@@ -32,10 +32,11 @@
   <div class="navbar-button">
     <div *ngIf="!showLocationAndDropdown">
       <button (click)="toggleKeyboardControl()" [ngClass]="{'on': keyboardControlEnabled, 'off': !keyboardControlEnabled}">
-        {{ keyboardControlEnabled ? 'Keyboard On' : 'Keyboard Off' }}
+        {{ (keyboardControlEnabled ? 'KEYBOARD ON' : 'KEYBOARD OFF') | translate }}
       </button>
-      <button *ngIf="!isAuthenticated" routerLink="/shell/login">LOG IN</button>
-      <button *ngIf="isAuthenticated" (click)="onSignOut()">SIGN OUT</button>
+      
+      <button *ngIf="!isAuthenticated" routerLink="/shell/login">{{ 'LOGIN' | translate }}</button>
+      <button *ngIf="isAuthenticated" (click)="onSignOut()">{{ 'LOGOUT' | translate }}</button>
     </div>
   </div>
 </nav>

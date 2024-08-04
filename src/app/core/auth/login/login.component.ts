@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store ,select } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { login } from './store/auth.actions';
 import { IAuthState } from './store/auth.reducer';
@@ -7,6 +7,7 @@ import { ILoginRequest } from './models/login-request.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectAuthUser, selectAuthError, selectAuthLoading } from './store/auth.selectors';
+import { TranslationService } from '../../../shared/services/translation.service'; // Import the TranslationService
 
 @Component({
   selector: 'app-login',
@@ -23,14 +24,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   error$ = this.store.pipe(select(selectAuthError));
   loading$ = this.store.pipe(select(selectAuthLoading));
 
-  constructor(private store: Store<{ auth: IAuthState }>, private router: Router) {}
+  constructor(
+    private store: Store<{ auth: IAuthState }>,
+    private router: Router,
+    private translationService: TranslationService // Inject TranslationService
+  ) {}
 
   ngOnInit(): void {
     this.user$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(user => {
         if (user && user.Login && user.Login.AccessToken) {
-          alert('Login successful');
+          const successMessage = this.translationService.getTranslation('LOGIN SUCCESSFUL');
+          alert(successMessage);
           this.router.navigate(['/shell/feature/account']);
         }
       });
@@ -39,7 +45,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(error => {
         if (error) {
-          alert('Login failed. Please check your username and password.');
+          const errorMessage = this.translationService.getTranslation('LOGIN FAILED MESSAGE');
+          alert(errorMessage);
         }
       });
   }

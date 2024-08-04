@@ -8,6 +8,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ShellComponent } from './shell.component';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { FeaturesModule } from '../../features/features.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -28,7 +31,14 @@ import { FeaturesModule } from '../../features/features.module';
     CommonModule,
     ShellRoutingModule,
     FormsModule,
-    FeaturesModule
+    FeaturesModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
   ]
 })

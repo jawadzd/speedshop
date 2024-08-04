@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { signout } from '../../auth/login/store/auth.actions';
 import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';  // Adjust the path to your service
+import { TranslationService } from '../../../shared/services/translation.service'; // Adjust the path to your service
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private store: Store<IAuthState>,
-    private keyboardControlService: KeyboardControlService
+    private keyboardControlService: KeyboardControlService,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   toggleKeyboardControl(): void {
     this.keyboardControlEnabled = !this.keyboardControlEnabled;
     this.keyboardControlService.setEnabled(this.keyboardControlEnabled);
+  }
+
+  changeLanguage(lang: string): void {
+    this.translationService.changeLanguage(lang);
   }
 
   ngOnDestroy(): void {
