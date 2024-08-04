@@ -14,13 +14,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { itemReducer } from './features/product-listing/store/item.reducer';
 import { ItemEffects } from './features/product-listing/store/item.effects';
 import { AuthInterceptor } from './core/auth/services/interceptors/auth-interceptor.service';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent
-
-
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +26,8 @@ import { AuthInterceptor } from './core/auth/services/interceptors/auth-intercep
     HttpClientModule,
     ShellModule,
     StoreModule.forRoot({ auth: authReducer, signup: signupReducer ,itemState: itemReducer}),
-    EffectsModule.forRoot([AuthEffects, SignupEffects,ItemEffects])
+    EffectsModule.forRoot([AuthEffects, SignupEffects,ItemEffects]),
+    NgbModule
 
   ],
   providers: [
