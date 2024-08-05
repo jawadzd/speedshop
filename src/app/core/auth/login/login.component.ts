@@ -7,7 +7,7 @@ import { ILoginRequest } from './models/login-request.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectAuthUser, selectAuthError, selectAuthLoading } from './store/auth.selectors';
-import { TranslationService } from '../../../shared/services/translation.service'; // Import the TranslationService
+import { TranslationService } from '../../../shared/services/translation.service';
 
 @Component({
   selector: 'app-login',
@@ -25,18 +25,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading$ = this.store.pipe(select(selectAuthLoading));
 
   constructor(
-    private store: Store<{ auth: IAuthState }>,
+    private store: Store<{ auth: IAuthState }>, 
     private router: Router,
-    private translationService: TranslationService // Inject TranslationService
+    private translationService: TranslationService 
   ) {}
 
   ngOnInit(): void {
+    console.log('LoginComponent initialized');
+    console.log('Current language:', this.translationService['translate'].currentLang);
+
     this.user$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(user => {
         if (user && user.Login && user.Login.AccessToken) {
-          const successMessage = this.translationService.getTranslation('LOGIN SUCCESSFUL');
-          alert(successMessage);
+          alert('Login successful');
           this.router.navigate(['/shell/feature/account']);
         }
       });
@@ -45,9 +47,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(error => {
         if (error) {
-          const errorMessage = this.translationService.getTranslation('LOGIN FAILED MESSAGE');
-          alert(errorMessage);
+          alert('Login failed. Please check your username and password.');
         }
+      });
+
+    this.translationService.languageChanges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(lang => {
+        console.log('Language changed to:', lang);
+        // Trigger change detection or any other action you need when language changes
       });
   }
 
@@ -58,6 +66,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(login({ request: request }));
+  }
+
+  onLanguageChange(lang: string): void {
+    this.translationService.changeLanguage(lang);
   }
 
   ngOnDestroy(): void {

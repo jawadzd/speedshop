@@ -16,14 +16,15 @@
 
   <div class="navbar-dropdown">
     <div class="dropdown">
-      <button class="dropbtn">EN <span class="arrow">&#9660;</span></button>
+      <button class="dropbtn">{{ 'LANGUAGE' | translate }} <span class="arrow">&#9660;</span></button>
       <div class="dropdown-content">
-        <a href="#" (click)="changeLanguage('en')">{{ 'ENGLISH' | translate }}</a>
-        <a href="#" (click)="changeLanguage('fr')">{{ 'FRENCH' | translate }}</a>
-        <a href="#" (click)="changeLanguage('ru')">{{ 'RUSSIAN' | translate }}</a>
+        <a (click)="onLanguageChange('en')">{{ 'ENGLISH' | translate }}</a>
+        <a (click)="onLanguageChange('fr')">{{ 'FRENCH' | translate }}</a>
+        <a (click)="onLanguageChange('ru')">{{ 'RUSSIAN' | translate }}</a>
       </div>
     </div>
   </div>
+  
 
   <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
     <img src="assets/navbar/cart.png" alt="cart-icon_pic" />

@@ -13,9 +13,6 @@ import { HttpLoaderFactory } from '../../app.module';
 import { HttpClient } from '@angular/common/http';
 
 
-
-
-
 @NgModule({
   declarations: [
     LoginComponent,
@@ -32,13 +29,8 @@ import { HttpClient } from '@angular/common/http';
     ShellRoutingModule,
     FormsModule,
     FeaturesModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule,
+ 
 
   ]
 })
