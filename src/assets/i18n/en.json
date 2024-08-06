@@ -45,5 +45,14 @@
   "CONTINUE_BUTTON_TEXT": "Continue",
   "LOGIN_FAILED_TITLE": "Login Failed",
   "LOGIN_FAILED_TEXT": "Please check your username and password.",
-  "TRY_AGAIN_BUTTON_TEXT": "Try Again"
+  "TRY_AGAIN_BUTTON_TEXT": "Try Again",
+  "LOADING_PROFILE": "Loading profile...",
+  "PROFILE_IMAGE_ALT": "Profile Image",
+  "USER_PROFILE": "User Profile",
+  "ID": "ID",
+  "FIRST_NAME": "First Name",
+  "LAST_NAME": "Last Name",
+  "ADMIN": "Admin",
+  "YES": "Yes",
+  "NO": "No"
 }

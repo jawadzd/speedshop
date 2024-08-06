@@ -1,61 +1,60 @@
 <div class="profile-container">
-    @if (loading()) {
-      <div class="loading">
-        <p>Loading profile...</p>
-      </div>
-    }
-  
-
-    @if (!loading() && userProfile() ; as profile) {
-      <div class="profile-content">
-
-        <div class="profile-image">
-          <img src="path/to/default-profile-image.jpg" alt="Profile Image" />
-        </div>
-  
-
-        <div class="profile-details">
-          <h2>User Profile</h2>
-          <table>
-            <tbody>
-              <tr>
-                <th>ID:</th>
-                <td>{{ profile.Id }}</td>
-              </tr>
-              <tr>
-                <th>First Name:</th>
-                <td>{{ profile.Firstname }}</td>
-              </tr>
-              <tr>
-                <th>Last Name:</th>
-                <td>{{ profile.Lastname }}</td>
-              </tr>
-              <tr>
-                <th>Email:</th>
-                <td>{{ profile.Email }}</td>
-              </tr>
-              <tr>
-                <th>Institution:</th>
-                <td>{{ profile.Institution || 'N/A' }}</td>
-              </tr>
-              <tr>
-                <th>Admin:</th>
-                <td>{{ profile.IsAdmin ? 'Yes' : 'No' }}</td>
-              </tr>
-              <tr>
-                <th>Username:</th>
-                <td>{{ profile.Username }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    }
-
-    @if (errorMessage()) {
-      <div class="error">
-        <p class="error-message">{{ errorMessage() }}</p>
-      </div>
-    }
+  @if(loading()){
+  <div>
+    <div class="loading">
+      <p>{{ "LOADING_PROFILE" | translate }}</p>
+    </div>
   </div>
-  
+  } @if(!loading() && userProfile() ;as profile){
+  <div class="profile-content">
+    <div class="profile-image">
+      <img
+        src="path/to/default-profile-image.jpg"
+        alt="{{ 'PROFILE_IMAGE_ALT' | translate }}"
+      />
+    </div>
+
+    <div class="profile-details">
+      <h2>{{ "USER_PROFILE" | translate }}</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>{{ "ID" | translate }}:</th>
+            <td>{{ profile.Id }}</td>
+          </tr>
+          <tr>
+            <th>{{ "FIRST_NAME" | translate }}:</th>
+            <td>{{ profile.Firstname }}</td>
+          </tr>
+          <tr>
+            <th>{{ "LAST_NAME" | translate }}:</th>
+            <td>{{ profile.Lastname }}</td>
+          </tr>
+          <tr>
+            <th>{{ "EMAIL" | translate }}:</th>
+            <td>{{ profile.Email }}</td>
+          </tr>
+          <tr>
+            <th>{{ "INSTITUTION" | translate }}:</th>
+            <td>{{ profile.Institution || "N/A" }}</td>
+          </tr>
+          <tr>
+            <th>{{ "ADMIN" | translate }}:</th>
+            <td>{{ profile.IsAdmin ? "Yes" : "No" }}</td>
+          </tr>
+          <tr>
+            <th>{{ "USERNAME" | translate }}:</th>
+            <td>{{ profile.Username }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  }
+
+ @if(errorMessage()){ <div>
+    <div class="error">
+      <p class="error-message">{{ errorMessage() }}</p>
+    </div>
+  </div>}
+</div>

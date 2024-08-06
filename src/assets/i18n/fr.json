@@ -45,5 +45,14 @@
   "CONTINUE_BUTTON_TEXT": "Continuer",
   "LOGIN_FAILED_TITLE": "Échec de la connexion",
   "LOGIN_FAILED_TEXT": "Veuillez vérifier votre nom d'utilisateur et votre mot de passe.",
-  "TRY_AGAIN_BUTTON_TEXT": "Réessayez"
+  "TRY_AGAIN_BUTTON_TEXT": "Réessayez",
+  "LOADING_PROFILE": "Chargement du profil...",
+  "PROFILE_IMAGE_ALT": "Image de profil",
+  "USER_PROFILE": "Profil de l'utilisateur",
+  "ID": "ID",
+  "FIRST_NAME": "Prénom",
+  "LAST_NAME": "Nom",
+  "ADMIN": "Admin",
+  "YES": "Oui",
+  "NO": "Non"
 }

@@ -45,5 +45,14 @@
   "CONTINUE_BUTTON_TEXT": "Продолжить",
   "LOGIN_FAILED_TITLE": "Неудачный вход",
   "LOGIN_FAILED_TEXT": "Пожалуйста, проверьте ваше имя пользователя и пароль.",
-  "TRY_AGAIN_BUTTON_TEXT": "Попробуйте снова"
+  "TRY_AGAIN_BUTTON_TEXT": "Попробуйте снова",
+  "LOADING_PROFILE": "Загрузка профиля...",
+  "PROFILE_IMAGE_ALT": "Изображение профиля",
+  "USER_PROFILE": "Профиль пользователя",
+  "ID": "ID",
+  "FIRST_NAME": "Имя",
+  "LAST_NAME": "Фамилия",
+  "ADMIN": "Администратор",
+  "YES": "Да",
+  "NO": "Нет"
 }
