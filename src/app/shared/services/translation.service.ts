@@ -14,15 +14,13 @@ export class TranslationService {
 
     const browserLang = this.translate.getBrowserLang() ?? 'en';
     const initialLang = browserLang.match(/en|fr|ru/) ? browserLang : 'en';
-    console.log(`Initial language detected: ${browserLang}, using: ${initialLang}`);
     this.translate.use(initialLang);
   }
 
   changeLanguage(lang: string): void {
     if (lang && this.translate.getLangs().includes(lang)) {
-      console.log(`Changing language to: ${lang}`);
       this.translate.use(lang);
-      this.languageChange$.next(lang); // Notify subscribers about language change
+      this.languageChange$.next(lang); 
     } else {
       console.warn(`Attempted to change to unsupported language: ${lang}`);
     }

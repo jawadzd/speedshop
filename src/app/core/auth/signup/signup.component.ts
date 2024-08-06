@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   password: string = '';
 
   user$ = this.store.pipe(select(selectSignupUser));
-  error$ = this.store.pipe(select(selectSignupError));
 
   constructor(private store: Store<ISignupState>, private router: Router) {}
 
@@ -39,19 +38,6 @@ export class SignupComponent implements OnInit, OnDestroy {
             confirmButtonText: 'Continue'
           }).then(() => {
             this.router.navigate(['/shell/login']);
-          });
-        }
-      });
-
-    this.error$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(error => {
-        if (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Signup Failed',
-            text: 'Please try again.',
-            confirmButtonText: 'Try Again'
           });
         }
       });

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 import { Store } from '@ngrx/store';
-import { signout } from '../../login/store/auth.actions';
+import { signout } from '../../core/auth/login/store/auth.actions';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -24,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          // Handle token expiration or invalid token
           this.store.dispatch(signout());
         }
         return throwError(error);

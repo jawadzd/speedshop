@@ -1,6 +1,6 @@
 <div class="signup-container">
   <div class="image-container">
-    <img src="assets/navbar/logo.png" alt="logo_icon_pic">
+    <img src="assets/navbar/logo.png" alt="logo_icon_pic" />
   </div>
   <div class="signup-form-container">
     <div class="signup-form">
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="email">{{ "EMAIL" | translate }}:</label>
+          <label for="email">{{ 'EMAIL' | translate }}:</label>
           <input
             type="email"
             id="email"
@@ -45,24 +45,15 @@
             name="email"
             #usernameInput="ngModel"
             required
-            [class.invalid]="
-              usernameInput.invalid &&
-              (usernameInput.dirty || usernameInput.touched)
-            "
+            [class.invalid]="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           />
-          <div
-            *ngIf="
-              usernameInput.invalid &&
-              (usernameInput.dirty || usernameInput.touched)
-            "
-            class="error-message"
-          >
+          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
             <ng-container *ngIf="usernameInput.errors?.['required']">
-              {{ "EMAIL_REQUIRED" | translate }}
+              {{ 'EMAIL_REQUIRED' | translate }}
             </ng-container>
             <ng-container *ngIf="usernameInput.errors?.['pattern']">
-              {{ "INVALID_EMAIL" | translate }}
+              {{ 'INVALID_EMAIL' | translate }}
             </ng-container>
           </div>
         </div>
@@ -81,7 +72,7 @@
             {{ 'PASSWORD_REQUIRED' | translate }}
           </div>
         </div>
-        <button type="submit">
+        <button type="submit" [disabled]="signupForm.invalid">
           {{ 'SIGNUP' | translate }}
         </button>
         <div class="login-text">
