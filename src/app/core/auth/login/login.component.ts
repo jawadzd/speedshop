@@ -6,13 +6,18 @@ import { IAuthState } from './store/auth.reducer';
 import { ILoginRequest } from './models/login-request.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { selectAuthUser, selectAuthError, selectAuthLoading } from './store/auth.selectors';
+import {
+  selectAuthUser,
+  selectAuthError,
+  selectAuthLoading,
+} from './store/auth.selectors';
 import { TranslationService } from '../../../shared/services/translation.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
@@ -25,47 +30,67 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading$ = this.store.pipe(select(selectAuthLoading));
 
   constructor(
-    private store: Store<{ auth: IAuthState }>, 
+    private store: Store<{ auth: IAuthState }>,
     private router: Router,
-    private translationService: TranslationService 
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
-    console.log('LoginComponent initialized');
-    console.log('Current language:', this.translationService['translate'].currentLang);
+    this.handleUserSubscription();
+    this.handleErrorSubscription();
+    this.handleLanguageChanges();
+  }
 
-    this.user$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(user => {
-        if (user && user.Login && user.Login.AccessToken) {
-          alert('Login successful');
+  private handleUserSubscription(): void {
+    this.user$.pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
+      if (user?.Login?.AccessToken) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: 'Welcome back!',
+          showConfirmButton: true,
+          confirmButtonText: 'Continue',
+          customClass: {
+            confirmButton: 'swal2-confirm',
+          },
+        }).then(() => {
           this.router.navigate(['/shell/feature/account']);
-        }
-      });
+        });
+      }
+    });
+  }
 
-    this.error$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(error => {
-        if (error) {
-          alert('Login failed. Please check your username and password.');
-        }
-      });
+  private handleErrorSubscription(): void {
+    this.error$.pipe(takeUntil(this.unsubscribe$)).subscribe((error) => {
+      if (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Please check your username and password.',
+          showConfirmButton: true,
+          confirmButtonText: 'Try Again',
+          customClass: {
+            confirmButton: 'swal2-confirm',
+          },
+        });
+      }
+    });
+  }
 
+  private handleLanguageChanges(): void {
     this.translationService.languageChanges
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(lang => {
-        console.log('Language changed to:', lang);
-        // Trigger change detection or any other action you need when language changes
+      .subscribe((lang) => {
       });
   }
 
   onSubmit(): void {
     const request: ILoginRequest = {
       username: this.username,
-      password: this.password
+      password: this.password,
     };
 
-    this.store.dispatch(login({ request: request }));
+    this.store.dispatch(login({ request }));
   }
 
   onLanguageChange(lang: string): void {

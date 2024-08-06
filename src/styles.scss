@@ -12,3 +12,16 @@ html, body {
     font-optical-sizing: auto;
   }
 
+  div.swal2-container .swal2-confirm {
+    background-color: #3780FF !important;
+    border: none !important;
+    color: #fff !important;
+  }
+  
+  div.swal2-container .swal2-confirm:hover {
+    background-color: #2b68d6 !important;
+  }
+  
+  div.swal2-container .swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(55, 128, 255, 0.4) !important;
+  }

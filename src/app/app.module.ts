@@ -17,6 +17,7 @@ import { ItemEffects } from './features/product-listing/store/item.effects';
 import { AuthInterceptor } from './core/auth/services/interceptors/auth-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    SweetAlert2Module.forRoot()
 
   ],
   providers: [

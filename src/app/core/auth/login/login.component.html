@@ -1,23 +1,74 @@
-
 <div class="login-container">
   <div class="image-container">
-    <img src="assets/navbar/logo.png" alt="logo_icon_pic">
+    <img src="assets/navbar/logo.png" alt="logo_icon_pic" />
   </div>
   <div class="login-form-container">
     <div class="login-form">
-      <h2>{{ 'LOGIN' | translate }}</h2>
-      <form (ngSubmit)="onSubmit()">
+      <h2>{{ "LOGIN" | translate }}</h2>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <div class="form-group">
-          <label for="username">{{ 'USERNAME' | translate }}:</label>
-          <input type="text" id="username" [(ngModel)]="username" name="username" required>
+          <label for="username">{{ "USERNAME" | translate }}:</label>
+          <input
+            type="email"
+            id="username"
+            [(ngModel)]="username"
+            name="username"
+            #usernameInput="ngModel"
+            required
+            [class.invalid]="
+              usernameInput.invalid &&
+              (usernameInput.dirty || usernameInput.touched)
+            "
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
+          <div
+            *ngIf="
+              usernameInput.invalid &&
+              (usernameInput.dirty || usernameInput.touched)
+            "
+            class="error-message"
+          >
+            <ng-container *ngIf="usernameInput.errors?.['required']">
+              {{ "USERNAME_REQUIRED" | translate }}
+            </ng-container>
+            <ng-container *ngIf="usernameInput.errors?.['pattern']">
+              {{ "INVALID_EMAIL" | translate }}
+            </ng-container>
+          </div>
         </div>
         <div class="form-group">
-          <label for="password">{{ 'PASSWORD' | translate }}:</label>
-          <input type="password" id="password" [(ngModel)]="password" name="password" required>
+          <label for="password">{{ "PASSWORD" | translate }}:</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            #passwordInput="ngModel"
+            required
+            [class.invalid]="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
+          />
+          <div
+            *ngIf="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
+            class="error-message"
+          >
+            {{ "PASSWORD_REQUIRED" | translate }}
+          </div>
         </div>
-        <button type="submit">{{ 'LOGIN' | translate }}</button>
+        <button type="submit" [disabled]="loading$ | async">
+          {{ "LOGIN" | translate }}
+          <span *ngIf="loading$ | async" class="loading-spinner"></span>
+        </button>
         <div class="signup-text">
-          <p>{{ 'DONT HAVE AN ACCOUNT' | translate }} <a routerLink="/shell/signup">{{ 'SIGN UP' | translate }}</a></p>
+          <p>
+            {{ "DONT HAVE AN ACCOUNT" | translate }}
+            <a routerLink="/shell/signup">{{ "SIGNUP" | translate }}</a>
+          </p>
         </div>
       </form>
     </div>
