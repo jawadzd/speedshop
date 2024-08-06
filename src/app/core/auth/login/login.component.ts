@@ -44,12 +44,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleUserSubscription(): void {
     this.user$.pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
       if (user?.Login?.AccessToken) {
+        const title = this.translationService.getTranslation('LOGIN_SUCCESS_TITLE');
+        const text = this.translationService.getTranslation('LOGIN_SUCCESS_TEXT');
+        const confirmButtonText = this.translationService.getTranslation('CONTINUE_BUTTON_TEXT');
+
         Swal.fire({
           icon: 'success',
-          title: 'Login Successful',
-          text: 'Welcome back!',
+          title,
+          text,
           showConfirmButton: true,
-          confirmButtonText: 'Continue',
+          confirmButtonText,
           customClass: {
             confirmButton: 'swal2-confirm',
           },
@@ -63,12 +67,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   private handleErrorSubscription(): void {
     this.error$.pipe(takeUntil(this.unsubscribe$)).subscribe((error) => {
       if (error) {
+        const title = this.translationService.getTranslation('LOGIN_FAILED_TITLE');
+        const text = this.translationService.getTranslation('LOGIN_FAILED_TEXT');
+        const confirmButtonText = this.translationService.getTranslation('TRY_AGAIN_BUTTON_TEXT');
+
         Swal.fire({
           icon: 'error',
-          title: 'Login Failed',
-          text: 'Please check your username and password.',
+          title,
+          text,
           showConfirmButton: true,
-          confirmButtonText: 'Try Again',
+          confirmButtonText,
           customClass: {
             confirmButton: 'swal2-confirm',
           },

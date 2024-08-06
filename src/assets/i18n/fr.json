@@ -39,5 +39,11 @@
   "FIRST_NAME_REQUIRED": "Prénom requis",
   "LAST_NAME_REQUIRED": "Nom de famille requis",
   "EMAIL_REQUIRED": "Email requis",
-  "INVALID_EMAIL": "Format d'email invalide"
+  "INVALID_EMAIL": "Format d'email invalide",
+  "LOGIN_SUCCESS_TITLE": "Connexion réussie",
+  "LOGIN_SUCCESS_TEXT": "Bienvenue de nouveau !",
+  "CONTINUE_BUTTON_TEXT": "Continuer",
+  "LOGIN_FAILED_TITLE": "Échec de la connexion",
+  "LOGIN_FAILED_TEXT": "Veuillez vérifier votre nom d'utilisateur et votre mot de passe.",
+  "TRY_AGAIN_BUTTON_TEXT": "Réessayez"
 }

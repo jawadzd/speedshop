@@ -39,5 +39,11 @@
   "FIRST_NAME_REQUIRED": "Требуется имя",
   "LAST_NAME_REQUIRED": "Требуется фамилия",
   "EMAIL_REQUIRED": "Требуется email",
-  "INVALID_EMAIL": "Неверный формат email"
+  "INVALID_EMAIL": "Неверный формат email",
+  "LOGIN_SUCCESS_TITLE": "Успешный вход",
+  "LOGIN_SUCCESS_TEXT": "С возвращением!",
+  "CONTINUE_BUTTON_TEXT": "Продолжить",
+  "LOGIN_FAILED_TITLE": "Неудачный вход",
+  "LOGIN_FAILED_TEXT": "Пожалуйста, проверьте ваше имя пользователя и пароль.",
+  "TRY_AGAIN_BUTTON_TEXT": "Попробуйте снова"
 }

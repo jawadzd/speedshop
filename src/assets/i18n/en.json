@@ -39,5 +39,11 @@
   "FIRST_NAME_REQUIRED": "First name is required",
   "LAST_NAME_REQUIRED": "Last name is required",
   "EMAIL_REQUIRED": "Email is required",
-  "INVALID_EMAIL": "Invalid email format"
+  "INVALID_EMAIL": "Invalid email format",
+  "LOGIN_SUCCESS_TITLE": "Login Successful",
+  "LOGIN_SUCCESS_TEXT": "Welcome back!",
+  "CONTINUE_BUTTON_TEXT": "Continue",
+  "LOGIN_FAILED_TITLE": "Login Failed",
+  "LOGIN_FAILED_TEXT": "Please check your username and password.",
+  "TRY_AGAIN_BUTTON_TEXT": "Try Again"
 }
