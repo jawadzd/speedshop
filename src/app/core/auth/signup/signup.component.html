@@ -1,32 +1,33 @@
 <div class="signup-container">
     <div class="image-container">
-        <img src="assets/navbar/logo.png" alt="logo_icon_pic">
+      <img src="assets/navbar/logo.png" alt="logo_icon_pic">
     </div>
     <div class="signup-form-container">
-        <div class="signup-form">
-            <h2>SignUp</h2>
-            <form (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="username">firstname</label>
-                    <input type="text" id="firstname" [(ngModel)]="firstname" name="'firstname" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Lastname:</label>
-                    <input type="text" id="lastname" [(ngModel)]="lastname" name="lastname" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" [(ngModel)]="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" [(ngModel)]="password" name="password" required>
-                  </div>
-                <button type="submit">SignUp</button>
-                <div class="login-text">
-                    <p>Already have an account? <a routerLink="/shell/login">LogIn</a></p>
-                </div>
-            </form>
-        </div>
+      <div class="signup-form">
+        <h2>{{ 'SIGNUP' | translate }}</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="firstname">{{ 'FIRST NAME' | translate }}</label>
+            <input type="text" id="firstname" [(ngModel)]="firstname" name="firstname" required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">{{ 'LAST NAME' | translate }}:</label>
+            <input type="text" id="lastname" [(ngModel)]="lastname" name="lastname" required>
+          </div>
+          <div class="form-group">
+            <label for="email">{{ 'EMAIL' | translate }}:</label>
+            <input type="email" id="email" [(ngModel)]="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">{{ 'PASSWORD' | translate }}:</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" required>
+          </div>
+          <button type="submit">{{ 'SIGNUP' | translate }}</button>
+          <div class="login-text">
+            <p>{{ 'ALREADY HAVE AN ACCOUNT' | translate }} <a routerLink="/shell/login">{{ 'LOGIN' | translate }}</a></p>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  

@@ -32,6 +32,7 @@
     "ADD TO CART": "Add to Cart",
     "QUANTITY": "Quantity",
     "LOGIN SUCCESSFUL": "Login successful",
-    "LOGIN FAILED MESSAGE": "Login failed. Please check your username and password."
+    "LOGIN FAILED MESSAGE": "Login failed. Please check your username and password.",
+     "ALREADY HAVE AN ACCOUNT": "Already have an account?"
   }
   

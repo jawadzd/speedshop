@@ -32,6 +32,7 @@
     "ADD TO CART": "Ajouter au panier",
     "QUANTITY": "Quantité",
     "LOGIN SUCCESSFUL": "Connexion réussie",
-    "LOGIN FAILED MESSAGE": "Échec de la connexion. Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
+    "LOGIN FAILED MESSAGE": "Échec de la connexion. Veuillez vérifier votre nom d'utilisateur et votre mot de passe.",
+      "ALREADY HAVE AN ACCOUNT": "Vous avez déjà un compte?"
   }
   
