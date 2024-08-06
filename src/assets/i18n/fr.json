@@ -36,5 +36,8 @@
   "ALREADY HAVE AN ACCOUNT": "Vous avez déjà un compte?",
   "USERNAME_REQUIRED": "nom d'utilisateur requis",
   "PASSWORD_REQUIRED": "mot de passe requis",
-  "INVALID_EMAIL": "Email invalide"
+  "FIRST_NAME_REQUIRED": "Prénom requis",
+  "LAST_NAME_REQUIRED": "Nom de famille requis",
+  "EMAIL_REQUIRED": "Email requis",
+  "INVALID_EMAIL": "Format d'email invalide"
 }

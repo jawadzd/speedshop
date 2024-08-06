@@ -36,5 +36,8 @@
   "ALREADY HAVE AN ACCOUNT": "Уже есть аккаунт?",
   "USERNAME_REQUIRED": "требуется имя пользователя",
   "PASSWORD_REQUIRED": "требуется пароль",
-  "INVALID_EMAIL": "Неверный адрес электронной почты"
+  "FIRST_NAME_REQUIRED": "Требуется имя",
+  "LAST_NAME_REQUIRED": "Требуется фамилия",
+  "EMAIL_REQUIRED": "Требуется email",
+  "INVALID_EMAIL": "Неверный формат email"
 }
