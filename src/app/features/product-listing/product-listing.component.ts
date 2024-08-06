@@ -68,7 +68,6 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   selectCurrentItem(): void {
     this.items$.subscribe(items => {
       const selectedItem = items[this.selectedItemIndex];
-      // Navigate to the item's detail page
       this.router.navigate(['/shell/feature/item', selectedItem.id]);
     });
   }
