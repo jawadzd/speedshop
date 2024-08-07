@@ -1,3 +1,4 @@
+//login response model to hold the login response data
 export interface ILoginResponse {
     Login: {
         AccessToken:      string;

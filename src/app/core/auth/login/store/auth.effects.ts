@@ -5,8 +5,8 @@ import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { LoginService } from '../services/login.service';
 import { AuthService } from '../../services/auth.service';
 import { login, loginSuccess, loginFailure, signout } from './auth.actions';
-
-@Injectable()
+//this is the effect class for the auth module which is used to handle the side effects of the actions
+@Injectable()//injectable decorator to inject the service into the module 
 export class AuthEffects {
   constructor(
     private actions$: Actions,
@@ -20,10 +20,11 @@ export class AuthEffects {
       mergeMap(action =>
         this.loginService.login(action.request).pipe(
           map(response => {
-            this.authService.setToken(response.Login.AccessToken, response.Login.RefreshToken);
-            return loginSuccess({ response });
+            this.authService.setToken(response.Login.AccessToken, response.Login.RefreshToken);//setting the token in the local storage
+            return loginSuccess({ response });//returning the login success action
           }),
-          catchError(error => of(loginFailure({ error })))
+          catchError(error => of(loginFailure({ error })))//returning the login failure action
+          //some errors are handled here on this level and some are handled by the interceptor
         )
       )
     )
@@ -34,18 +35,18 @@ export class AuthEffects {
       ofType(signout),
       map(() => {
         this.authService.removeToken();
-        return { type: '[Auth] Signout Success' }; 
+        return { type: '[Auth] Signout Success' }; //returning the signout success action
       })
     )
   );
 
-  autoLogin$ = createEffect(() =>
+  autoLogin$ = createEffect(() =>//effect to auto login the user if the token is present in the local storage
     this.actions$.pipe(
       ofType('[Auth] Auto Login'),
       switchMap(() => this.authService.isAuthenticated.pipe(
         map(isAuthenticated => {
           if (isAuthenticated) {
-            return { type: '[Auth] Auto Login Success' };
+            return { type: '[Auth] Auto Login Success' };//returning the auto login success action
           } else {
             return { type: '[Auth] Auto Login Failure' };
           }

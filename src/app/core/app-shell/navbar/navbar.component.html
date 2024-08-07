@@ -1,19 +1,21 @@
 <nav class="navbar">
+  <!-- nabar logo wit a showLocationAndDropdown flag -->
   <a [routerLink]="['/shell/features']" class="navbar-logo-link">
     <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
       <img src="assets/navbar/logo.png" alt="logo_pic" />
     </div>
   </a>
 
+  <!-- navbar location with a showLocationAndDropdown flag -->
   <div class="navbar-location" *ngIf="showLocationAndDropdown">
     <img src="assets/navbar/location.png" alt="location-icon_pic" />
   </div>
-
+ <!-- navbar searchbar with a showLocationAndDropdown flag -->
   <div class="navbar-search" *ngIf="!showLocationAndDropdown">
     <input type="text" placeholder="Search..." />
     <img src="assets/navbar/search.png" alt="search-icon_pic" />
   </div>
-
+ <!-- this dropdown is used for Language selection  -->
   <div class="navbar-dropdown">
     <div class="dropdown">
       <button class="dropbtn">{{ 'LANGUAGE' | translate }} <span class="arrow">&#9660;</span></button>
@@ -29,13 +31,13 @@
   <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
     <img src="assets/navbar/cart.png" alt="cart-icon_pic" />
   </div>
-
+  <!-- this is the button used to turn the keyboard control on and off using 2 way binding to detect class -->
   <div class="navbar-button">
     <div *ngIf="!showLocationAndDropdown">
       <button (click)="toggleKeyboardControl()" [ngClass]="{'on': keyboardControlEnabled, 'off': !keyboardControlEnabled}">
         {{ (keyboardControlEnabled ? 'KEYBOARD ON' : 'KEYBOARD OFF') | translate }}
       </button>
-      
+      <!-- the 2 buttons login and signout that show according to the authentication state -->
       <button *ngIf="!isAuthenticated" routerLink="/shell/login">{{ 'LOGIN' | translate }}</button>
       <button *ngIf="isAuthenticated" (click)="onSignOut()">{{ 'LOGOUT' | translate }}</button>
     </div>

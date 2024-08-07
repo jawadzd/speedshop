@@ -8,16 +8,18 @@
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <div class="form-group">
           <label for="username">{{ 'USERNAME' | translate }}:</label>
+          <!-- username form input  with nescassery validation for empty feilds and valid email alerts-->
           <input
             type="email"
             id="username"
-            [(ngModel)]="username"
+            [(ngModel)]="username"   
             name="username"
             #usernameInput="ngModel"
             required
             [class.invalid]="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           />
+
           <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
             <ng-container *ngIf="usernameInput.errors?.['required']">
               {{ 'USERNAME_REQUIRED' | translate }}
@@ -28,6 +30,7 @@
           </div>
         </div>
         <div class="form-group">
+          <!-- password input with validators  -->
           <label for="password">{{ 'PASSWORD' | translate }}:</label>
           <input
             type="password"
@@ -42,6 +45,7 @@
             {{ 'PASSWORD_REQUIRED' | translate }}
           </div>
         </div>
+        <!-- submit button with an validator for all input forms present -->
         <button type="submit" [disabled]="loginForm.invalid || (loading$ | async)">
           {{ 'LOGIN' | translate }}
           <span *ngIf="loading$ | async" class="loading-spinner"></span>
@@ -49,6 +53,7 @@
         <div class="signup-text">
           <p>
             {{ 'DONT HAVE AN ACCOUNT' | translate }}
+            <!-- link to signup page  -->
             <a routerLink="/shell/signup">{{ 'SIGNUP' | translate }}</a>
           </p>
         </div>

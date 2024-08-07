@@ -9,9 +9,8 @@ import { ShellComponent } from './shell.component';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { FeaturesModule } from '../../features/features.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../app.module';
-import { HttpClient } from '@angular/common/http';
 
+//shell module to hold the shell components and the features module with all needed imports,routing and services
 
 @NgModule({
   declarations: [
@@ -20,9 +19,6 @@ import { HttpClient } from '@angular/common/http';
     FooterComponent,
     ShellComponent,
     SignupComponent,
-
-    
-    
   ],
   imports: [
     CommonModule,
@@ -30,8 +26,6 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     FeaturesModule,
     TranslateModule,
- 
-
-  ]
+  ],
 })
-export class ShellModule { }
+export class ShellModule {}

@@ -1,32 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 import { ILoginResponse } from '../models/login-response.model';
+import { IAuthState } from '../models/auth-state.model';
+//auth reducer to handle the login, login success, login failure and signout actions
 
-export interface IAuthState {
-  user: ILoginResponse | null;
-  error: string | null;
-  loading: boolean;
-}
 
 export const initialState: IAuthState = {
   user: null,
   error: null,
   loading: false,
 };
-export const authReducer = createReducer(
-  initialState,
-  on(AuthActions.login, state => ({ ...state, loading: true })),
-  on(AuthActions.loginSuccess, (state, { response }) => ({
+export const authReducer = createReducer(//creating the reducer using the createReducer function
+  initialState,//initial state of the reducer
+  on(AuthActions.login, state => ({ ...state, loading: true })),//handling the login action
+  on(AuthActions.loginSuccess, (state, { response }) => ({//handling the login success action
     ...state,
     user: response,
     loading: false,
   })),
-  on(AuthActions.loginFailure, (state, { error }) => ({
+  on(AuthActions.loginFailure, (state, { error }) => ({//handling the login failure action
     ...state,
     error,
     loading: false,
   })),
-  on(AuthActions.signout, state => ({
+  on(AuthActions.signout, state => ({//handling the signout action
     ...state,
     user: null,
     error: null,

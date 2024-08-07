@@ -11,6 +11,7 @@ import { environment } from '../../../../../environments/environment.dev';
 export class LoginService {
   private authUrl = environment.authenticationApi;
 
+  //login service to make the login request to the api 
   constructor(private http:HttpClient) { }
 
   login(request: ILoginRequest):Observable<ILoginResponse>{

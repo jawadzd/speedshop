@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+//this authGuard service is used to protect the routes from unauthorized access by checking for the authentication status via auth serivce and redirecting to login page if not authenticated
 @Injectable({
   providedIn: 'root'
 })
