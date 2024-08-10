@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { login } from './store/auth.actions';
 import { IAuthState } from './models/auth-state.model';
 import { ILoginRequest } from './models/login-request.model';
@@ -13,42 +13,47 @@ import {
 } from './store/auth.selectors';
 import { TranslationService } from '../../../shared/services/translation.service';
 import Swal from 'sweetalert2';
-//importing the necessary modules for the login component
+
+// Importing the necessary modules for the login component
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private unsubscribe$ = new Subject<void>();//subject to unsubscribe all the subscriptions
+  private unsubscribe$ = new Subject<void>(); // Subject to unsubscribe all the subscriptions
 
-  username: string = '';//username to hold the username
-  password: string = '';//password to hold the password
+  username: string = ''; // Username to hold the username
+  password: string = ''; // Password to hold the password
 
-  user$ = this.store.pipe(select(selectAuthUser));//observable to hold the user
-  error$ = this.store.pipe(select(selectAuthError));//observable to hold the error
-  loading$ = this.store.pipe(select(selectAuthLoading));//observable to hold the loading state
+  user$ = this.store.pipe(select(selectAuthUser)); // Observable to hold the user
+  error$ = this.store.pipe(select(selectAuthError)); // Observable to hold the error
+  loading$ = this.store.pipe(select(selectAuthLoading)); // Observable to hold the loading state
+
+  returnUrl: string = '/'; // Default redirect path if no returnUrl is specified
 
   constructor(
     private store: Store<{ auth: IAuthState }>,
     private router: Router,
+    private route: ActivatedRoute, // Inject ActivatedRoute to access query parameters
     private translationService: TranslationService
-  ) {}//injecting the necessary services and store
+  ) {} // Injecting the necessary services and store
 
   ngOnInit(): void {
-    this.handleUserSubscription();//handling the user subscription
-    this.handleErrorSubscription();//handling the error subscription
-    this.handleLanguageChanges();//handling the language changes
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'; // Capture the returnUrl
+    this.handleUserSubscription(); // Handling the user subscription
+    this.handleErrorSubscription(); // Handling the error subscription
+    this.handleLanguageChanges(); // Handling the language changes
   }
 
-  private handleUserSubscription(): void {//function to handle the user subscription
+  private handleUserSubscription(): void { // Function to handle the user subscription
     this.user$.pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
-      if (user?.Login?.AccessToken) {//if the user is present then navigate to the account page and show the success message using the sweetalert
+      if (user?.Login?.AccessToken) { // If the user is present then navigate to the account page and show the success message using SweetAlert
         const title = this.translationService.getTranslation('LOGIN_SUCCESS_TITLE');
         const text = this.translationService.getTranslation('LOGIN_SUCCESS_TEXT');
         const confirmButtonText = this.translationService.getTranslation('CONTINUE_BUTTON_TEXT');
 
-        Swal.fire({//editing the sweetalert popup
+        Swal.fire({ // Editing the SweetAlert popup
           icon: 'success',
           title,
           text,
@@ -58,20 +63,20 @@ export class LoginComponent implements OnInit, OnDestroy {
             confirmButton: 'swal2-confirm',
           },
         }).then(() => {
-          this.router.navigate(['/shell/feature/account']);//navigating to the account page
+          this.router.navigateByUrl(this.returnUrl); // Use the returnUrl for redirection
         });
       }
     });
   }
 
-  private handleErrorSubscription(): void {//function to handle the error subscription
+  private handleErrorSubscription(): void { // Function to handle the error subscription
     this.error$.pipe(takeUntil(this.unsubscribe$)).subscribe((error) => {
       if (error) {
         const title = this.translationService.getTranslation('LOGIN_FAILED_TITLE');
         const text = this.translationService.getTranslation('LOGIN_FAILED_TEXT');
         const confirmButtonText = this.translationService.getTranslation('TRY_AGAIN_BUTTON_TEXT');
 
-        Swal.fire({//editing the sweetalert popup for failed atttempt
+        Swal.fire({ // Editing the SweetAlert popup for failed attempt
           icon: 'error',
           title,
           text,
@@ -85,27 +90,28 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  private handleLanguageChanges(): void {//function to handle the language changes
+  private handleLanguageChanges(): void { // Function to handle the language changes
     this.translationService.languageChanges
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((lang) => {
+        // Language change logic here if needed
       });
   }
 
-  onSubmit(): void {//function to handle the form submission
+  onSubmit(): void { // Function to handle the form submission
     const request: ILoginRequest = {
       username: this.username,
       password: this.password,
     };
 
-    this.store.dispatch(login({ request }));//dispatching the login action with the request payload
+    this.store.dispatch(login({ request })); // Dispatching the login action with the request payload
   }
 
-  onLanguageChange(lang: string): void {//function to handle the language change
-    this.translationService.changeLanguage(lang);//changing the language
+  onLanguageChange(lang: string): void { // Function to handle the language change
+    this.translationService.changeLanguage(lang); // Changing the language
   }
 
-  ngOnDestroy(): void {//unsubscribing all the subscriptions
+  ngOnDestroy(): void { // Unsubscribing all the subscriptions
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

@@ -54,7 +54,7 @@
           <p>
             {{ 'DONT HAVE AN ACCOUNT' | translate }}
             <!-- link to signup page  -->
-            <a routerLink="/shell/signup">{{ 'SIGNUP' | translate }}</a>
+            <a [routerLink]="['/shell/signup']" [queryParams]="{ returnUrl: returnUrl }">{{ 'SIGNUP' | translate }}</a>
           </p>
         </div>
       </form>

@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { signup } from './store/signup.actions';
 import { ISignupState } from './store/signup.reducer';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { selectSignupUser, selectSignupError } from './store/signup.selectors';
 import Swal from 'sweetalert2';
-import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -23,10 +22,18 @@ export class SignupComponent implements OnInit, OnDestroy {
   password: string = '';
 
   user$ = this.store.pipe(select(selectSignupUser));
+  redirectUrl: string | null = null; // To hold the redirect URL
 
-  constructor(private store: Store<ISignupState>, private router: Router) {}
+  constructor(
+    private store: Store<ISignupState>,
+    private router: Router,
+    private route: ActivatedRoute // Inject ActivatedRoute to get query parameters
+  ) {}
 
   ngOnInit(): void {
+    // Get the redirect URL from query parameters
+    this.redirectUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+
     this.user$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(user => {
@@ -37,19 +44,12 @@ export class SignupComponent implements OnInit, OnDestroy {
             text: 'Please login to continue',
             confirmButtonText: 'Continue'
           }).then(() => {
-            this.router.navigate(['/shell/login']);
+            this.router.navigate(['/shell/login'], {
+              queryParams: { returnUrl: this.redirectUrl } // Pass the redirect URL
+            });
           });
         }
       });
-  }
-  emailDomainValidator(): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const email = control.value;
-      if (email && !email.includes('@') || !email.endsWith('.com')) {
-        return { 'invalidEmail': true };
-      }
-      return null;
-    };
   }
 
   onSubmit(): void {

@@ -55,16 +55,16 @@ export class ItemComponent implements OnInit {
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['/login']);
+        // Store the current URL and redirect to login
+        const returnUrl = this.router.url; // Current URL
+        this.router.navigate(['/login'], { queryParams: { returnUrl } });
       }
     });
   }
+  
 
   goToCart() {
     this.router.navigate(['/cart']);
   }
 
-  goToMainPage() {
-    this.router.navigate(['/']);
-  }
 }
