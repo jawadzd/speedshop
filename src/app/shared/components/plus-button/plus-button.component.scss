@@ -1,0 +1,35 @@
+.plus-button-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  
+    .action-button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin: 0 5px; /* Horizontal margin for spacing */
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    span {
+      margin: 0 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  
+    .total-price {
+      margin-left: 10px; /* Margin to separate total price */
+      font-size: 14px;
+      color: #555;
+      font-weight: bold;
+    }
+  }
+  

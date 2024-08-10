@@ -29,6 +29,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
+
 //central module to whole application at the root to import needed modules and services
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

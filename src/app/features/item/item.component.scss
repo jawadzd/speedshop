@@ -93,3 +93,27 @@
     color: white;
   }
   
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    app-plus-button {
+      margin-right: 15px; /* Space between plus button and Go to Cart button */
+    }
+
+    .navigation-button {
+      background-color: #28a745; /* Green for Go to Cart */
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+  }

@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryColorPipe } from '../shared/pipes/category-color.pipe';
 import { CarouselComponent } from '../shared/components/carousel/carousel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { PlusButtonComponent } from '../shared/components/plus-button/plus-button.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +20,12 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
   ItemComponent,
   CategoryColorPipe,
   CarouselComponent,
-  LandingPageComponent
-
-
-    
+  LandingPageComponent,    
   ],
   imports: [
     FeaturesRoutingModule,
     CommonModule,
-
+    PlusButtonComponent,
     AccountModule,
     NgbModule
 
