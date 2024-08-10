@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from '../../auth/services/auth.service';
-import { IAuthState } from '../../auth/login/store/auth.reducer';
+import { IAuthState } from '../../auth/login/models/auth-state.model';
 import { selectAuthUser } from '../../auth/login/store/auth.selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
