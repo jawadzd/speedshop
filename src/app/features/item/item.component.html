@@ -16,7 +16,7 @@
     <div class="action-buttons">
      <app-plus-button [itemPrice]="item.price" [isAuthenticated]="isAuthenticated" (itemCountChange)="handleItemCountChange($event)"></app-plus-button>
 
-      <button *ngIf="showGoToCartButton" class="navigation-button" (click)="goToCart()">Go to Cart</button>
+      <button *ngIf="showGoToCartButton" class="navigation-button" (click)="goToCart()">{{"GO_TO_CART" | translate}}</button>
     </div>
   </div>
 </div>

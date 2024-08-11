@@ -11,6 +11,8 @@ import { CategoryColorPipe } from '../shared/pipes/category-color.pipe';
 import { CarouselComponent } from '../shared/components/carousel/carousel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PlusButtonComponent } from '../shared/components/plus-button/plus-button.component';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PlusButtonComponent } from '../shared/components/plus-button/plus-butto
     CommonModule,
     PlusButtonComponent,
     AccountModule,
-    NgbModule
+    NgbModule,
+    TranslateModule
 
   ]
 })

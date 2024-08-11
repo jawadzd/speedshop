@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plus-button',
   standalone: true,
   templateUrl: './plus-button.component.html',
   styleUrls: ['./plus-button.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
 })
 export class PlusButtonComponent {
   @Input() itemPrice = 0;
@@ -16,6 +18,7 @@ export class PlusButtonComponent {
   expanded = false;
   totalPrice = 0;
 
+  constructor( private translate: TranslateService) {}
   toggle() {
     console.log("toggle");
     if (this.isAuthenticated) { // Check authentication status before toggling

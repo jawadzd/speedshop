@@ -3,10 +3,10 @@
       <button class="action-button" (click)="decrement()">-</button>
       <span>{{ count }}</span>
       <button class="action-button" (click)="increment()">+</button>
-      <div class="total-price">Total: {{ totalPrice | currency }}</div>
+      <div class="total-price">{{"Total:"| translate}}{{ totalPrice | currency }}</div>
     </ng-container>
     <ng-template #showPlus>
-      <button class="action-button" (click)="toggle()">Add to Cart +</button>
+      <button class="action-button" (click)="toggle()">{{ "ADD_TO_CART_+"|translate}}</button>
     </ng-template>
   </div>
   
