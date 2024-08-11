@@ -64,7 +64,7 @@ export class ItemComponent implements OnInit {
   
 
   goToCart() {
-    this.router.navigate(['/cart']);
+    this.router.navigate(['account/cart']);
   }
 
 }

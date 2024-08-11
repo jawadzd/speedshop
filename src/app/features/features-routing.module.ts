@@ -8,13 +8,18 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  {path: 'product-listing', component: ProductListingComponent},
+  { path: 'product-listing', component: ProductListingComponent },
   { path: 'item/:id', component: ItemComponent },
-  { path: 'account',canActivate: [authGuard],loadChildren: () => import('../features/account/account.module').then(m => m.AccountModule) }
+  {
+    path: 'account',
+    canActivate: [authGuard],
+    loadChildren: () =>
+      import('../features/account/account.module').then((m) => m.AccountModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FeaturesRoutingModule { }
+export class FeaturesRoutingModule {}
