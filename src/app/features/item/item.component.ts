@@ -4,6 +4,7 @@ import { ItemService } from './services/item.service';
 import { IItem } from '../../shared/models/item.model';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../core/auth/services/auth.service';
+import { CartService } from '../../features/account/services/cart.service';
 
 @Component({
   selector: 'app-item',
@@ -19,7 +20,8 @@ export class ItemComponent implements OnInit {
     private route: ActivatedRoute,
     private itemService: ItemService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -67,4 +69,28 @@ export class ItemComponent implements OnInit {
     this.router.navigate(['account/cart']);
   }
 
+  addToCart() {
+    if (this.item && this.isAuthenticated) {
+ 
+      const userId = this.authService.getUserId();
+      console.log(userId);
+
+      if (userId !== null) {
+        this.cartService.addItemToCart(userId, {
+          productId: this.item.id,
+          quantity: 1, // Example quantity
+        }).subscribe(
+          (response) => {
+            Swal.fire('Success', 'Item added to cart successfully!', 'success');
+          },
+          (error) => {
+            Swal.fire('Error', 'Failed to add item to cart.', 'error');
+          }
+        );
+      } else {
+        Swal.fire('Error', 'Could not retrieve user information.', 'error');
+      }
+    }
+  }
 }
+

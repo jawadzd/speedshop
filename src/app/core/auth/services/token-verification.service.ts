@@ -14,7 +14,7 @@ export class TokenVerificationService {
   constructor(private http: HttpClient) {}
 
   // Decodes the JWT and returns its payload
-  private decodeToken(token: string): any {
+   decodeToken(token: string): any {
     try {
       return jwtDecode(token);
     } catch (e) {

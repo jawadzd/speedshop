@@ -1,6 +1,6 @@
 <div *ngIf="item" class="item-card">
   <div class="item-card-image">
-    <img [src]="item.image" alt="{{ item.title }}">
+    <img [src]="item.image" alt="{{ item.title }}" />
   </div>
 
   <div class="item-card-body">
@@ -11,12 +11,29 @@
     </p>
     <p class="item-price">{{ item.price | currency }}</p>
     <p class="item-description">{{ item.description }}</p>
-    
+
     <!-- Container for Plus Button and Go to Cart Button -->
     <div class="action-buttons">
-     <app-plus-button [itemPrice]="item.price" [isAuthenticated]="isAuthenticated" (itemCountChange)="handleItemCountChange($event)"></app-plus-button>
+      <app-plus-button
+        [itemPrice]="item.price"
+        [isAuthenticated]="isAuthenticated"
+        (itemCountChange)="handleItemCountChange($event)"
+      ></app-plus-button>
 
-      <button *ngIf="showGoToCartButton" class="navigation-button" (click)="goToCart()">{{"GO_TO_CART" | translate}}</button>
+      <button
+        *ngIf="showGoToCartButton"
+        class="navigation-button"
+        (click)="addToCart()"
+      >
+        {{ "ADD_TO_CART" | translate }}
+      </button>
+      <button
+        *ngIf="showGoToCartButton"
+        class="navigation-button"
+        (click)="goToCart()"
+      >
+        {{ "GO_TO_CART" | translate }}
+      </button>
     </div>
   </div>
 </div>

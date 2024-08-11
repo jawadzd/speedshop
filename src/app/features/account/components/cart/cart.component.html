@@ -1,1 +1,21 @@
-<p>cart works!</p>
+<div class="cart-container">
+    <h2>Your Cart</h2>
+  
+    <div *ngIf="cartData.length === 0">No items in your cart.</div>
+  
+    <div *ngFor="let cart of cartData" class="cart-item">
+      <h3>Cart ID: {{ cart.id }}</h3>
+      <p>User ID: {{ cart.userId }}</p>
+      <p>Date: {{ cart.date | date: 'mediumDate' }}</p>
+  
+      <div *ngIf="cart.products.length > 0">
+        <h4>Products:</h4>
+        <ul>
+          <li *ngFor="let product of cart.products">
+            Product ID: {{ product.productId }}, Quantity: {{ product.quantity }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
