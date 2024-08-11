@@ -17,12 +17,15 @@ export class PlusButtonComponent {
   totalPrice = 0;
 
   toggle() {
+    console.log("toggle");
     if (this.isAuthenticated) { // Check authentication status before toggling
+      console.log("is authenticated");
       this.expanded = !this.expanded;
       this.count = 1;
       this.totalPrice = this.itemPrice;
       this.itemCountChange.emit(this.count);
     } else {
+      console.log("is not auth");
       this.itemCountChange.emit(0); // Notify parent if unauthenticated
     }
   }
