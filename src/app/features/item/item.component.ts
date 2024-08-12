@@ -4,7 +4,7 @@ import { ItemService } from './services/item.service';
 import { IItem } from '../../shared/models/item.model';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../core/auth/services/auth.service';
-import { CartService } from '../../features/account/services/cart.service';
+import { CartService } from '../account/services/cart.service';
 
 @Component({
   selector: 'app-item',
