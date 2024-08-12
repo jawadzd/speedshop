@@ -5,7 +5,7 @@ import { IItem } from '../../shared/models/item.model';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { CartService } from '../account/services/cart.service';
-
+//this is the item component that will show the details of the item when selected
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -30,7 +30,7 @@ export class ItemComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
     });
 
-    const itemId = this.route.snapshot.paramMap.get('id');
+    const itemId = this.route.snapshot.paramMap.get('id'); //get the item id from the route
     if (itemId) {
       this.itemService.getItemById(+itemId).subscribe((item) => {
         this.item = item;
@@ -39,6 +39,7 @@ export class ItemComponent implements OnInit {
   }
 
   handleItemCountChange(count: number) {
+    //this is to handle the count of the items in the cart
     if (!this.isAuthenticated) {
       this.showLoginPrompt();
     } else {
@@ -47,6 +48,7 @@ export class ItemComponent implements OnInit {
   }
 
   showLoginPrompt() {
+    //this is to show the login prompt when not logged in to restrict access
     Swal.fire({
       title: 'Not Logged In',
       text: 'You need to log in to add items to the cart.',
@@ -63,34 +65,39 @@ export class ItemComponent implements OnInit {
       }
     });
   }
-  
 
   goToCart() {
+    //this is to navigate to the cart page
     this.router.navigate(['account/cart']);
   }
 
   addToCart() {
+    //this is to add the item to the cart
     if (this.item && this.isAuthenticated) {
- 
       const userId = this.authService.getUserId();
       console.log(userId);
 
       if (userId !== null) {
-        this.cartService.addItemToCart(userId, {
-          productId: this.item.id,
-          quantity: 1, // Example quantity
-        }).subscribe(
-          (response) => {
-            Swal.fire('Success', 'Item added to cart successfully!', 'success');
-          },
-          (error) => {
-            Swal.fire('Error', 'Failed to add item to cart.', 'error');
-          }
-        );
+        this.cartService
+          .addItemToCart(userId, {
+            productId: this.item.id,
+            quantity: 1, //this should be dynamic
+          })
+          .subscribe(
+            (response) => {
+              Swal.fire(
+                'Success',
+                'Item added to cart successfully!',
+                'success'
+              );
+            },
+            (error) => {
+              Swal.fire('Error', 'Failed to add item to cart.', 'error');
+            }
+          );
       } else {
         Swal.fire('Error', 'Could not retrieve user information.', 'error');
       }
     }
   }
 }
-

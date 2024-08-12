@@ -10,7 +10,7 @@ import { SignupComponent } from '../auth/signup/signup.component';
 import { FeaturesModule } from '../../features/features.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-//shell module to hold the shell components and the features module with all needed imports,routing and services
+//this is the second level module to hold the shell components and the features module with all needed imports,routing and services
 
 @NgModule({
   declarations: [

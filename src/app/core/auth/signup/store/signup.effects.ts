@@ -7,15 +7,18 @@ import { SignupService } from '../services/signup.service';
 
 @Injectable()
 export class SignupEffects {
-  signup$ = createEffect(() => this.actions$.pipe(
-    ofType(signup),
-    mergeMap(action =>
-      this.signupService.signup(action.request).pipe(
-        map(response => signupSuccess({ response: response })),
-        catchError(error => of(signupFailure({ error: error.message })))
+  signup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signup),
+      mergeMap((action) =>
+        this.signupService.signup(action.request).pipe(
+          //call the signup service
+          map((response) => signupSuccess({ response: response })), //if the request is successful, dispatch the signup success action
+          catchError((error) => of(signupFailure({ error: error.message }))) //if the request fails, dispatch the signup failure action
+        )
       )
     )
-  ));
+  );
 
   constructor(
     private actions$: Actions,

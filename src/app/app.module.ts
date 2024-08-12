@@ -21,12 +21,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { itemReducer } from './features/product-listing/store/item.reducer';
 import { ItemEffects } from './features/product-listing/store/item.effects';
-import { AuthInterceptor } from './shared/interceptors/auth-interceptor.service';
+import { AuthInterceptor } from './core/auth/interceptors/auth-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { ErrorInterceptor } from './core/auth/interceptors/error.interceptor';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 

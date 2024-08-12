@@ -13,7 +13,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PlusButtonComponent } from '../shared/components/plus-button/plus-button.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+//this is the thrid level module in the app hirearchy and it is responsible for the features of the app (main pages)
 @NgModule({
   declarations: [
   FeatureComponent,

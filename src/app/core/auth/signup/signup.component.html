@@ -4,10 +4,12 @@
   </div>
   <div class="signup-form-container">
     <div class="signup-form">
-      <h2>{{ 'SIGNUP' | translate }}</h2>
+      <h2>{{ "SIGNUP" | translate }}</h2>
       <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+        <!-- form -->
         <div class="form-group">
-          <label for="firstname">{{ 'FIRST NAME' | translate }}:</label>
+          <label for="firstname">{{ "FIRST NAME" | translate }}:</label>
+          <!-- firt name input feild  -->
           <input
             type="text"
             id="firstname"
@@ -15,14 +17,23 @@
             name="firstname"
             #firstnameInput="ngModel"
             required
-            [class.invalid]="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)"
+            [class.invalid]="
+              firstnameInput.invalid &&
+              (firstnameInput.dirty || firstnameInput.touched)
+            "
           />
-          <div *ngIf="firstnameInput.invalid && (firstnameInput.dirty || firstnameInput.touched)" class="error-message">
-            {{ 'FIRST_NAME_REQUIRED' | translate }}
+          <div
+            *ngIf="
+              firstnameInput.invalid &&
+              (firstnameInput.dirty || firstnameInput.touched)
+            "
+            class="error-message"
+          >
+            {{ "FIRST_NAME_REQUIRED" | translate }}
           </div>
         </div>
         <div class="form-group">
-          <label for="lastname">{{ 'LAST NAME' | translate }}:</label>
+          <label for="lastname">{{ "LAST NAME" | translate }}:</label>
           <input
             type="text"
             id="lastname"
@@ -30,14 +41,23 @@
             name="lastname"
             #lastnameInput="ngModel"
             required
-            [class.invalid]="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)"
+            [class.invalid]="
+              lastnameInput.invalid &&
+              (lastnameInput.dirty || lastnameInput.touched)
+            "
           />
-          <div *ngIf="lastnameInput.invalid && (lastnameInput.dirty || lastnameInput.touched)" class="error-message">
-            {{ 'LAST_NAME_REQUIRED' | translate }}
+          <div
+            *ngIf="
+              lastnameInput.invalid &&
+              (lastnameInput.dirty || lastnameInput.touched)
+            "
+            class="error-message"
+          >
+            {{ "LAST_NAME_REQUIRED" | translate }}
           </div>
         </div>
         <div class="form-group">
-          <label for="email">{{ 'EMAIL' | translate }}:</label>
+          <label for="email">{{ "EMAIL" | translate }}:</label>
           <input
             type="email"
             id="email"
@@ -45,20 +65,29 @@
             name="email"
             #usernameInput="ngModel"
             required
-            [class.invalid]="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
+            [class.invalid]="
+              usernameInput.invalid &&
+              (usernameInput.dirty || usernameInput.touched)
+            "
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           />
-          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
+          <div
+            *ngIf="
+              usernameInput.invalid &&
+              (usernameInput.dirty || usernameInput.touched)
+            "
+            class="error-message"
+          >
             <ng-container *ngIf="usernameInput.errors?.['required']">
-              {{ 'EMAIL_REQUIRED' | translate }}
+              {{ "EMAIL_REQUIRED" | translate }}
             </ng-container>
             <ng-container *ngIf="usernameInput.errors?.['pattern']">
-              {{ 'INVALID_EMAIL' | translate }}
+              {{ "INVALID_EMAIL" | translate }}
             </ng-container>
           </div>
         </div>
         <div class="form-group">
-          <label for="password">{{ 'PASSWORD' | translate }}:</label>
+          <label for="password">{{ "PASSWORD" | translate }}:</label>
           <input
             type="password"
             id="password"
@@ -66,17 +95,29 @@
             name="password"
             #passwordInput="ngModel"
             required
-            [class.invalid]="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
+            [class.invalid]="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
           />
-          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
-            {{ 'PASSWORD_REQUIRED' | translate }}
+          <div
+            *ngIf="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
+            class="error-message"
+          >
+            {{ "PASSWORD_REQUIRED" | translate }}
           </div>
         </div>
         <button type="submit" [disabled]="signupForm.invalid">
-          {{ 'SIGNUP' | translate }}
+          {{ "SIGNUP" | translate }}
         </button>
         <div class="login-text">
-          <p>{{ 'ALREADY HAVE AN ACCOUNT' | translate }} <a routerLink="/shell/login">{{ 'LOGIN' | translate }}</a></p>
+          <p>
+            {{ "ALREADY HAVE AN ACCOUNT" | translate }}
+            <a routerLink="/shell/login">{{ "LOGIN" | translate }}</a>
+          </p>
         </div>
       </form>
     </div>

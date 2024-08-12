@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment.dev'; 
+import { environment } from '../../../../environments/environment.dev';
 import { IUserProfile } from '../models/userprofile';
 
-
+//this is the service that will be used to fetch the user profile from the API
 @Injectable({
   providedIn: 'root',
 })
@@ -22,5 +22,4 @@ export class ProfileService {
       })
     );
   }
-  
 }

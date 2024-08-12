@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateService } from '@ngx-translate/core';
-
+// Plus button component that will be used to add items to the cart this is a standalone component with testing file complete
 @Component({
   selector: 'app-plus-button',
   standalone: true,
   templateUrl: './plus-button.component.html',
   styleUrls: ['./plus-button.component.scss'],
-  imports: [CommonModule,TranslateModule],
+  imports: [CommonModule, TranslateModule],
 })
 export class PlusButtonComponent {
   @Input() itemPrice = 0;
@@ -18,9 +18,10 @@ export class PlusButtonComponent {
   expanded = false;
   totalPrice = 0;
 
-  constructor( private translate: TranslateService) {}
+  constructor(private translate: TranslateService) {}
   toggle() {
-    if (this.isAuthenticated) { // Check authentication status before toggling
+    if (this.isAuthenticated) {
+      // Check authentication status before toggling
       this.expanded = !this.expanded;
       this.count = 1;
       this.totalPrice = this.itemPrice;
@@ -31,7 +32,8 @@ export class PlusButtonComponent {
   }
 
   increment() {
-    if (this.isAuthenticated) { // Check authentication status before incrementing
+    if (this.isAuthenticated) {
+      // Check authentication status before incrementing
       this.count++;
       this.updateTotalPrice();
       this.itemCountChange.emit(this.count);
@@ -41,7 +43,8 @@ export class PlusButtonComponent {
   }
 
   decrement() {
-    if (this.isAuthenticated && this.count > 0) { // Check authentication status before decrementing
+    if (this.isAuthenticated && this.count > 0) {
+      // Check authentication status before decrementing
       this.count--;
       this.updateTotalPrice();
       this.itemCountChange.emit(this.count);

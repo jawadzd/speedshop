@@ -3,16 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IItem } from '../../../shared/models/item.model';
 import { environment } from '../../../../environments/environment.dev';
-
+//this is the service that will be used to fetch the items from the API
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ItemService {
-  private url= environment.productsApi;
+  private url = environment.productsApi;
 
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 
   getItems(): Observable<IItem[]> {
     return this.http.get<IItem[]>(`${this.url}products`);

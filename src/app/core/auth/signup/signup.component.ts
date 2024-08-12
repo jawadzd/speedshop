@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit(): void {
+  onSubmit(): void {// Function to handle form submission
     const request = {
       firstname: this.firstname,
       lastname: this.lastname,
@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.store.dispatch(signup({ request }));
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {// Unsubscribe from the Subject
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

@@ -1,11 +1,15 @@
+<!-- first we see the carousel that goes throug some intial pictures  -->
 <app-carousel></app-carousel>
+
 <div class="card-container">
-  <div 
-    *ngFor="let item of items$ | async; trackBy: trackByItemId; let i = index" 
-    class="card-wrapper" 
-    (click)="onCardClick(i)" 
+  <!-- tracking items using trackby and using the async pipe for less memory usage and to not need unsubscribtion -->
+  <div
+    *ngFor="let item of items$ | async; trackBy: trackByItemId; let i = index"
+    class="card-wrapper"
+    (click)="onCardClick(i)"
     (dblclick)="onDoubleClick(item.id)"
-    [class.selected]="i === selectedItemIndex">
+    [class.selected]="i === selectedItemIndex"
+  >
     <app-card [item]="item"></app-card>
   </div>
 </div>

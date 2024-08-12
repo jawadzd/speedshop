@@ -5,17 +5,17 @@ import { ISignupRequest } from '../models/signup-request.model';
 import { ISignupResponse } from '../models/signup-response.model';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SignupService {
   private authUrl = environment.authenticationApi;
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-
-  signup(request: ISignupRequest):Observable<ISignupResponse>{
- 
-    return this.http.post<ISignupResponse>(`${this.authUrl}User/SignUp()`, request);
+  signup(request: ISignupRequest): Observable<ISignupResponse> {
+    return this.http.post<ISignupResponse>(
+      `${this.authUrl}User/SignUp()`,
+      request
+    ); //post request to the signup endpoint
   }
 }

@@ -7,11 +7,11 @@ import { ItemState } from './store/item.reducer';
 import { selectAllItems } from './store/item.selectors';
 import { KeyboardControlService } from '../../shared/services/keyboard-control.service';
 import { Router } from '@angular/router';
-
+//this component is the main product listingg component it will show all the data with the needed filters and search criteria
 @Component({
   selector: 'app-product-listing',
   templateUrl: './product-listing.component.html',
-  styleUrls: ['./product-listing.component.scss']
+  styleUrls: ['./product-listing.component.scss'],
 })
 export class ProductListingComponent implements OnInit, OnDestroy {
   title = 'speedshop';
@@ -28,10 +28,11 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    //load the items when the component is initialized
     this.store.dispatch(loadItems());
 
     this.subscriptions.add(
-      this.keyboardControlService.arrowKey$.subscribe(key => {
+      this.keyboardControlService.arrowKey$.subscribe((key) => {
         if (key === 'ArrowRight') {
           this.selectNextItem();
         } else if (key === 'ArrowLeft') {
@@ -41,6 +42,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
+      //this is for the enter key to select the item
       this.keyboardControlService.enterKey$.subscribe(() => {
         this.selectCurrentItem();
       })
@@ -48,11 +50,13 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    //unsubscribe from the subscriptions when the component is destroyed
     this.subscriptions.unsubscribe();
   }
 
+  //these are keyboard settings for the navigation in the product listing page
   selectNextItem(): void {
-    this.items$.subscribe(items => {
+    this.items$.subscribe((items) => {
       if (this.selectedItemIndex < items.length - 1) {
         this.selectedItemIndex++;
       }
@@ -66,7 +70,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   selectCurrentItem(): void {
-    this.items$.subscribe(items => {
+    this.items$.subscribe((items) => {
       const selectedItem = items[this.selectedItemIndex];
       this.router.navigate(['/shell/feature/item', selectedItem.id]);
     });

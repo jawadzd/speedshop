@@ -10,7 +10,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 export class CartComponent implements OnInit {
   cartData: any[] = [];
   userId: number | null = null;
-
+  //this is the cart component that will be used to display the cart data
   constructor(
     private cartService: CartService,
     private authService: AuthService

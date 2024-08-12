@@ -8,21 +8,18 @@ import { IItem } from '../../../shared/models/item.model';
 
 @Injectable()
 export class ItemEffects {
-
   loadItems$ = createEffect(() =>
+    //this is the effect that will be triggered when the loadItems action is dispatched
     this.actions$.pipe(
       ofType(loadItems),
       mergeMap(() =>
         this.itemService.getItems().pipe(
           map((items: IItem[]) => loadItemsSuccess({ items })),
-          catchError(error => of(loadItemsFailure({ error })))
+          catchError((error) => of(loadItemsFailure({ error })))
         )
       )
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private itemService: ItemService
-  ) {}
+  constructor(private actions$: Actions, private itemService: ItemService) {}
 }
