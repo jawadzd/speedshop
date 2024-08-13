@@ -10,35 +10,33 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 export class CartComponent implements OnInit {
   cartData: any[] = [];
   userId: number | null = null;
-  //this is the cart component that will be used to display the cart data
+
   constructor(
     private cartService: CartService,
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.userId = this.authService.getUserId();
     if (this.userId !== null) {
-      this.loadCartData();
+      await this.loadCartData();
     } else {
       console.error('User ID not found');
     }
   }
 
-  loadCartData(): void {
+  async loadCartData(): Promise<void> {
     if (this.userId === null) {
       console.error('Cannot load cart data without a valid user ID');
       return;
     }
 
-    this.cartService.getUserCart(this.userId).subscribe(
-      (data) => {
-        this.cartData = data;
-        console.log(this.cartData);
-      },
-      (error) => {
-        console.error('Error fetching cart data:', error);
-      }
-    );
+    try {
+      const data = await this.cartService.getUserCart(this.userId);
+      this.cartData = data;
+      console.log(this.cartData);
+    } catch (error) {
+      console.error('Error fetching cart data:', error);
+    }
   }
 }

@@ -5,7 +5,7 @@ import { IItem } from '../../shared/models/item.model';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { CartService } from '../account/services/cart.service';
-//this is the item component that will show the details of the item when selected
+
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -15,6 +15,7 @@ export class ItemComponent implements OnInit {
   item: IItem | null = null;
   showGoToCartButton = false;
   isAuthenticated = false; // Track authentication status
+  currentQuantity = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class ItemComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
     });
 
-    const itemId = this.route.snapshot.paramMap.get('id'); //get the item id from the route
+    const itemId = this.route.snapshot.paramMap.get('id'); // Get the item id from the route
     if (itemId) {
       this.itemService.getItemById(+itemId).subscribe((item) => {
         this.item = item;
@@ -39,7 +40,8 @@ export class ItemComponent implements OnInit {
   }
 
   handleItemCountChange(count: number) {
-    //this is to handle the count of the items in the cart
+    // Handle the count of the items in the cart
+    this.currentQuantity = count;
     if (!this.isAuthenticated) {
       this.showLoginPrompt();
     } else {
@@ -48,7 +50,7 @@ export class ItemComponent implements OnInit {
   }
 
   showLoginPrompt() {
-    //this is to show the login prompt when not logged in to restrict access
+    // Show the login prompt when not logged in to restrict access
     Swal.fire({
       title: 'Not Logged In',
       text: 'You need to log in to add items to the cart.',
@@ -61,40 +63,34 @@ export class ItemComponent implements OnInit {
       if (result.isConfirmed) {
         // Store the current URL and redirect to login
         const returnUrl = this.router.url; // Current URL
-        this.router.navigate(['/login'], { queryParams: { returnUrl } });
+        this.router.navigate(['/shell/login'], { queryParams: { returnUrl } });
       }
     });
   }
 
   goToCart() {
-    //this is to navigate to the cart page
-    this.router.navigate(['account/cart']);
+    // Navigate to the cart page
+    this.router.navigate(['shell/feature/account/cart']);
   }
 
-  addToCart() {
-    //this is to add the item to the cart
+  async addToCart() {
+    // Add the item to the cart
     if (this.item && this.isAuthenticated) {
       const userId = this.authService.getUserId();
       console.log(userId);
 
       if (userId !== null) {
-        this.cartService
-          .addItemToCart(userId, {
+        try {
+          await this.cartService.addItemToCart(userId, {
             productId: this.item.id,
-            quantity: 1, //this should be dynamic
-          })
-          .subscribe(
-            (response) => {
-              Swal.fire(
-                'Success',
-                'Item added to cart successfully!',
-                'success'
-              );
-            },
-            (error) => {
-              Swal.fire('Error', 'Failed to add item to cart.', 'error');
-            }
-          );
+            quantity: this.currentQuantity,
+          });
+
+          Swal.fire('Success', 'Item added to cart successfully!', 'success');
+        } catch (error) {
+          console.error(error);
+          Swal.fire('Error', 'Failed to add item to cart.', 'error');
+        }
       } else {
         Swal.fire('Error', 'Could not retrieve user information.', 'error');
       }
