@@ -1,10 +1,19 @@
 <div class="cart-container">
   <h2>Your Cart</h2>
 
-  <div *ngIf="(cartData$ | async)?.length === 0">No items in your cart.</div>
+  <div *ngIf="cartItems$ | async as cartItems; else noItems">
+    <div *ngIf="cartItems.length === 0">No items in your cart.</div>
 
-  <div *ngFor="let item of cartData$ | async" class="cart-item">
-    <p>Product ID: {{ item.productId }}</p>
-    <p>Quantity: {{ item.quantity }}</p>
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <h3>Product ID: {{ item.id }}</h3>
+      <img [src]="item.image" alt="{{ item.title }}" class="cart-item-image" />
+      <p>Title: {{ item.title }}</p>
+      <p>Price: {{ item.price | currency }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+    </div>
   </div>
+
+  <ng-template #noItems>
+    <div>No items in your cart.</div>
+  </ng-template>
 </div>
