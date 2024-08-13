@@ -1,6 +1,6 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
-import { IUserProfile } from '../../models/userprofile';
+import { IUserProfile } from '../../models/userprofile-model';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
 

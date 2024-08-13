@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -8,35 +9,19 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  cartData: any[] = [];
-  userId: number | null = null;
+  cartData$: Observable<{ productId: number; quantity: number }[]> = new Observable();
 
   constructor(
     private cartService: CartService,
     private authService: AuthService
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    this.userId = this.authService.getUserId();
-    if (this.userId !== null) {
-      await this.loadCartData();
+  ngOnInit(): void {
+    const userId = this.authService.getUserId();
+    if (userId !== null) {
+      this.cartData$ = this.cartService.getUserCart(userId);
     } else {
       console.error('User ID not found');
-    }
-  }
-
-  async loadCartData(): Promise<void> {
-    if (this.userId === null) {
-      console.error('Cannot load cart data without a valid user ID');
-      return;
-    }
-
-    try {
-      const data = await this.cartService.getUserCart(this.userId);
-      this.cartData = data;
-      console.log(this.cartData);
-    } catch (error) {
-      console.error('Error fetching cart data:', error);
     }
   }
 }
