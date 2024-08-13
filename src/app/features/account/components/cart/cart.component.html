@@ -1,19 +1,15 @@
 <div class="cart-container">
-  <h2>Your Cart</h2>
+  <h1>Your Shopping Cart</h1>
 
-  <div *ngIf="cartItems$ | async as cartItems; else noItems">
-    <div *ngIf="cartItems.length === 0">No items in your cart.</div>
-
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <h3>Product ID: {{ item.id }}</h3>
-      <img [src]="item.image" alt="{{ item.title }}" class="cart-item-image" />
-      <p>Title: {{ item.title }}</p>
-      <p>Price: {{ item.price | currency }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-    </div>
-  </div>
-
-  <ng-template #noItems>
-    <div>No items in your cart.</div>
-  </ng-template>
+  <ag-grid-angular
+    style="width: 100%; height: 500px;"
+    class="ag-theme-balham"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData$ | async"
+    domLayout="autoHeight"
+    [defaultColDef]="{ resizable: true }"
+  ></ag-grid-angular>
+</div>
+<div *ngIf="total$ | async as total">
+  <p>Total Price: ${{ total.toFixed(2) }}</p>
 </div>
