@@ -11,9 +11,15 @@
     [pagination]="true"
     domLayout="normal"
     [defaultColDef]="{ resizable: true }"
-    [components]="frameworkComponents">
+    [components]="frameworkComponents"
+    [context]="context">
   </ag-grid-angular>
 </div>
+
+<ng-template #noItems>
+  <p>Your cart is empty!</p>
+</ng-template>
+
 <div *ngIf="total$ | async as total">
   <p>Total Price: ${{ total.toFixed(2) }}</p>
 </div>
