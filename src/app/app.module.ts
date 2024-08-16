@@ -28,8 +28,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ErrorInterceptor } from './core/auth/interceptors/error.interceptor';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 //central module to whole application at the root to import needed modules and services
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

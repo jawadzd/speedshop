@@ -1,0 +1,22 @@
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  mat-dialog-content {
+    padding: 20px;
+  }
+  
+  mat-dialog-actions {
+    padding: 10px;
+    text-align: right;
+  }
+  

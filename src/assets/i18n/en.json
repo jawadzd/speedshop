@@ -72,7 +72,12 @@
   "GO_TO_CART": "Go to Cart",
   "TITLE": "Title",
   "IMAGE": "Image",
-  "ACTIONS": "Actions"
+  "ACTIONS": "Actions",
+  "DELETE": "Delete",
+  "ITEM_DETAILS": "Item Details",
+  "DESCRIPTION": "Description",
+  "CLOSE": "Close",
+  "SHOW_DETAILS": "Show Details"
 
 
 }

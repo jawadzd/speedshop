@@ -72,5 +72,10 @@
   "ADD_TO_CART": "Ajouter au Panier"  ,
   "TITLE": "Titre",
   "IMAGE": "Image",
-  "ACTIONS": "Actions"
+  "ACTIONS": "Actions",
+  "DELETE": "Supprimer",
+  "ITEM_DETAILS": "Détails de l'article",
+  "DESCRIPTION": "Description",
+  "CLOSE": "Fermer",
+  "SHOW_DETAILS": "Afficher les détails"
 }

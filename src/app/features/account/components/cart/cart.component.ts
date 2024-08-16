@@ -8,6 +8,7 @@ import { ColDef } from 'ag-grid-community';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { DeleteComponent } from '../../../../shared/components/grid_components/delete/delete.component';
+import { DetailsButtonRendererComponent } from '../../../../shared/components/grid_components/details-popup/details-button-renderer.component';
 
 @Component({
   selector: 'app-cart',
@@ -17,12 +18,23 @@ import { DeleteComponent } from '../../../../shared/components/grid_components/d
 export class CartComponent implements OnInit {
   context = { componentParent: this };
 
-  rowData$: Observable<{ id: number; title: string; price: number; quantity: number; image: string }[]> | undefined;
+  rowData$:
+    | Observable<
+        {
+          id: number;
+          title: string;
+          price: number;
+          quantity: number;
+          image: string;
+        }[]
+      >
+    | undefined;
   total$: Observable<number> | undefined;
   columnDefs: ColDef[] = [];
 
   frameworkComponents: any = {
-    deleteButtonRenderer: DeleteComponent
+    deleteButtonRenderer: DeleteComponent,
+    detailsButtonRenderer: DetailsButtonRendererComponent,
   };
 
   constructor(
@@ -44,32 +56,34 @@ export class CartComponent implements OnInit {
     const userId = this.authService.getUserId();
     if (userId !== null) {
       this.rowData$ = this.cartService.getUserCart(userId).pipe(
-        switchMap(cartItems => {
+        switchMap((cartItems) => {
           if (cartItems.length === 0) {
             return of([]); // Return an empty array if no cart items are found
           }
-          const productRequests = cartItems.map(item =>
+          const productRequests = cartItems.map((item) =>
             this.productService.getProductDetailsById(item.productId).pipe(
               map((product: IItem) => ({
                 id: product.id,
                 title: product.title,
                 price: product.price,
                 quantity: item.quantity,
-                image: product.image
+                image: product.image,
               }))
             )
           );
           return forkJoin(productRequests);
         }),
-        catchError(error => {
+        catchError((error) => {
           console.error('Error fetching cart items:', error);
           return of([]); // Return an empty array in case of error
         })
       );
 
       this.total$ = this.rowData$.pipe(
-        map(items => items.reduce((total, item) => total + item.price * item.quantity, 0)),
-        catchError(error => {
+        map((items) =>
+          items.reduce((total, item) => total + item.price * item.quantity, 0)
+        ),
+        catchError((error) => {
           console.error('Error calculating total price:', error);
           return of(0); // Return 0 in case of error
         })
@@ -81,58 +95,76 @@ export class CartComponent implements OnInit {
   }
 
   private updateColumnDefs(): void {
-    this.translate.get([
-      'ID',
-      'TITLE',
-      'PRICE',
-      'QUANTITY',
-      'IMAGE',
-      'ACTIONS'
-    ]).subscribe(translations => {
-      this.columnDefs = [
-        { headerName: translations['ID'], field: 'id', width: 70 },
-        { headerName: translations['TITLE'], field: 'title', width: 250 },
-        { headerName: translations['PRICE'], field: 'price', width: 100 },
-        { headerName: translations['QUANTITY'], field: 'quantity', width: 100 },
-        { headerName: translations['IMAGE'], field: 'image', width: 150, cellRenderer: this.imageRenderer },
-        { headerName: translations['ACTIONS'], cellRenderer: 'deleteButtonRenderer' }
-      ];
-    });
+    this.translate
+      .get(['ID', 'TITLE', 'PRICE', 'QUANTITY', 'IMAGE', 'ACTIONS'])
+      .subscribe((translations) => {
+        this.columnDefs = [
+          { headerName: translations['ID'], field: 'id', width: 70 },
+          { headerName: translations['TITLE'], field: 'title', width: 250 },
+          { headerName: translations['PRICE'], field: 'price', width: 100 },
+          {
+            headerName: translations['QUANTITY'],
+            field: 'quantity',
+            width: 100,
+          },
+          {
+            headerName: translations['IMAGE'],
+            field: 'image',
+            width: 150,
+            cellRenderer: this.imageRenderer,
+          },
+          {
+            headerName: translations['DELETE'],
+            width: 50,
+            cellRenderer: 'deleteButtonRenderer',
+          },
+          {
+            headerName: translations['ACTIONS'],
+            cellRenderer: 'detailsButtonRenderer',
+          },
+        ];
+      });
   }
 
   deleteRow(rowIndex: number): void {
-    this.rowData$?.subscribe(rowData => {
-      const productId = rowData[rowIndex]?.id;
-      if (productId !== undefined) {
-        Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do you really want to delete this item from your cart?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, keep it'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.onDelete(productId);
-          }
-        });
-      } else {
-        console.error('Product ID is undefined at rowIndex:', rowIndex);
+    this.rowData$?.subscribe(
+      (rowData) => {
+        const productId = rowData[rowIndex]?.id;
+        if (productId !== undefined) {
+          Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to delete this item from your cart?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.onDelete(productId);
+            }
+          });
+        } else {
+          console.error('Product ID is undefined at rowIndex:', rowIndex);
+        }
+      },
+      (error) => {
+        console.error('Error subscribing to rowData$:', error);
       }
-    }, error => {
-      console.error('Error subscribing to rowData$:', error);
-    });
+    );
   }
 
   private onDelete(productId: number): void {
     const userId = this.authService.getUserId();
     if (userId !== null) {
-      this.cartService.removeItemFromCart(userId, productId).subscribe(() => {
-        // Refresh the cart data after deletion
-        this.loadCartData(); // Call the method to reload cart data
-      }, error => {
-        console.error('Error removing item from cart:', error);
-      });
+      this.cartService.removeItemFromCart(userId, productId).subscribe(
+        () => {
+          // Refresh the cart data after deletion
+          this.loadCartData(); // Call the method to reload cart data
+        },
+        (error) => {
+          console.error('Error removing item from cart:', error);
+        }
+      );
     }
   }
 
