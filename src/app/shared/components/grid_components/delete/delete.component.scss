@@ -1,0 +1,13 @@
+.delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px; /* Adjust size as needed */
+    color: #dc3545; /* Red color for the trash can */
+    transition: color 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    color: #c82333; /* Darker red for hover effect */
+  }
+  

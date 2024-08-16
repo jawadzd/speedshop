@@ -64,5 +64,10 @@
   "Diamonds": "Бриллианты",
   "Get Authentic Diamonds on your rings": "Получите настоящие бриллианты на своих кольцах",
   "Electronics": "Электроника",
-  "Best Quality Electronics devices": "Устройства лучшего качества"
+  "Best Quality Electronics devices": "Устройства лучшего качества",
+  "YOUR_CART": "Ваша корзина",
+  "TOTAL_PRICE": "Общая стоимость",
+  "PROMO_CODE": "У вас есть промокод? Введите здесь:",
+  "CHECKOUT": "Оформить заказ",
+  "NO_ITEMS": "Ваша корзина пуста!"
 }

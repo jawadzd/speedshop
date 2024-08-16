@@ -1,25 +1,41 @@
 <div class="cart-container">
-  <h1>Your Shopping Cart</h1>
+  <h1>{{ 'YOUR_CART' | translate }}</h1>
 
-  <ag-grid-angular
-    style="width: 80%; height: 700px;"
-    class="ag-theme-quartz"
-    [columnDefs]="columnDefs"
-    [rowData]="rowData$ | async"
-    [rowHeight]="50" 
-    [paginationPageSize]="3"
-    [pagination]="true"
-    domLayout="normal"
-    [defaultColDef]="{ resizable: true }"
-    [components]="frameworkComponents"
-    [context]="context">
-  </ag-grid-angular>
+  <div class="cart-content">
+    <!-- AG Grid Table -->
+    <div class="ag-grid-container">
+      <ag-grid-angular
+        style="width: 100%; height: 700px;"
+        class="ag-theme-quartz"
+        [columnDefs]="columnDefs"
+        [rowData]="rowData$ | async"
+        [rowHeight]="50"
+        [paginationPageSize]="3"
+        [pagination]="true"
+        domLayout="normal"
+        [defaultColDef]="{ resizable: true }"
+        [components]="frameworkComponents"
+        [context]="context">
+      </ag-grid-angular>
+    </div>
+ <!-- Total Price and Promo Code Section -->
+ <div class="sidebar">
+  <div class="total-price">
+    <h3>{{ 'TOTAL_PRICE' | translate }}</h3>
+    <p>$ {{ (total$ | async)?.toFixed(2) }}</p>
+  </div>
+
+  <div class="promo-code">
+    <label for="promoCode">{{ 'PROMO_CODE' | translate }}</label>
+    <input type="text" id="promoCode" placeholder="{{ 'PROMO_CODE' | translate }}">
+  </div>
+
+  <button class="checkout-button">{{ 'CHECKOUT' | translate }}</button>
+</div>
 </div>
 
+<!-- No items message -->
 <ng-template #noItems>
-  <p>Your cart is empty!</p>
+<p>{{ 'NO_ITEMS' | translate }}</p>
 </ng-template>
-
-<div *ngIf="total$ | async as total">
-  <p>Total Price: ${{ total.toFixed(2) }}</p>
 </div>

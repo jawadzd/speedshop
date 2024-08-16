@@ -64,5 +64,13 @@
   "Diamonds": "Diamants",
   "Get Authentic Diamonds on your rings": "Obtenez des diamants authentiques sur vos bagues",
   "Electronics": "Électronique",
-  "Best Quality Electronics devices": "Appareils électroniques de meilleure qualité"
+  "Best Quality Electronics devices": "Appareils électroniques de meilleure qualité",
+  "YOUR_CART": "Votre Panier",
+  "TOTAL_PRICE": "Prix Total",
+  "PROMO_CODE_LABEL": "Vous avez un code promo ? Entrez ici :",
+  "CHECKOUT": "Commander",
+  "ADD_TO_CART": "Ajouter au Panier"  ,
+  "TITLE": "Titre",
+  "IMAGE": "Image",
+  "ACTIONS": "Actions"
 }

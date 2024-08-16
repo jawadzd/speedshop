@@ -56,7 +56,6 @@
   "YES": "Yes",
   "NO": "No",
   "LANGUAGE": "Language",
-  "GO_TO_CART": "Go to Cart",
   "ADD_TO_CART_+": "Add to Cart +",
   "Total:" : "Total:",
   "Men's Cloth":"Men's Cloth",
@@ -64,7 +63,16 @@
   "Diamonds" : "Diamonds",
   "Get Authentic Diamonds on your rings":"Get Authentic Diamonds on your rings",
   "Electronics":"Electronics",
-  "Best Quality Electronics devices":"Best Quality Electronics devices"
+  "Best Quality Electronics devices":"Best Quality Electronics devices",
+  "YOUR_CART": "Your Shopping Cart",
+  "TOTAL_PRICE": "Total Price",
+  "PROMO_CODE_LABEL": "You have a promo code? Enter here:",
+  "CHECKOUT": "Checkout",
+  "ADD_TO_CART": "Add to Cart",
+  "GO_TO_CART": "Go to Cart",
+  "TITLE": "Title",
+  "IMAGE": "Image",
+  "ACTIONS": "Actions"
 
 
 }
