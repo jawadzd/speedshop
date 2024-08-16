@@ -2,11 +2,12 @@
   <h1>Your Shopping Cart</h1>
 
   <ag-grid-angular
-    style="width: 100%; height: 500px;"
+    style="width: 80%; height: 700px;"
     class="ag-theme-balham"
     [columnDefs]="columnDefs"
     [rowData]="rowData$ | async"
-    domLayout="autoHeight"
+    [rowHeight]="50" 
+    domLayout="normal"
     [defaultColDef]="{ resizable: true }"
   ></ag-grid-angular>
 </div>

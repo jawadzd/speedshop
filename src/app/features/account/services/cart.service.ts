@@ -34,23 +34,50 @@ export class CartService {
   }
 
   // Get the user's cart from IndexedDB
-  getUserCart(userId: number): Observable<{ userId: number; productId: number; quantity: number }[]> {
-    return from(this.dbPromise.then(db => db.getAll('cart')).then(allItems => allItems.filter(item => item.userId === userId)));
+  getUserCart(
+    userId: number
+  ): Observable<{ userId: number; productId: number; quantity: number }[]> {
+    return from(
+      this.dbPromise
+        .then((db) => db.getAll('cart'))
+        .then((allItems) => allItems.filter((item) => item.userId === userId))
+    );
   }
 
   // Add an item to the user's cart in IndexedDB
-  addItemToCart(userId: number, item: { productId: number; quantity: number }): Observable<void> {
-    return from(this.dbPromise.then(async db => {
-      const existingItem = await db.get('cart', item.productId);
+  addItemToCart(
+    userId: number,
+    item: { productId: number; quantity: number }
+  ): Observable<void> {
+    return from(
+      this.dbPromise.then(async (db) => {
+        const existingItem = await db.get('cart', item.productId);
 
-      if (existingItem) {
-        // If the item already exists in the cart, update the quantity
-        existingItem.quantity += item.quantity;
-        await db.put('cart', existingItem);
-      } else {
-        // If the item does not exist, add it to the cart
-        await db.put('cart', { userId, productId: item.productId, quantity: item.quantity });
-      }
-    }));
+        if (existingItem && existingItem.userId === userId) {
+          // If the item already exists in the cart, update the quantity
+          existingItem.quantity += item.quantity;
+          await db.put('cart', existingItem);
+        } else {
+          // If the item does not exist, add it to the cart
+          await db.put('cart', {
+            userId,
+            productId: item.productId,
+            quantity: item.quantity,
+          });
+        }
+      })
+    );
+  }
+
+  // Remove an item from the user's cart in IndexedDB
+  removeItemFromCart(userId: number, productId: number): Observable<void> {
+    return from(
+      this.dbPromise.then(async (db) => {
+        const existingItem = await db.get('cart', productId);
+        if (existingItem && existingItem.userId === userId) {
+          await db.delete('cart', productId);
+        }
+      })
+    );
   }
 }

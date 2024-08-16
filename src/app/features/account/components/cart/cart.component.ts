@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { ProductService } from '../../services/single-item.service';
-import { Observable, forkJoin, switchMap, map } from 'rxjs';
+import { Observable, forkJoin, switchMap, map ,catchError,of } from 'rxjs';
 import { IItem } from '../../../../shared/models/item.model';
-import { ColDef } from 'ag-grid-community';
+import { ColDef ,ICellRendererComp} from 'ag-grid-community';
+import { DeleteGridButtonComponent } from '../../../../shared/components/grid_components/delete-grid-button/delete-grid-button.component';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,16 @@ export class CartComponent implements OnInit {
     { headerName: 'Title', field: 'title', width: 250 },
     { headerName: 'Price', field: 'price', width: 100 },
     { headerName: 'Quantity', field: 'quantity', width: 100 },
-    { headerName: 'Image', field: 'image', width: 150, cellRenderer: this.imageRenderer }
+    { headerName: 'Image', field: 'image', width: 150, cellRenderer: this.imageRenderer },
+    {
+      headerName: 'Actions',
+      field: 'id', // Use 'id' as the field since your delete button needs the id
+      width: 100,
+      cellRenderer: DeleteGridButtonComponent,
+      cellRendererParams: {
+        delete: (id: number) => this.onDelete(id),
+      },
+    },
   ];
 
   rowData$: Observable<{ id: number; title: string; price: number; quantity: number; image: string }[]> | undefined;
@@ -46,19 +56,70 @@ export class CartComponent implements OnInit {
             )
           );
           return forkJoin(productRequests);
+        }),
+        catchError(error => {
+          console.error('Error fetching cart items:', error);
+          return of([]); // Return an empty array in case of error
         })
       );
 
-      // Calculate the total price
       this.total$ = this.rowData$.pipe(
-        map(items => items.reduce((total, item) => total + item.price * item.quantity, 0))
+        map(items => items.reduce((total, item) => total + item.price * item.quantity, 0)),
+        catchError(error => {
+          console.error('Error calculating total price:', error);
+          return of(0); // Return 0 in case of error
+        })
       );
     } else {
       console.error('User ID not found');
     }
   }
 
-  imageRenderer(params: any): string {
+  onDelete(productId: number): void {
+    console.log('Deleting product with ID:', productId);
+    const userId = this.authService.getUserId();
+    if (userId !== null) {
+      this.cartService.removeItemFromCart(userId, productId).subscribe(() => {
+        this.rowData$ = this.cartService.getUserCart(userId).pipe(
+          switchMap(cartItems => {
+            const productRequests = cartItems.map(item =>
+              this.productService.getProductDetailsById(item.productId).pipe(
+                map((product: IItem) => ({
+                  id: product.id,
+                  title: product.title,
+                  price: product.price,
+                  quantity: item.quantity,
+                  image: product.image
+                }))
+              )
+            );
+            return forkJoin(productRequests);
+          }),
+          catchError(error => {
+            console.error('Error fetching updated cart items:', error);
+            return of([]); // Return an empty array in case of error
+          })
+        );
+        this.updateTotal();
+      });
+    }
+  }
+
+  private updateTotal(): void {
+    if (this.rowData$) {
+      this.total$ = this.rowData$.pipe(
+        map(items => items.reduce((total, item) => total + item.price * item.quantity, 0)),
+        catchError(error => {
+          console.error('Error updating total price:', error);
+          return of(0); // Return 0 in case of error
+        })
+      );
+    } else {
+      console.error('rowData$ is undefined');
+    }
+  }
+
+  imageRenderer(params: { value: string }): string {
     return `<img src="${params.value}" width="100" height="100" style="object-fit: contain;">`;
   }
 }
