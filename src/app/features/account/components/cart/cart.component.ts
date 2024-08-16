@@ -5,7 +5,7 @@ import { ProductService } from '../../services/single-item.service';
 import { Observable, forkJoin, switchMap, map ,catchError,of } from 'rxjs';
 import { IItem } from '../../../../shared/models/item.model';
 import { ColDef ,ICellRendererComp} from 'ag-grid-community';
-import { DeleteGridButtonComponent } from '../../../../shared/components/grid_components/delete-grid-button/delete-grid-button.component';
+import { DeleteComponent } from '../../../../shared/components/grid_components/delete/delete.component';
 
 @Component({
   selector: 'app-cart',
@@ -13,22 +13,22 @@ import { DeleteGridButtonComponent } from '../../../../shared/components/grid_co
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+
+  rowData: any[]=[];
+
   columnDefs: ColDef[] = [
     { headerName: 'ID', field: 'id', width: 70 },
     { headerName: 'Title', field: 'title', width: 250 },
     { headerName: 'Price', field: 'price', width: 100 },
     { headerName: 'Quantity', field: 'quantity', width: 100 },
     { headerName: 'Image', field: 'image', width: 150, cellRenderer: this.imageRenderer },
-    {
-      headerName: 'Actions',
-      field: 'id', // Use 'id' as the field since your delete button needs the id
-      width: 100,
-      cellRenderer: DeleteGridButtonComponent,
-      cellRendererParams: {
-        delete: (id: number) => this.onDelete(id),
-      },
-    },
+    { headerName: "Actions", cellRenderer: 'deleteButtonRenderer' } 
   ];
+
+  frameworkComponents: any = {
+    deleteButtonRenderer: DeleteComponent
+
+  };
 
   rowData$: Observable<{ id: number; title: string; price: number; quantity: number; image: string }[]> | undefined;
   total$: Observable<number> | undefined;

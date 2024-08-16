@@ -3,13 +3,16 @@
 
   <ag-grid-angular
     style="width: 80%; height: 700px;"
-    class="ag-theme-balham"
+    class="ag-theme-quartz"
     [columnDefs]="columnDefs"
     [rowData]="rowData$ | async"
     [rowHeight]="50" 
+    [paginationPageSize]="3"
+    [pagination]="true"
     domLayout="normal"
     [defaultColDef]="{ resizable: true }"
-  ></ag-grid-angular>
+    [components]="frameworkComponents">
+  </ag-grid-angular>
 </div>
 <div *ngIf="total$ | async as total">
   <p>Total Price: ${{ total.toFixed(2) }}</p>
