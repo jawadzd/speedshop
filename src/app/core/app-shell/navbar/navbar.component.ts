@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { signout } from '../../auth/login/store/auth.actions';
 import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';
 import { TranslationService } from '../../../shared/services/translation.service';
+import { GeocodingService } from '../../../shared/services/geocoding.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   showLocationAndDropdown: boolean = false; //initial state of showLocationAndDropdown
   isAuthenticated: boolean = false; //initial state of isAuthenticated
   keyboardControlEnabled: boolean = false; //initial state of keyboardControlEnabled
+  userLocation: string = 'Location'; //initial state of userLocations
   private unsubscribe$ = new Subject<void>(); //creating a new Subject used to unsubscribe from the observables
 
   constructor(
@@ -26,7 +28,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private store: Store<IAuthState>,
     private keyboardControlService: KeyboardControlService,
-    private translationService: TranslationService 
+    private translationService: TranslationService ,
+    private geocodingService: GeocodingService
     //injection of services through the constructor
   ) {}
 
@@ -62,6 +65,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.checkAuthentication();
     this.keyboardControlEnabled = this.keyboardControlService.isEnabled();//checking if the keyboard control is enabled
+    this.getLocation();
   }
  //authentication check function
   checkAuthentication(): void {
@@ -85,6 +89,41 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.translationService.changeLanguage(lang);
    
   }
+
+   // Method to get user location
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showPosition(position);
+      }, (error) => {
+        console.error('Error getting location: ', error);
+        this.userLocation = 'Location Unavailable';
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      this.userLocation = 'Geolocation Not Supported';
+    }
+  }
+
+  showPosition(position: GeolocationPosition) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    this.geocodingService.getAddress(lat, lon).subscribe(
+      (response) => {
+        if (response.results && response.results.length > 0) {
+          this.userLocation = response.results[0].formatted; 
+        } else {
+          this.userLocation = 'Address Not Found';
+        }
+      },
+      (error) => {
+        console.error('Error fetching address:', error);
+        this.userLocation = 'Error Fetching Address';
+      }
+    );
+  }
+
 //ngOnDestroy is a lifecycle hook that is called when a directive, pipe, or service is destroyed. Use ngOnDestroy() to unsubscribe observables and detach event handlers to avoid memory leaks.
   ngOnDestroy(): void {
     this.unsubscribe$.next();
