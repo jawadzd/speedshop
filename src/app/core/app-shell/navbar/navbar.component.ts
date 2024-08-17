@@ -35,12 +35,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (this.router.url === '/shell/login' || this.router.url === '/shell/signup') {
-          this.showLocationAndDropdown = true;//checkong the url and setting the showLocationAndDropdown to true or false
-        } else {
-          this.showLocationAndDropdown = false;
-        }
-        this.checkAuthentication();
+          const urlTree = this.router.parseUrl(this.router.url);
+          const basePath = urlTree.root.children['primary']?.segments.map(it => it.path).join('/');
+
+          // Check for login, signup, or feature/item/number pattern
+          const isFeatureItemRoute = basePath.startsWith('shell/feature/item/');
+          const isAuthRoute = basePath === '/login' || basePath === '/signup';
+
+          if (isAuthRoute || isFeatureItemRoute) {
+              this.showLocationAndDropdown = true;
+          } else {
+              this.showLocationAndDropdown = false;
+          }
+          
+          this.checkAuthentication();
       }
     });
 
@@ -64,7 +72,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 //signout function
   onSignOut(): void {
     this.store.dispatch(signout());
-    this.router.navigate(['/shell/login']);
+    this.router.navigate(['/login']);
   }
 //keyboard control function
   toggleKeyboardControl(): void {

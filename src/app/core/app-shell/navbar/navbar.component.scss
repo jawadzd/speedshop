@@ -132,7 +132,12 @@ $spacing-unit: 0.625rem;
     font-size: 0.625rem; 
     margin-left: 0.3125rem; /* 5px equivalent in rem */
 }
-
+.flag-icon {
+    width: 16px; /* Adjust the width to fit your design */
+    height: 12px; /* Adjust the height to fit your design */
+    margin-right: 8px; /* Adds some space between the flag and the language text */
+    vertical-align: middle; /* Aligns the flag vertically with the text */
+  }
 @media (max-width: 768px) {
     *{
         margin: 2px;

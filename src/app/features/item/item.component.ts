@@ -63,7 +63,7 @@ export class ItemComponent implements OnInit {
       if (result.isConfirmed) {
         // Store the current URL and redirect to login
         const returnUrl = this.router.url; // Current URL
-        this.router.navigate(['/shell/login'], { queryParams: { returnUrl } });
+        this.router.navigate(['/login'], { queryParams: { returnUrl } });
       }
     });
   }

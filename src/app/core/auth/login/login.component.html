@@ -1,7 +1,11 @@
 <div class="login-container">
+ 
   <div class="image-container">
+    <a routerLink="/shell/feature">
     <img src="assets/navbar/logo.png" alt="logo_icon_pic" />
+  </a>
   </div>
+
   <div class="login-form-container">
     <div class="login-form">
       <h2>{{ 'LOGIN' | translate }}</h2>
@@ -54,7 +58,7 @@
           <p>
             {{ 'DONT HAVE AN ACCOUNT' | translate }}
             <!-- link to signup page  -->
-            <a [routerLink]="['/shell/signup']" [queryParams]="{ returnUrl: returnUrl }">{{ 'SIGNUP' | translate }}</a>
+            <a [routerLink]="['/signup']" [queryParams]="{ returnUrl: returnUrl }">{{ 'SIGNUP' | translate }}</a>
           </p>
         </div>
       </form>

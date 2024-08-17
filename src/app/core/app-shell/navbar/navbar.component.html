@@ -10,36 +10,57 @@
   <div class="navbar-location" *ngIf="showLocationAndDropdown">
     <img src="assets/navbar/location.png" alt="location-icon_pic" />
   </div>
- <!-- navbar searchbar with a showLocationAndDropdown flag -->
+  <!-- navbar searchbar with a showLocationAndDropdown flag -->
   <div class="navbar-search" *ngIf="!showLocationAndDropdown">
     <input type="text" placeholder="Search..." />
     <img src="assets/navbar/search.png" alt="search-icon_pic" />
   </div>
- <!-- this dropdown is used for Language selection  -->
+  <!-- this dropdown is used for Language selection  -->
   <div class="navbar-dropdown">
     <div class="dropdown">
-      <button class="dropbtn">{{ 'LANGUAGE' | translate }} <span class="arrow">&#9660;</span></button>
+      <button class="dropbtn">
+        {{ "LANGUAGE" | translate }} <span class="arrow">&#9660;</span>
+      </button>
       <div class="dropdown-content">
-        <a (click)="onLanguageChange('en')">{{ 'ENGLISH' | translate }}</a>
-        <a (click)="onLanguageChange('fr')">{{ 'FRENCH' | translate }}</a>
-        <a (click)="onLanguageChange('ru')">{{ 'RUSSIAN' | translate }}</a>
+        <a (click)="onLanguageChange('en')">
+          <img src="assets/flags/en.png" alt="English Flag" class="flag-icon" />
+          {{ "ENGLISH" | translate }}
+        </a>
+        <a (click)="onLanguageChange('fr')">
+          <img src="assets/flags/fr.png" alt="French Flag" class="flag-icon" />
+          {{ "FRENCH" | translate }}
+        </a>
+        <a (click)="onLanguageChange('ru')">
+          <img src="assets/flags/ru.png" alt="Russian Flag" class="flag-icon" />
+          {{ "RUSSIAN" | translate }}
+        </a>
       </div>
     </div>
   </div>
-  
 
   <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
-    <a routerLink="feature/account/cart"><img src="assets/navbar/cart.png" alt="cart-icon_pic" /></a>
+    <a routerLink="feature/account/cart"
+      ><img src="assets/navbar/cart.png" alt="cart-icon_pic"
+    /></a>
   </div>
   <!-- this is the button used to turn the keyboard control on and off using 2 way binding to detect class -->
   <div class="navbar-button">
     <div *ngIf="!showLocationAndDropdown">
-      <button (click)="toggleKeyboardControl()" [ngClass]="{'on': keyboardControlEnabled, 'off': !keyboardControlEnabled}">
-        {{ (keyboardControlEnabled ? 'KEYBOARD ON' : 'KEYBOARD OFF') | translate }}
+      <button
+        (click)="toggleKeyboardControl()"
+        [ngClass]="{ on: keyboardControlEnabled, off: !keyboardControlEnabled }"
+      >
+        {{
+          (keyboardControlEnabled ? "KEYBOARD ON" : "KEYBOARD OFF") | translate
+        }}
       </button>
       <!-- the 2 buttons login and signout that show according to the authentication state -->
-      <button *ngIf="!isAuthenticated" routerLink="/shell/login">{{ 'LOGIN' | translate }}</button>
-      <button *ngIf="isAuthenticated" (click)="onSignOut()">{{ 'LOGOUT' | translate }}</button>
+      <button *ngIf="!isAuthenticated" routerLink="/login">
+        {{ "LOGIN" | translate }}
+      </button>
+      <button *ngIf="isAuthenticated" (click)="onSignOut()">
+        {{ "LOGOUT" | translate }}
+      </button>
     </div>
   </div>
 </nav>
