@@ -11,7 +11,7 @@
   </div>
 
   <div class="navbar-search" *ngIf="!showLocationAndDropdown">
-    <input type="text" placeholder="Search..." />
+    <input type="text" placeholder="Search..." (input)="onSearch($event)" />
     <img src="assets/navbar/search.png" alt="search-icon_pic" />
   </div>
 

@@ -4,7 +4,7 @@
 <div class="card-container">
   <!-- tracking items using trackby and using the async pipe for less memory usage and to not need unsubscribtion -->
   <div
-    *ngFor="let item of items$ | async; trackBy: trackByItemId; let i = index"
+    *ngFor="let item of filteredItems$ | async; trackBy: trackByItemId; let i = index"
     class="card-wrapper"
     (click)="onCardClick(i)"
     (dblclick)="onDoubleClick(item.id)"

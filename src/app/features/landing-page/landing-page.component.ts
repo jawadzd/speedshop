@@ -7,6 +7,8 @@ import { ItemState } from '../product-listing/store/item.reducer';
 import { selectAllItems } from '../product-listing/store/item.selectors';
 import { KeyboardControlService } from '../../shared/services/keyboard-control.service';
 import { Router } from '@angular/router';
+import { SearchService } from '../../shared/services/search.service';
+import { map, switchMap } from 'rxjs/operators';
 
 //the app landing page component the first page that the user will see
 @Component({
@@ -16,15 +18,29 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent {
   items$: Observable<IItem[]>;
+  filteredItems$: Observable<IItem[]>;
   selectedItemIndex: number = 0;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
     private store: Store<{ itemState: ItemState }>,
     private keyboardControlService: KeyboardControlService,
+    private searchService: SearchService,
     private router: Router
   ) {
     this.items$ = this.store.pipe(select(selectAllItems));
+    this.filteredItems$ = this.searchService.searchQuery$.pipe(
+      switchMap(query =>
+        this.items$.pipe(
+          map(items => {
+            const filtered = items.filter(item =>
+              item.title.toLowerCase().includes(query.toLowerCase())
+            );
+            return filtered;
+          })
+        )
+      )
+    );
   }
 
   ngOnInit() {

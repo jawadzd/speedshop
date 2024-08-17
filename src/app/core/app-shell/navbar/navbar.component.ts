@@ -10,6 +10,7 @@ import { signout } from '../../auth/login/store/auth.actions';
 import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { GeocodingService } from '../../../shared/services/geocoding.service';
+import { SearchService } from '../../../shared/services/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private store: Store<IAuthState>,
     private keyboardControlService: KeyboardControlService,
     private translationService: TranslationService ,
-    private geocodingService: GeocodingService
+    private geocodingService: GeocodingService,
+    private searchService :SearchService
     //injection of services through the constructor
   ) {}
 
@@ -72,6 +74,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.isAuthenticated.subscribe(authenticated => {
       this.isAuthenticated = authenticated;
     });
+  }
+
+//search function
+  onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if(input){
+    this.searchService.setSearchQuery(input.value);}
   }
 //signout function
   onSignOut(): void {
