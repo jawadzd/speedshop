@@ -7,10 +7,10 @@ import { selectAuthUser } from '../../auth/login/store/auth.selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { signout } from '../../auth/login/store/auth.actions';
-import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { GeocodingService } from '../../../shared/services/geocoding.service';
 import { SearchService } from '../../../shared/services/search.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +20,6 @@ import { SearchService } from '../../../shared/services/search.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   showLocationAndDropdown: boolean = false; //initial state of showLocationAndDropdown
   isAuthenticated: boolean = false; //initial state of isAuthenticated
-  keyboardControlEnabled: boolean = false; //initial state of keyboardControlEnabled
   userLocation: string = 'Location'; //initial state of userLocations
   private unsubscribe$ = new Subject<void>(); //creating a new Subject used to unsubscribe from the observables
 
@@ -28,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private store: Store<IAuthState>,
-    private keyboardControlService: KeyboardControlService,
+
     private translationService: TranslationService ,
     private geocodingService: GeocodingService,
     private searchService :SearchService
@@ -41,18 +40,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
           const urlTree = this.router.parseUrl(this.router.url);
-          const basePath = urlTree.root.children['primary']?.segments.map(it => it.path).join('/');
-
-          // Check for login, signup, or feature/item/number pattern
-          const isFeatureItemRoute = basePath.startsWith('shell/feature/item/');
-          const isAuthRoute = basePath === '/login' || basePath === '/signup';
-
-          if (isAuthRoute || isFeatureItemRoute) {
-              this.showLocationAndDropdown = true;
-          } else {
-              this.showLocationAndDropdown = false;
-          }
-          
           this.checkAuthentication();
       }
     });
@@ -66,7 +53,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
 
     this.checkAuthentication();
-    this.keyboardControlEnabled = this.keyboardControlService.isEnabled();//checking if the keyboard control is enabled
     this.getLocation();
   }
  //authentication check function
@@ -82,16 +68,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if(input){
     this.searchService.setSearchQuery(input.value);}
   }
-//signout function
-  onSignOut(): void {
-    this.store.dispatch(signout());
-    this.router.navigate(['/login']);
-  }
-//keyboard control function
-  toggleKeyboardControl(): void {
-    this.keyboardControlEnabled = !this.keyboardControlEnabled;
-    this.keyboardControlService.setEnabled(this.keyboardControlEnabled);
-  }
+
+
 
 //detecting the language change
   onLanguageChange(lang: string): void {

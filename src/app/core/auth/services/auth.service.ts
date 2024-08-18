@@ -45,7 +45,14 @@ export class AuthService {
     this.cookieService.set(this.tokenKey, accessToken);
     this.cookieService.set(this.refreshTokenKey, refreshToken);
   }
-
+  getUserName(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.tokenVerificationService.decodeToken(token);
+      return decoded ? decoded.name : null; 
+    }
+    return null;
+  }
   removeToken(): void {
     //a function that removes the token
     this.cookieService.delete(this.tokenKey);

@@ -1,21 +1,17 @@
-//basic shell component to hold the header and footer of the application
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  loadItems,
+import {  loadItems,
   loadElectronics,
   loadJewelry,
   loadMensClothing,
-  loadWomensClothing,
-} from '../../features/product-listing/store/item.actions';
-
+  loadWomensClothing, } from '../../../features/product-listing/store/item.actions';
 @Component({
-  selector: 'app-shell',
-  templateUrl: './shell.component.html',
-  styleUrls: ['./shell.component.scss'],
+  selector: 'app-category-bar',
+  templateUrl: './category-bar.component.html',
+  styleUrls: ['./category-bar.component.scss'] 
 })
-export class ShellComponent implements OnInit {
+export class CategoryBarComponent implements OnInit {
   showCategoryLinks: boolean = true;
   selectedCategory: string = 'all'; // Default to 'all'
 
@@ -24,14 +20,16 @@ export class ShellComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        const currentUrl = this.router.url;
         this.showCategoryLinks = !(
-          this.router.url.includes('/shell/feature/account/profile') ||
-          this.router.url.includes('/shell/feature/account/cart')
+          currentUrl.includes('/shell/feature/account/profile') ||
+          currentUrl.includes('/shell/feature/account/cart')
         );
-        // Update selectedCategory based on current route
       }
     });
   }
+
+  
   onDrawerToggle(isOpen: boolean): void {
     if (isOpen) {
       document.body.style.overflow = 'hidden'; // Disable scrolling

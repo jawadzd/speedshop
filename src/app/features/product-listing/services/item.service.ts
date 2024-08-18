@@ -15,4 +15,19 @@ export class ItemService {
   getItems(): Observable<IItem[]> {
     return this.http.get<IItem[]>(`${this.url}products`);
   }
+
+  getelec(): Observable<IItem[]> {
+    return this.http.get<IItem[]>(`${this.url}products/category/electronics`);
+  }
+
+  getjew(): Observable<IItem[]> {
+    return this.http.get<IItem[]>(`${this.url}products/category/jewelery`);
+  }
+  getmen(): Observable<IItem[]> {
+    return this.http.get<IItem[]>(`${this.url}products/category/men's clothing`);
+  }
+
+  getwomen(): Observable<IItem[]> {
+    return this.http.get<IItem[]>(`${this.url}products/category/women's clothing`);
+  }
 }

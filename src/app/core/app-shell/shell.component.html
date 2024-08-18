@@ -1,8 +1,29 @@
-<div class="shell-container">
-    <app-navbar></app-navbar>
-    <div class="content">
-      <router-outlet></router-outlet>
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer (openedChange)="onDrawerToggle($event)">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="shell-container">
+      <div class="navbardiv">
+        <app-navbar class="mainnav"></app-navbar>
+
+        <div class="ham-menu">
+          <button
+            mat-icon-button
+            (click)="drawer.toggle()"
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+          <app-category-bar class="category-links"> </app-category-bar>
+        </div>
+      </div>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
     </div>
-    <app-footer></app-footer>
-  </div>
-  <!-- creating a shell compoent to be parent for other components while always having the navbar and footer wrapping around the components -->
+  </mat-drawer-content>
+</mat-drawer-container>

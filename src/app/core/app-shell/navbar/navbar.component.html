@@ -1,18 +1,18 @@
 <nav class="navbar">
 
-    <div class="navbar-logo" *ngIf="!showLocationAndDropdown">
+    <div class="navbar-logo">
       <a routerLink="/shell/feature" class="navbar-logo-link">
       <img src="assets/navbar/logo.png" alt="logo_pic" />
     </a>
 
     </div>
 
-  <div class="navbar-location" *ngIf="!showLocationAndDropdown">
+  <div class="navbar-location" >
     <img src="assets/navbar/location.png" alt="location-icon_pic" />
     <span>{{ userLocation }}</span> <!-- Display the user location -->
   </div>
 
-  <div class="navbar-search" *ngIf="!showLocationAndDropdown">
+  <div class="navbar-search">
     <input type="text" placeholder="Search..." (input)="onSearch($event)" />
     <img src="assets/navbar/search.png" alt="search-icon_pic" />
   </div>
@@ -38,26 +38,17 @@
       </div>
     </div>
   </div>
-
-  <div class="navbar-cart" *ngIf="!showLocationAndDropdown">
+   <div class="navbar-cart" *ngIf="isAuthenticated" >
     <a routerLink="feature/account/cart">
       <img src="assets/navbar/cart.png" alt="cart-icon_pic" />
     </a>
-  </div>
+  </div> 
 
   <div class="navbar-button">
-    <div *ngIf="!showLocationAndDropdown">
-      <button (click)="toggleKeyboardControl()" [ngClass]="{ on: keyboardControlEnabled, off: !keyboardControlEnabled }">
-        {{
-          (keyboardControlEnabled ? "KEYBOARD ON" : "KEYBOARD OFF") | translate
-        }}
-      </button>
+ 
       <button *ngIf="!isAuthenticated" routerLink="/login">
         {{ "LOGIN" | translate }}
       </button>
-      <button *ngIf="isAuthenticated" (click)="onSignOut()">
-        {{ "LOGOUT" | translate }}
-      </button>
-    </div>
   </div>
+
 </nav>

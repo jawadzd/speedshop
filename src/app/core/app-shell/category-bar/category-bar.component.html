@@ -1,0 +1,43 @@
+<div class="ham-menu">
+  <div class="category-links" *ngIf="showCategoryLinks">
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'all' }"
+      (click)="navigateToCategory('all')"
+    >
+      {{ "ALL_ITEMS" | translate }}
+    </a>
+    <mat-divider vertical></mat-divider>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'mens' }"
+      (click)="navigateToCategory('mens')"
+    >
+      {{ "MENS" | translate }}
+    </a>
+    <mat-divider vertical></mat-divider>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'womens' }"
+      (click)="navigateToCategory('womens')"
+    >
+      {{ "WOMENS" | translate }}
+    </a>
+    <mat-divider vertical></mat-divider>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'electronics' }"
+      (click)="navigateToCategory('electronics')"
+    >
+      {{ "Electronics" | translate }}
+    </a>
+    <mat-divider vertical></mat-divider>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'jewelry' }"
+      (click)="navigateToCategory('jewelry')"
+    >
+      {{ "JEWELERY" | translate }}
+    </a>
+  </div>
+</div>

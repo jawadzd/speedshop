@@ -1,0 +1,66 @@
+<div class="sidenav">
+  <!-- Greeting -->
+  <div class="greeting">
+    <h3>
+      {{ "HELLO" | translate }},
+      {{ isAuthenticated ? userName : ("LOGIN" | translate) }}
+    </h3>
+  </div>
+
+  <!-- Divider -->
+  <hr class="divider" />
+
+  <!-- Menu Section -->
+  <div class="menu-section">
+    <h4>{{ "MENU" | translate }}</h4>
+    <ul>
+      <li routerLink="/shell/feature/product-listing">
+        {{ "ALL_ITEMS" | translate }}
+      </li>
+      <li routerLink="/shell/feature">{{ "TRENDING" | translate }}</li>
+      <li>{{ "SALES" | translate }}</li>
+      <li>{{ "PROMO" | translate }}</li>
+    </ul>
+  </div>
+
+  <!-- Divider -->
+  <hr class="divider" />
+
+  <!-- Settings Section -->
+  <div class="settings-section">
+    <h4>{{ "SETTINGS" | translate }}</h4>
+    <ul>
+      <li routerLink="/login" *ngIf="!isAuthenticated">
+        {{ "LOGIN" | translate }}
+      </li>
+      <li (click)="gotocart()">{{ "CART" | translate }}</li>
+      <li (click)="gotoprofile()">{{ "PROFILE" | translate }}</li>
+      <mat-slide-toggle
+        labelPosition="before"
+        [checked]="keyboardControlEnabled"
+        (change)="toggleKeyboardControl()"
+      >
+        {{
+          (keyboardControlEnabled ? "KEYBOARD ON" : "KEYBOARD OFF") | translate
+        }}
+      </mat-slide-toggle>
+      <li>
+        <mat-slide-toggle
+          labelPosition="before"
+          [checked]="LightTheme"
+          (change)="ChangeTheme()"
+        >
+          {{ (LightTheme ? "MODE:🌙" : "MODE:☀️") | translate }}
+        </mat-slide-toggle>
+      </li>
+
+      <li *ngIf="isAuthenticated" (click)="onSignOut()">
+        {{ "LOGOUT" | translate }}
+      </li>
+
+      <li>
+        {{ "SHARE_WEBSITE" | translate }}
+      </li>
+    </ul>
+  </div>
+</div>
