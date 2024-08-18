@@ -92,28 +92,39 @@
     background-color: lightgray;
     color: white;
   }
-  
   .action-buttons {
     display: flex;
     align-items: center;
     margin-top: 20px;
-
-    app-plus-button {
-      margin-right: 15px; /* Space between plus button and Go to Cart button */
+    gap: 15px; /* Space between the buttons */
+  }
+  
+  .add-to-cart-button {
+    background-color: #007bff; /* Blue color for Add to Cart */
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Larger padding for emphasis */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3; /* Darker blue on hover */
     }
-
-    .navigation-button {
-      background-color: #28a745; /* Green for Go to Cart */
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #218838;
-      }
+  }
+  
+  .go-to-cart-button {
+    background-color: #28a745; /* Green color for Go to Cart */
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Larger padding for emphasis */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #218838; /* Darker green on hover */
     }
   }
