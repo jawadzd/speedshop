@@ -2,16 +2,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px); 
+  height: calc(100vh - 5rem); 
   width: 100%;
   box-sizing: border-box;
-  padding: 20px; 
+  padding: 1.25rem; 
+  position: relative;
+}
+
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
+  z-index: -1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .login-form-container {
   width: 100%;
-  max-width: 400px; 
-  margin-right: 20px;
+  max-width: 25rem; 
+  margin-right: 1.25rem; 
+  position: relative; 
+  z-index: 1;
 }
 
 .login-form {
@@ -20,67 +41,83 @@
   justify-content: center;
   align-items: center;
   background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem; 
+  border-radius: 0.5rem; 
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
   height: 100%;
   box-sizing: border-box;
 }
 
 .login-form h2 {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; 
 }
 
 .login-form .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem; 
   width: 100%;
 }
 
 .login-form input {
   width: 100%;
+  padding: 0.625rem; 
+  border-radius: 0.25rem; 
 }
 
 .login-form button {
   width: 100%;
-}
-
-.login-form .signup-text {
-  margin-top: 10px;
+  padding: 0.625rem; 
+  border-radius: 0.25rem; 
   font-size: 0.875rem; 
 }
 
-.image-container {
-  flex: 0.7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.login-form .signup-text {
+  margin-top: 0.625rem; 
+  font-size: 0.875rem; 
 }
 
-.image-container img {
-  max-width: 100%;
-  height: auto;
-}
 .invalid {
   border-color: red;
 }
 
 .error-message {
   color: red;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+  font-size: 0.875rem; 
+  margin-top: 0.3125rem; 
 }
 
 .loading-spinner {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  width: 1.25rem; 
+  height: 1.25rem; 
+  border: 0.125rem solid rgba(0, 0, 0, 0.1); 
   border-radius: 50%;
-  border-top: 2px solid #3780FF;
+  border-top: 0.125rem solid #3780ff; 
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    padding: 1.25rem;
+  }
+
+  .image-container {
+    position: static;
+    opacity: 0.3;
+    z-index: 0; 
+  }
+
+  .login-form-container {
+    margin-right: 0;
+  }
 }
