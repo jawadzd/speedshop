@@ -1,5 +1,10 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer #drawer (openedChange)="onDrawerToggle($event)">
+  <mat-drawer
+    mode="over"
+    #drawer
+    (openedChange)="onDrawerToggle($event)"
+    class="sidenav-drawer"
+  >
     <app-sidenav></app-sidenav>
   </mat-drawer>
 
@@ -13,11 +18,10 @@
             mat-icon-button
             (click)="drawer.toggle()"
             class="example-icon"
-            aria-label="Example icon-button with menu icon"
           >
             <mat-icon>menu</mat-icon>
           </button>
-          <app-category-bar class="category-links"> </app-category-bar>
+          <app-category-bar class="category-links"></app-category-bar>
         </div>
       </div>
       <div class="content">

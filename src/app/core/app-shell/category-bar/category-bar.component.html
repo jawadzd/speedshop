@@ -1,9 +1,54 @@
 <div class="ham-menu">
-  <div class="category-links" *ngIf="showCategoryLinks">
+  <!-- Button to toggle dropdown on small screens -->
+  <button class="dropdown-button" *ngIf="isSmallScreen" (click)="toggleDropdown()">
+    {{ selectedCategory | translate }}
+  </button>
+
+  <!-- Dropdown menu for small screens -->
+  <div class="category-links dropdown" *ngIf="isDropdownVisible && isSmallScreen">
     <a
       mat-button
       [ngClass]="{ selected: selectedCategory === 'all' }"
       (click)="navigateToCategory('all')"
+    >
+      {{ "ALL_ITEMS" | translate }}
+    </a>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'mens' }"
+      (click)="navigateToCategory('mens')"
+    >
+      {{ "MENS" | translate }}
+    </a>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'womens' }"
+      (click)="navigateToCategory('womens')"
+    >
+      {{ "WOMENS" | translate }}
+    </a>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'electronics' }"
+      (click)="navigateToCategory('electronics')"
+    >
+      {{ "Electronics" | translate }}
+    </a>
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'jewelry' }"
+      (click)="navigateToCategory('jewelry')"
+    >
+      {{ "JEWELERY" | translate }}
+    </a>
+  </div>
+
+  <!-- Horizontal category links for larger screens -->
+  <div class="category-links" *ngIf="!isSmallScreen">
+    <a
+      mat-button
+      [ngClass]="{ selected: selectedCategory === 'all' }"
+      (click)="navigateToCategory('All')"
     >
       {{ "ALL_ITEMS" | translate }}
     </a>

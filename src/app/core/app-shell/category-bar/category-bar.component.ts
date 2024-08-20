@@ -1,23 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {  loadItems,
+import {
+  loadItems,
   loadElectronics,
   loadJewelry,
   loadMensClothing,
-  loadWomensClothing, } from '../../../features/product-listing/store/item.actions';
+  loadWomensClothing,
+} from '../../../features/product-listing/store/item.actions';
 @Component({
   selector: 'app-category-bar',
   templateUrl: './category-bar.component.html',
-  styleUrls: ['./category-bar.component.scss'] 
+  styleUrls: ['./category-bar.component.scss'],
 })
 export class CategoryBarComponent implements OnInit {
   showCategoryLinks: boolean = true;
-  selectedCategory: string = 'all'; // Default to 'all'
+  isDropdownVisible = false;
+  isSmallScreen = false;
+  selectedCategory: string = 'all';
 
   constructor(private router: Router, private store: Store) {}
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isSmallScreen = window.innerWidth <= 768;
+  }
+
+
   ngOnInit(): void {
+    this.isSmallScreen = window.innerWidth <= 768;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd || event instanceof NavigationStart) {
         const currentUrl = this.router.url;
@@ -29,8 +40,8 @@ export class CategoryBarComponent implements OnInit {
     });
   }
 
-  
   onDrawerToggle(isOpen: boolean): void {
+    this.isDropdownVisible = !this.isDropdownVisible;
     if (isOpen) {
       document.body.style.overflow = 'hidden'; // Disable scrolling
     } else {
@@ -38,6 +49,8 @@ export class CategoryBarComponent implements OnInit {
     }
   }
   navigateToCategory(category: string): void {
+      this.selectedCategory = category;
+    this.isDropdownVisible = false;
     // Update selectedCategory before navigation
     this.selectedCategory = category;
 
@@ -50,7 +63,9 @@ export class CategoryBarComponent implements OnInit {
       this.dispatchCategoryAction(category);
     }
   }
-
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
   private dispatchCategoryAction(category: string): void {
     switch (category) {
       case 'electronics':

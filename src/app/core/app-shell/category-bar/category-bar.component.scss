@@ -1,51 +1,130 @@
 .ham-menu {
+  display: flex;
+  align-items: center;
+  position: relative; // Position relative for absolute positioning of dropdown
+
+  .example-icon {
+    margin-right: 0.625rem; // 10px equivalent in rem
+  }
+
+  .dropdown-button {
+    display: none; // Hide by default, show on small screens
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+
+  .category-links {
     display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
     align-items: center;
-  
-    .example-icon {
-      margin-right: 10px; // Space between the icon and the links
+    flex-wrap: wrap; // Allows wrapping of links
+
+    a {
+      text-decoration: none;
+      font-size: 0.875rem; // 14px equivalent in rem
+      color: inherit;
+      margin: 0 0.5rem; // 8px equivalent in rem
     }
-  
-    .category-links {
-        justify-content: center;
-      display: flex;
-      flex: 1;
-      width: 100%;
-      align-items: center;
-  
-      a {
-        text-decoration: none;
-        font-size: 14px;
-        color: inherit;
-        margin: 0 8px; // Space between links
-      }
-  
-      mat-divider[vertical] {
-        height: 24px;
-        margin: 0 8px;
-        align-self: center;
-      }
+
+    mat-divider[vertical] {
+      height: 1.5rem; // 24px equivalent in rem
+      margin: 0 0.5rem; // 8px equivalent in rem
+      align-self: center;
     }
   }
-  
 
   .category-links a {
     position: relative;
     text-decoration: none;
     color: inherit;
   }
-  
+
   .category-links .selected {
-    color: #007bff// Adjust color as needed
+    color: #007bff; // Adjust color as needed
   }
-  
+
   .category-links .selected::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: -5px; // Adjust as needed
+    bottom: -0.3125rem; // 5px equivalent in rem, adjust as needed
     left: 0;
     width: 100%;
-    height: 2px; // Adjust as needed
+    height: 0.125rem; // 2px equivalent in rem, adjust as needed
     background-color: blue; // Adjust color as needed
   }
-  
+
+  /* Responsive Styles */
+  @media (max-width: 1024px) {
+    .category-links a {
+      font-size: 0.8125rem; // 13px equivalent in rem
+      margin: 0 0.4375rem; // 7px equivalent in rem
+    }
+
+    mat-divider[vertical] {
+      height: 1.375rem; // 22px equivalent in rem
+      margin: 0 0.4375rem; // 7px equivalent in rem
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dropdown-button {
+      display: block; // Show button on small screens
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
+    .category-links {
+      display: none; // Hide horizontal links on small screens
+
+      &.dropdown {
+        display: block;
+        position: absolute; // Ensure dropdown is positioned over other content
+        background-color: #fff;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+        width: 100%;
+        z-index: 1;
+
+        a {
+          display: block;
+          padding: 0.75rem;
+          text-align: left;
+          text-decoration: none;
+          color: #333;
+        }
+
+        a:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ham-menu {
+      .example-icon {
+        display: none; // Hide the icon on small screens
+      }
+      .category-links {
+        width: 100%;
+        justify-content: space-between;
+
+        a {
+          font-size: 0.6875rem; // 11px equivalent in rem
+          margin: 0.25rem 0; // 4px equivalent in rem
+          width: 48%; // Adjust width to fit two links per row
+        }
+
+        mat-divider[vertical] {
+          display: none; // Hide dividers on small screens
+        }
+      }
+    }
+  }
+}

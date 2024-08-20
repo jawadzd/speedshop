@@ -33,10 +33,16 @@ export class ShellComponent implements OnInit {
     });
   }
   onDrawerToggle(isOpen: boolean): void {
+    const matDrawerContainer = document.querySelector('.example-container');
+    
     if (isOpen) {
-      document.body.style.overflow = 'hidden'; // Disable scrolling
+      if (matDrawerContainer) {
+        matDrawerContainer.classList.add('no-scroll'); // Add a class to disable scroll
+      }
     } else {
-      document.body.style.overflow = ''; // Re-enable scrolling
+      if (matDrawerContainer) {
+        matDrawerContainer.classList.remove('no-scroll'); // Remove the class to re-enable scroll
+      }
     }
   }
   navigateToCategory(category: string): void {

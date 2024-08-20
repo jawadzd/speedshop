@@ -44,9 +44,8 @@
     </a>
   </div> 
 
-  <div class="navbar-button">
- 
-      <button *ngIf="!isAuthenticated" routerLink="/login">
+  <div  *ngIf="!isAuthenticated" class="navbar-button">
+      <button routerLink="/login">
         {{ "LOGIN" | translate }}
       </button>
   </div>

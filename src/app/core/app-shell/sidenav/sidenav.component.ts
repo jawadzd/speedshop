@@ -5,21 +5,28 @@ import { Store, select } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { signout } from '../../auth/login/store/auth.actions';
 import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';
+import { TranslationService } from '../../../shared/services/translation.service';
+import { GeocodingService } from '../../../shared/services/geocoding.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
+  currentLanguage: string = 'en';
+  currentFlag: string = 'assets/flags/en.png';
   isAuthenticated: boolean = false;
+  userLocation: string = 'Location'; //initial state of userLocations
   userName: string = '';
   keyboardControlEnabled: boolean = false; //initial state of keyboardControlEnabled
-  LightTheme:boolean = false;
+  LightTheme: boolean = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private store: Store,
+    private translationService: TranslationService,
+    private geocodingService: GeocodingService,
     private keyboardControlService: KeyboardControlService
   ) {}
 
@@ -32,7 +39,8 @@ export class SidenavComponent {
     });
 
     this.keyboardControlEnabled = this.keyboardControlService.isEnabled(); //checking if the keyboard control is enabled
-    this.LightTheme
+    this.LightTheme;
+    this.getLocation();
   }
 
   //keyboard control function
@@ -41,9 +49,8 @@ export class SidenavComponent {
     this.keyboardControlService.setEnabled(this.keyboardControlEnabled);
   }
 
-  ChangeTheme() :void{
-  this.LightTheme = !this.LightTheme;
-
+  ChangeTheme(): void {
+    this.LightTheme = !this.LightTheme;
   }
 
   //function to navigate to the cart
@@ -70,7 +77,7 @@ export class SidenavComponent {
       }).then((result) => {
         if (result.isConfirmed) {
           // Store the current URL and redirect to login
-          const returnUrl = "/shell/feature/account/profile"; // Current URL
+          const returnUrl = '/shell/feature/account/profile'; // Current URL
           this.router.navigate(['/login'], { queryParams: { returnUrl } });
         }
       });
@@ -94,6 +101,62 @@ export class SidenavComponent {
         this.router.navigate(['/login'], { queryParams: { returnUrl } });
       }
     });
+  }
+
+  cycleLanguage() {
+    if (this.currentLanguage === 'en') {
+      this.currentLanguage = 'fr';
+      this.currentFlag = 'assets/flags/fr.png';
+      this.onLanguageChange('fr');
+    } else if (this.currentLanguage === 'fr') {
+      this.currentLanguage = 'ru';
+      this.currentFlag = 'assets/flags/ru.png';
+      this.onLanguageChange('ru');
+    } else {
+      this.currentLanguage = 'en';
+      this.currentFlag = 'assets/flags/en.png';
+      this.onLanguageChange('en');
+    }
+  }
+
+  onLanguageChange(lang: string): void {
+    this.translationService.changeLanguage(lang);
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.showPosition(position);
+        },
+        (error) => {
+          console.error('Error getting location: ', error);
+          this.userLocation = 'Location Unavailable';
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      this.userLocation = 'Geolocation Not Supported';
+    }
+  }
+
+  showPosition(position: GeolocationPosition) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    this.geocodingService.getAddress(lat, lon).subscribe(
+      (response) => {
+        if (response.results && response.results.length > 0) {
+          this.userLocation = response.results[0].formatted;
+        } else {
+          this.userLocation = 'Address Not Found';
+        }
+      },
+      (error) => {
+        console.error('Error fetching address:', error);
+        this.userLocation = 'Error Fetching Address';
+      }
+    );
   }
 
   //signout function

@@ -27,7 +27,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private store: Store<IAuthState>,
-
     private translationService: TranslationService ,
     private geocodingService: GeocodingService,
     private searchService :SearchService

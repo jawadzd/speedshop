@@ -7,6 +7,11 @@
     </h3>
   </div>
 
+  <!-- Location -->
+  <div class="location">
+    <span>{{ userLocation }}</span> <!-- Display the user location -->
+  </div>
+
   <!-- Divider -->
   <hr class="divider" />
 
@@ -35,15 +40,28 @@
       </li>
       <li (click)="gotocart()">{{ "CART" | translate }}</li>
       <li (click)="gotoprofile()">{{ "PROFILE" | translate }}</li>
-      <mat-slide-toggle
-        labelPosition="before"
-        [checked]="keyboardControlEnabled"
-        (change)="toggleKeyboardControl()"
-      >
-        {{
-          (keyboardControlEnabled ? "KEYBOARD ON" : "KEYBOARD OFF") | translate
-        }}
-      </mat-slide-toggle>
+
+      <!-- Language Selector -->
+      <li class="language-selector">
+        <button mat-icon-button (click)="cycleLanguage()">
+          <span class="language-code">{{ currentLanguage.toUpperCase() }}</span>
+          <img [src]="currentFlag" alt="Current Language Flag" class="flag-icon" />
+        </button>
+      </li>
+      
+
+      <li>
+        <mat-slide-toggle
+          labelPosition="before"
+          [checked]="keyboardControlEnabled"
+          (change)="toggleKeyboardControl()"
+        >
+          {{
+            (keyboardControlEnabled ? "KEYBOARD ON" : "KEYBOARD OFF") | translate
+          }}
+        </mat-slide-toggle>
+      </li>
+
       <li>
         <mat-slide-toggle
           labelPosition="before"
