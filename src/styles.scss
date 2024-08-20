@@ -1,40 +1,55 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'ag-grid-community/styles/ag-grid.css';
-@import 'ag-grid-community/styles/ag-theme-quartz.css';
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Playwrite+BE+VLG:wght@100..400&family=Signika:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Playwrite+BE+VLG:wght@100..400&family=Signika:wght@300..700&display=swap');
+@import "bootstrap/scss/bootstrap";
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Playwrite+BE+VLG:wght@100..400&family=Signika:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Playwrite+BE+VLG:wght@100..400&family=Signika:wght@300..700&display=swap");
+@import "./themes.scss";
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html, body {
-    height: 100%;
-    font-family: "Signika", sans-serif;
-    font-optical-sizing: auto;
-  }
+html,
+body {
+  height: 100%;
+  font-family: "Signika", sans-serif;
+  font-optical-sizing: auto;
+  background-color: var(--navbar-background-color);
+}
 
-  div.swal2-container .swal2-confirm {
-    background-color: #3780FF !important;
-    border: none !important;
-    color: #fff !important;
-  }
-  
-  div.swal2-container .swal2-confirm:hover {
-    background-color: #2b68d6 !important;
-  }
-  
-  div.swal2-container .swal2-confirm:focus {
-    box-shadow: 0 0 0 3px rgba(55, 128, 255, 0.4) !important;
-  }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+div.swal2-container .swal2-confirm {
+  background-color: #3780ff !important;
+  border: none !important;
+  color: #fff !important;
+}
 
-.mdc-form-field--align-end>label{
+div.swal2-container .swal2-confirm:hover {
+  background-color: #2b68d6 !important;
+}
+
+div.swal2-container .swal2-confirm:focus {
+  box-shadow: 0 0 0 3px rgba(55, 128, 255, 0.4) !important;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mdc-form-field--align-end > label {
   font-size: 16px !important;
+  color: var(--text-color-ttt);
 }
 
+$spacing-unit: 0.625rem;
 
-
-$spacing-unit: 0.625rem; 
+:host {
+  .mat-mdc-icon-button .mat-mdc-button-touch-target {
+    color: var(--navbar-background-color)!important;
+    background-color: var(--navbar-background-color) !important;
+  }
+}

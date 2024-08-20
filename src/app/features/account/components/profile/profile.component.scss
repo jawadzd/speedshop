@@ -1,3 +1,5 @@
+
+
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -5,11 +7,12 @@
   justify-content: center;
   min-height: 80vh;
   padding: 1.25rem;
+  background-color: var(--profile-background-color);
 }
 
 .loading {
   font-size: 1.125rem;
-  color: #666;
+  color: var(--profile-loading-color);
 }
 
 .profile-content {
@@ -28,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: var(--profile-image-background);
 
   img {
     width: 100%;
@@ -39,15 +42,16 @@
 
 .profile-details {
   flex: 1;
+  color: var(--navbar-text-color);
   max-width: 31.25rem;
-  background: #fff;
+  background: var(--profile-background-color);
   border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.625rem var(--profile-shadow);
   padding: 1.25rem;
 
   h2 {
     margin-top: 0;
-    color: #333;
+    color: var(--profile-heading-color);
   }
 
   table {
@@ -61,12 +65,12 @@
     }
 
     th {
-      background: #f4f4f4;
+      background: var(--profile-table-header-background);
       font-weight: bold;
     }
 
     td {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--profile-table-border);
     }
 
     tr:last-child td {
@@ -76,8 +80,8 @@
 }
 
 .error {
-  color: #d9534f;
-  background-color: #f9d6d5;
+  color: var(--profile-error-text);
+  background-color: var(--profile-error-background);
   padding: 0.625rem;
   border-radius: 0.25rem;
   margin-top: 1.25rem;

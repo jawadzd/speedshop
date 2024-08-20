@@ -2,11 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.25rem; 
+  padding: 1.25rem;
+  min-height: 100vh; /* Ensures the container covers at least the full viewport height */
+  background-color: var(--navbar-background-color); /* Adapt to your theme */
 }
 
 h1 {
-  margin-bottom: 1.25rem; 
+  margin-bottom: 1.25rem;
+  font-size: 2rem; /* Adjust font size as needed */
+  color: var(--navbar-text-color); /* Adapt to your theme */
 }
 
 .cart-content {
@@ -14,62 +18,62 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  gap: 1.25rem; 
-  flex-wrap: wrap; 
+  gap: 1.25rem;
+  flex-wrap: wrap;
 }
 
 .ag-grid-container {
   flex: 1;
-  margin-right: 1.25rem; 
-  min-width: 0; 
+  margin-right: 1.25rem;
+  min-width: 0;
 }
 
 .sidebar {
-  width: 18.75rem; 
+  width: 18.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem; 
+  gap: 1.25rem;
 }
 
 .total-price {
   background-color: #f8f8f8;
-  padding: 0.625rem; 
-  border-radius: 0.3125rem; 
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
   width: 100%;
   text-align: center;
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 .promo-code {
   background-color: #f8f8f8;
-  padding: 0.625rem; 
-  border-radius: 0.3125rem; 
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
   width: 100%;
 }
 
 .promo-code label {
   display: block;
-  margin-bottom: 0.3125rem; 
+  margin-bottom: 0.3125rem;
   font-weight: bold;
 }
 
 .promo-code input {
-  width: calc(100% - 1.375rem); 
-  padding: 0.5rem; 
-  border: 0.0625rem solid #ccc; 
-  border-radius: 0.25rem; 
+  width: calc(100% - 1.375rem);
+  padding: 0.5rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
 }
 
 .checkout-button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 0.625rem 1.25rem; 
-  border-radius: 0.3125rem; 
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.3125rem;
   cursor: pointer;
-  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
   width: 100%;
   text-align: center;
 }
@@ -91,5 +95,17 @@ h1 {
 
   .sidebar {
     width: 100%;
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+
+  .total-price {
+    font-size: 1.25rem; /* Adjust font size for smaller screens */
+  }
+
+  .promo-code input {
+    width: 100%; /* Ensure input takes full width on smaller screens */
   }
 }

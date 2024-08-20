@@ -7,6 +7,7 @@ import { signout } from '../../auth/login/store/auth.actions';
 import { KeyboardControlService } from '../../../shared/services/keyboard-control.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { GeocodingService } from '../../../shared/services/geocoding.service';
+import { ThemeService } from '../../../shared/services/theme.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -24,11 +25,14 @@ export class SidenavComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private themeService: ThemeService,
     private store: Store,
     private translationService: TranslationService,
     private geocodingService: GeocodingService,
     private keyboardControlService: KeyboardControlService
-  ) {}
+  ) {
+    this.LightTheme = localStorage.getItem('theme') === 'light-theme';
+  }
 
   ngOnInit(): void {
     this.authService.isAuthenticated.subscribe((isAuth) => {
@@ -51,6 +55,7 @@ export class SidenavComponent {
 
   ChangeTheme(): void {
     this.LightTheme = !this.LightTheme;
+    this.themeService.toggleTheme(this.LightTheme);
   }
 
   //function to navigate to the cart

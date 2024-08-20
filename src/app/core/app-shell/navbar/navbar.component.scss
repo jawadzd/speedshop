@@ -7,6 +7,8 @@ $spacing-unit: 0.625rem;
   align-items: center;
   box-shadow: 0 math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0.1);
   width: 100%;
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-text-color);
 }
 
 .navbar-logo {
@@ -43,7 +45,11 @@ $spacing-unit: 0.625rem;
   width: calc(100% - 1.5rem);
   padding: math.div($spacing-unit, 2);
   border: none;
-  background-color: rgb(212, 202, 202);
+  background-color: rgb(
+    212,
+    202,
+    202
+  ); // Adjust this color separately for light/dark theme
   border-radius: math.div($spacing-unit, 1);
   outline: none;
 }
@@ -64,27 +70,20 @@ $spacing-unit: 0.625rem;
   width: 1.75rem;
   height: 1.75rem;
 }
-
 .navbar-button button {
-  padding: math.div($spacing-unit, 1) math.div($spacing-unit, 1); // 0.625rem equivalent in rem
+  padding: math.div($spacing-unit, 1);
   border: none;
   border-radius: 0.25rem;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--navbar-button-background-color);
+  color: var(--navbar-button-text-color);
   cursor: pointer;
   margin-right: math.div($spacing-unit, 1);
 }
 
-.navbar-button .on {
-  background-color: green;
-}
-
-.navbar-button .off {
-  background-color: red;
-}
-
 .navbar-button button:hover {
-  background-color: #0056b3;
+  background-color: var(
+    --navbar-button-hover-background-color
+  ); // Use the custom property for hover state
 }
 
 .navbar-dropdown {
@@ -98,8 +97,8 @@ $spacing-unit: 0.625rem;
 }
 
 .dropbtn {
-  background-color: white;
-  color: black;
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-text-color);
   font-size: 1rem;
   border: none;
   cursor: pointer;
@@ -108,21 +107,22 @@ $spacing-unit: 0.625rem;
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 6rem; // Adjusted for better scaling, previously 7.5rem
+  background-color: var(--dropdown-background-color); // Regular background
+  min-width: 6rem;
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
+  color: var(--dropdown-text-color);
   padding: math.div($spacing-unit, 1) math.div($spacing-unit, 2);
   text-decoration: none;
   display: block;
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: var(--dropdown-hover-background-color); // Use hover background color
 }
+
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -134,13 +134,13 @@ $spacing-unit: 0.625rem;
 }
 
 .flag-icon {
-  width: 1rem; // Adjusted for better scaling, previously 16px
-  height: 0.75rem; // Adjusted for better scaling, previously 12px
-  margin-right: 0.5rem; // Adjusted for better scaling, previously 8px
+  width: 1rem;
+  height: 0.75rem;
+  margin-right: 0.5rem;
   vertical-align: middle;
 }
+
 @media (max-width: 48rem) {
-  // 768px equivalent
   .navbar {
     display: flex;
     flex-direction: row;
@@ -148,20 +148,17 @@ $spacing-unit: 0.625rem;
     align-items: center;
     padding: 0 $spacing-unit;
 
-    // Hide elements on smaller screens
     .navbar-location,
     .navbar-dropdown {
       display: none;
     }
 
-    // Logo in the center
     &-logo {
       display: flex;
       justify-content: center;
       margin-bottom: $spacing-unit;
     }
 
-    // Search bar directly under the logo
     &-search {
       width: 100%;
       display: flex;
@@ -169,7 +166,7 @@ $spacing-unit: 0.625rem;
       margin-bottom: $spacing-unit;
 
       input {
-        width: 95%; // Adjust width as needed
+        width: 95%;
         padding: 0.75rem;
         margin-top: 0.3rem;
         border: none;
@@ -179,11 +176,10 @@ $spacing-unit: 0.625rem;
       }
 
       img {
-        display: none; // Hide search icon on mobile
+        display: none;
       }
     }
 
-    // Login button under the search bar
     &-button {
       display: flex;
       justify-content: flex-end;

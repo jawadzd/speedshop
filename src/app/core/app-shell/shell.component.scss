@@ -1,42 +1,74 @@
-.ham-menu {
-    display: flex;
-    align-items: center;
-  
-    .example-icon {
-      margin-right: 10px; // Space between the icon and the links
-    }
-  
-    .category-links {
-        justify-content: center;
-      display: flex;
-      flex: 1;
-      width: 100%;
-      align-items: center;
+html,body{
+  background-color: var(--navbar-background-color);
+}
+.category-links {
+  background-color: var(--navbar-background-color);
+}
 
-    }
+.ham-menu {
+  display: flex;
+  color: var(--navbar-background-color);
+  align-items: center;
+
+  .example-icon {
+    margin-right: 10px; // Space between the icon and the links
   }
-  .example-container.no-scroll {
-    height: 100vh;
-    overflow: hidden; /* Completely disable scrolling */
+
+  .category-links {
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: center;
   }
-  
-  .sidenav-drawer {
-    height: 100%; /* Ensure the sidenav takes full height */
-    width: 250px; /* Set a fixed width for the sidenav */
+
+  // Apply theme-based color to mat-divider
+  mat-divider[vertical] {
+    height: 1.5rem;
+    margin: 0 0.5rem;
+    align-self: center;
+    border-color: var(--divider-color); // Use theme-based divider color
   }
-  
-  .sidenav {
-    height: 100%; /* Take full height inside the drawer */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 1.25rem;
-    background-color: #f5f5f5;
-  }
-  
-  @media (max-width: 48rem){
+}
+
+.example-container.no-scroll {
+  height: 100vh;
+  overflow: hidden; /* Completely disable scrolling */
+}
+
+.sidenav-drawer {
+  height: 100%; /* Ensure the sidenav takes full height */
+  width: 250px; /* Set a fixed width for the sidenav */
+}
+
+.mat-mdc-icon-button .mat-mdc-button-touch-target{
+  display: var(--navbar-background-color);
+}
+.sidenav {
+  height: 100%; /* Take full height inside the drawer */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 1.25rem;
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 48rem) {
   mat-drawer {
-    width:100%; // Set width to match the sidenav
+    width: 100%; // Set width to match the sidenav
     max-width: 80vw; // Optional: Set a maximum width for responsiveness
     
     // Optional: Style adjustments
     background-color: #f5f5f5; // Match the sidenav background
-  }}
+  }
+}
+
+.example-icon {
+  background-color: var(--button-background);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.example-icon:hover {
+  background-color: var(--button-hover-background);
+  color: var(--button-hover-text);
+}

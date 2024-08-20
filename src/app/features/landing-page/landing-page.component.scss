@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    background-color: var(--navbar-background-color);
   }
   
   .card-wrapper {
@@ -18,4 +19,5 @@
     border: 2px solid #3780FF; /* Or any other visual highlight */
     outline: none; /* Remove default outline if any */
   }
+  
   

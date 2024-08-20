@@ -1,0 +1,136 @@
+
+.light-theme {
+    --background-color: #ffffff;
+    --login-background-color: #ffffff;
+    --login-form-background-color: #ffffff;
+    --login-form-border-color: #ddd;
+    --login-form-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --login-form-text-color: #000000;
+    --button-background: #ffffff;
+    --button-text: #000000;
+    --button-hover-background: #f0f0f0;
+    --button-hover-text: #000000;
+    --button-border: #cccccc;
+    --login-form-button-bg-color: #007bff;
+    --login-form-button-hover-bg-color: #0056b3;
+    --error-message-color: #ff0000;
+    --loading-spinner-color: #007bff;
+    --text-color-ttt: #000000;
+    --primary-color: #3780FF;
+    --price-color:#007bff;
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --signup-background-color: #ffffff;
+    --signup-form-background-color: #ffffff;
+    --signup-form-border-color: #ddd;
+    --signup-form-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --signup-form-text-color: #000000;
+    --signup-form-button-bg-color: #007bff;
+    --signup-form-button-hover-bg-color: #0056b3;
+    --signup-form-heading-color: #000000;
+    --primary-color: #3780FF;
+    --card-wrapper-background-color: #ffffff; 
+    --divider-color: #ccc;
+    --navbar-background-color: #ffffff;
+    --navbar-text-color: #000000;
+    --navbar-button-background-color: #007bff;
+    --navbar-button-hover-background-color: #0056b3;
+    --sidenav-background-color: #f5f5f5;
+    --sidenav-text-color: #000;
+    --background-color: #ffff;
+    --text-color: #ffffff;
+    --primary-color: #FF6347;
+  // Dark card background
+    --divider-color: #ffffff; 
+    --sidenav-link-color: #007bff;
+    --sidenav-divider-color: #ddd;
+    --profile-background-color: #ffffff; /* White background */
+    --profile-border-color: #ddd; /* Light gray border */
+    --profile-shadow: rgba(0, 0, 0, 0.1); /* Light shadow */
+    --profile-text-color: #333; /* Dark text color */
+    --profile-heading-color: #333; /* Dark heading color */
+    --profile-loading-color: #666; /* Medium gray for loading text */
+    --profile-error-background: #f9d6d5; /* Light red for error background */
+    --profile-error-text: #d9534f; /* Red text for errors */
+    --profile-image-background: #f0f0f0; /* Light gray for profile image background */
+    --profile-table-header-background: #f4f4f4; /* Very light gray for table headers */
+    --profile-table-border: #ddd; /* Light gray for table borders */
+    --profile-table-row-background: #ffffff; /* White background for table rows */
+    --navbar-button-text-color: white;
+    --dropdown-background-color: #f9f9f9;
+    --dropdown-hover-background-color: #f1f1f1;
+    --dropdown-text-color: black;
+    --ham-menu-bg-color: #ffffff;
+    --text-secondary-color:black;
+    --ham-menu-text-color: #000000;
+    --border-color:solid #ccc;;
+    --ham-menu-dropdown-bg-color: #f0f0f0;
+    --divider-color: #000000;
+    --ham-menu-dropdown-hover-bg-color: #e0e0e0;
+    --ham-menu-selected-color: #007bff;
+    --ham-menu-selected-underline-color: blue;
+  }
+  
+  .dark-theme {
+    --text-secondary-color:white;
+    --background-color: #444444;
+    --text-color-ttt: #ffffff;
+    --signup-background-color: #333333;
+    --price-color:red;
+    --signup-form-background-color: #333333;
+    --signup-form-border-color: #444444;
+    --signup-form-box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --signup-form-text-color: #ffffff;
+    --signup-form-button-bg-color: #555555;
+    --signup-form-button-hover-bg-color: #444444;
+    --signup-form-heading-color: #ffffff;
+    --sidenav-background-color: #2c2c2c;
+    --card-wrapper-background-color: #444444; 
+    --sidenav-text-color: #f5f5f5;
+    --sidenav-link-color: #1e90ff;
+    --sidenav-divider-color: #555;
+    --primary-color: #FF6347;
+    --navbar-background-color: #333333;
+    --navbar-text-color: #ffffff;
+    --divider-color: #ffffff;
+    --navbar-button-background-color: #555555;
+    --navbar-button-hover-background-color: #444444; 
+    --navbar-button-text-color: #ffffff;
+    --login-background-color: #333333;
+    --login-form-background-color: #333333;
+    --border-color:solid white;
+    --login-form-border-color: #444444;
+    --login-form-box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --profile-background-color: #333333; /* Dark gray background */
+    --profile-border-color: #555555; /* Darker gray border */
+    --profile-shadow: rgba(0, 0, 0, 0.3); /* Darker shadow */
+    --profile-text-color: #ffffff; /* White text color */
+    --profile-heading-color: #ffffff; /* White heading color */
+    --profile-loading-color: #aaaaaa; /* Light gray for loading text */
+    --profile-error-background: #d9534f; /* Red background for errors */
+    --profile-error-text: #ffffff; /* White text for error messages */
+    --profile-image-background: #444444; /* Darker gray for profile image background */
+    --profile-table-header-background: #555555; /* Dark gray for table headers */
+    --profile-table-border: #777777; /* Medium gray for table borders */
+    --profile-table-row-background: #333333; /* Dark gray for table rows */
+    --login-form-text-color: #ffffff;
+    --login-form-button-bg-color: #555555;
+    --login-form-button-hover-bg-color: #444444;
+    --error-message-color: #ff0000;
+    --loading-spinner-color: #3780ff;
+    --dropdown-background-color: #444444;
+    --dropdown-hover-background-color: #555555; 
+    --dropdown-text-color: white;
+    --ham-menu-bg-color: #333333;
+    --ham-menu-text-color: #ffffff;
+    --button-background: #333333;
+    --button-text: #ffffff;
+    --button-hover-background: #444444;
+    --button-hover-text: #ffffff;
+    --button-border: #555555;
+    --ham-menu-dropdown-bg-color: #444444;
+    --ham-menu-dropdown-hover-bg-color: #555555;
+    --ham-menu-selected-color: #3780ff;
+    --ham-menu-selected-underline-color: #3780ff;
+  }
+  

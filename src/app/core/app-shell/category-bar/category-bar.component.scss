@@ -1,7 +1,9 @@
+
 .ham-menu {
   display: flex;
   align-items: center;
   position: relative; // Position relative for absolute positioning of dropdown
+  color: var(--ham-menu-text-color);
 
   .example-icon {
     margin-right: 0.625rem;
@@ -12,7 +14,7 @@
     width: 100%;
     text-align: left;
     padding: 0.75rem;
-    background-color: #f0f0f0;
+    background-color:var(  --navbar-background-color) ;
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
@@ -22,6 +24,7 @@
     display: flex;
     flex: 1;
     width: 100%;
+  
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; // Allows wrapping of links
@@ -37,6 +40,7 @@
       height: 1.5rem;
       margin: 0 0.5rem;
       align-self: center;
+      border-color: var(--divider-color);
     }
   }
 
@@ -47,7 +51,7 @@
   }
 
   .category-links .selected {
-    color: #007bff; // Adjust color as needed
+    color: var(--ham-menu-selected-color); // Use theme color
   }
 
   .category-links .selected::after {
@@ -57,7 +61,7 @@
     left: 0;
     width: 100%;
     height: 0.125rem;
-    background-color: blue; // Adjust color as needed
+    background-color: var(--ham-menu-selected-underline-color); // Use theme color
   }
 
   /* Responsive Styles */
@@ -87,7 +91,7 @@
       &.dropdown {
         display: block;
         position: absolute; // Ensure dropdown is positioned over other content
-        background-color: #fff;
+        background-color: var(--ham-menu-dropdown-bg-color); // Use theme color
         box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
         width: 100%;
         z-index: 1;
@@ -97,11 +101,11 @@
           padding: 0.75rem;
           text-align: left;
           text-decoration: none;
-          color: #333;
+          color: var(--ham-menu-text-color); // Use theme color
         }
 
         a:hover {
-          background-color: #f0f0f0;
+          background-color: var(--ham-menu-dropdown-hover-bg-color); // Use theme color
         }
       }
     }
@@ -112,6 +116,7 @@
       .example-icon {
         display: none; // Hide the icon on small screens
       }
+
       .category-links {
         width: 100%;
         justify-content: space-between;

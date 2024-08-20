@@ -65,10 +65,10 @@
       <li>
         <mat-slide-toggle
           labelPosition="before"
-          [checked]="LightTheme"
+          [checked]="!LightTheme"
           (change)="ChangeTheme()"
         >
-          {{ (LightTheme ? "MODE:🌙" : "MODE:☀️") | translate }}
+          {{ (LightTheme ? "MODE:☀️" : "MODE:🌙") | translate }}
         </mat-slide-toggle>
       </li>
 
