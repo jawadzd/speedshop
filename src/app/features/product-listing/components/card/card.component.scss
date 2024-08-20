@@ -1,35 +1,41 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 1rem;
-    max-width: 300px; /* Adjust width as needed */
-  }
-  
-  .card-image {
-    width: 100%;
-    height: auto;
-  }
-  
-  .card-body {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-price {
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 0.5rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  border: 0.0625rem solid #ccc; /* 1px in rem */
+  border-radius: 0.5rem; /* 8px in rem */
+  overflow: hidden;
+  margin: 1rem;
+  max-width: 18.75rem; /* 300px in rem */
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-price {
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Media Query to hide the card description on small screens */
+@media (max-width: 768px) {
   .card-description {
-    font-size: 0.875rem;
-    line-height: 1.5;
+    display: none;
   }
-  
+}
