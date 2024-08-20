@@ -1,38 +1,18 @@
+/* Old Design for Large Screens */
 .signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 5rem); 
+  height: calc(100vh - 80px); 
   width: 100%;
   box-sizing: border-box;
-  padding: 1.25rem; 
-  position: relative; 
-}
-
-.image-container {
-  position: absolute; 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.3; 
-  z-index: 0; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  padding: 20px; 
 }
 
 .signup-form-container {
-  position: relative; 
   width: 100%;
-  max-width: 25rem; 
-  margin-right: 1.25rem; 
-  z-index: 1; 
+  max-width: 400px; 
+  margin-right: 20px;
 }
 
 .signup-form {
@@ -41,66 +21,49 @@
   justify-content: center;
   align-items: center;
   background: #fff;
-  padding: 1.25rem; 
-  border-radius: 0.5rem; 
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 100%;
   box-sizing: border-box;
 }
 
 .signup-form h2 {
-  margin-bottom: 1.25rem; 
+  margin-bottom: 20px;
 }
 
 .signup-form .form-group {
-  margin-bottom: 0.9375rem; 
+  margin-bottom: 15px;
   width: 100%;
 }
 
 .signup-form input {
   width: 100%;
-  padding: 0.625rem; 
-  border-radius: 0.25rem; 
 }
 
 .signup-form button {
   width: 100%;
-  padding: 0.625rem; 
-  border-radius: 0.25rem; 
-  font-size: 0.875rem; 
 }
 
 .signup-form .signup-text {
-  margin-top: 0.625rem; 
-  font-size: 0.875rem; 
+  margin-top: 10px;
+  font-size: 0.875rem;
 }
 
-.invalid {
-  border-color: red;
+.image-container {
+  flex: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.error-message {
-  color: red;
-  font-size: 0.875rem; 
-  margin-top: 0.3125rem; 
+.image-container img {
+  max-width: 100%;
+  height: auto;
 }
 
-.loading-spinner {
-  display: inline-block;
-  width: 1.25rem; 
-  height: 1.25rem; 
-  border: 0.125rem solid rgba(0, 0, 0, 0.1); 
-  border-radius: 50%;
-  border-top: 0.125rem solid #3780FF; 
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@media (max-width: 48rem) { 
+/* New Design for Small Screens */
+@media (max-width: 48rem) { /* 768px */
   .signup-container {
     flex-direction: column;
     height: auto;
@@ -114,6 +77,26 @@
   }
 
   .signup-form-container {
+    max-width: 25rem; 
     margin-right: 0;
+    z-index: 1;
+  }
+
+  .signup-form {
+    padding: 1.25rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
+  }
+
+  .signup-form h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .signup-form .form-group {
+    margin-bottom: 0.9375rem;
+  }
+
+  .signup-form .signup-text {
+    margin-top: 0.625rem;
   }
 }
