@@ -1,11 +1,11 @@
 <div class="ham-menu">
   <!-- Button to toggle dropdown on small screens -->
-  <button class="dropdown-button" *ngIf="isSmallScreen" (click)="toggleDropdown()">
+  <button class="dropdown-button" *ngIf="isSmallScreen && showCategoryLinks" (click)="toggleDropdown()">
     {{ selectedCategory | translate }}
   </button>
 
   <!-- Dropdown menu for small screens -->
-  <div class="category-links dropdown" *ngIf="isDropdownVisible && isSmallScreen">
+  <div class="category-links dropdown" *ngIf="isDropdownVisible && showCategoryLinks&& isSmallScreen">
     <a
       mat-button
       [ngClass]="{ selected: selectedCategory === 'all' }"
@@ -44,35 +44,35 @@
   </div>
 
   <!-- Horizontal category links for larger screens -->
-  <div class="category-links" *ngIf="!isSmallScreen">
+  <div class="category-links" *ngIf="!isSmallScreen && showCategoryLinks">
     <a
       mat-button
-      [ngClass]="{ selected: selectedCategory === 'all' }"
-      (click)="navigateToCategory('All')"
+      [ngClass]="{ selected: selectedCategory === 'All Items' }"
+      (click)="navigateToCategory('All Items')"
     >
       {{ "ALL_ITEMS" | translate }}
     </a>
     <mat-divider vertical></mat-divider>
     <a
       mat-button
-      [ngClass]="{ selected: selectedCategory === 'mens' }"
-      (click)="navigateToCategory('mens')"
+      [ngClass]="{ selected: selectedCategory === 'Men' }"
+      (click)="navigateToCategory('Men')"
     >
       {{ "MENS" | translate }}
     </a>
     <mat-divider vertical></mat-divider>
     <a
       mat-button
-      [ngClass]="{ selected: selectedCategory === 'womens' }"
-      (click)="navigateToCategory('womens')"
+      [ngClass]="{ selected: selectedCategory === 'Women'}"
+      (click)="navigateToCategory('Women')"
     >
       {{ "WOMENS" | translate }}
     </a>
     <mat-divider vertical></mat-divider>
     <a
       mat-button
-      [ngClass]="{ selected: selectedCategory === 'electronics' }"
-      (click)="navigateToCategory('electronics')"
+      [ngClass]="{ selected: selectedCategory === 'Electronics' }"
+      (click)="navigateToCategory('Electronics')"
     >
       {{ "Electronics" | translate }}
     </a>

@@ -1,204 +1,201 @@
 @use "sass:math";
-$spacing-unit: 0.625rem; 
+$spacing-unit: 0.625rem;
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0.1);
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .navbar-logo {
-    display: flex;
-    margin-left: math.div($spacing-unit, 2); // 0.3125rem equivalent in rem
-    align-items: center;
+  display: flex;
+  margin-left: math.div($spacing-unit, 2);
+  align-items: center;
 }
 
 .navbar-logo img {
-    width: 3rem; // Adjusted for better scaling, previously 3.75rem
-    height: 3rem; // Adjusted for better scaling, previously 3.75rem
+  width: 3rem;
+  height: 3rem;
 }
 
 .navbar-location {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-location img {
-    margin-left: math.div($spacing-unit, 2); // 0.3rem equivalent in rem
-    margin-top: math.div($spacing-unit, 2);
-    margin-bottom: math.div($spacing-unit, 2);
-    width: 1.75rem; // Adjusted for better scaling, previously 2.1875rem
-    height: 1.75rem; // Adjusted for better scaling, previously 2.1875rem
+  margin-left: math.div($spacing-unit, 2);
+  margin-top: math.div($spacing-unit, 2);
+  margin-bottom: math.div($spacing-unit, 2);
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .navbar-search {
-    flex-grow: 0.6;
-    display: flex;
-    align-items: center;
+  flex-grow: 0.6;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-search input {
-    width: calc(100% - 1.5rem); // Adjusted for better scaling, previously 1.875rem
-    padding: math.div($spacing-unit, 2); // 0.75rem equivalent in rem
-    border: none;
-    background-color: rgb(212, 202, 202);
-    border-radius: math.div($spacing-unit, 1); // 1.25rem equivalent in rem
-    outline: none;
+  width: calc(100% - 1.5rem);
+  padding: math.div($spacing-unit, 2);
+  border: none;
+  background-color: rgb(212, 202, 202);
+  border-radius: math.div($spacing-unit, 1);
+  outline: none;
 }
 
 .navbar-search img {
-    width: math.div($spacing-unit, 1); // 1.25rem equivalent in rem
-    height: math.div($spacing-unit, 1);
-    margin-left: math.div($spacing-unit, 2); // 0.625rem equivalent in rem
-    cursor: pointer;
+  width: math.div($spacing-unit, 1);
+  height: math.div($spacing-unit, 1);
+  margin-left: math.div($spacing-unit, 2);
+  cursor: pointer;
 }
 
 .navbar-cart {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-cart img {
-    width: 1.75rem; // Adjusted for better scaling, previously 2.1875rem
-    height: 1.75rem; // Adjusted for better scaling, previously 2.1875rem
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .navbar-button button {
-    padding: math.div($spacing-unit, 1) math.div($spacing-unit, 1); // 0.625rem equivalent in rem
-    border: none;
-    border-radius: 0.25rem;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    margin-right: math.div($spacing-unit, 1); // 1.25rem equivalent in rem
+  padding: math.div($spacing-unit, 1) math.div($spacing-unit, 1); // 0.625rem equivalent in rem
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-right: math.div($spacing-unit, 1);
 }
 
 .navbar-button .on {
-    background-color: green;
+  background-color: green;
 }
 
 .navbar-button .off {
-    background-color: red;
+  background-color: red;
 }
 
 .navbar-button button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .navbar-dropdown {
-    display: flex;
-    margin-right: 4rem; // Adjusted for better scaling, previously 5rem
+  display: flex;
+  margin-right: 4rem; // Adjusted for better scaling, previously 5rem
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .dropbtn {
-    background-color: white;
-    color: black;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 6rem; // Adjusted for better scaling, previously 7.5rem
-    z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 6rem; // Adjusted for better scaling, previously 7.5rem
+  z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: math.div($spacing-unit, 1) math.div($spacing-unit, 2); // 0.75rem 1rem equivalent in rem
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: math.div($spacing-unit, 1) math.div($spacing-unit, 2);
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 .arrow {
-    font-size: math.div($spacing-unit, 1); // 0.625rem equivalent in rem
-    margin-left: math.div($spacing-unit, 2); // 0.3125rem equivalent in rem
+  font-size: math.div($spacing-unit, 1);
+  margin-left: math.div($spacing-unit, 2);
 }
 
 .flag-icon {
-    width: 1rem; // Adjusted for better scaling, previously 16px
-    height: 0.75rem; // Adjusted for better scaling, previously 12px
-    margin-right: 0.5rem; // Adjusted for better scaling, previously 8px
-    vertical-align: middle;
+  width: 1rem; // Adjusted for better scaling, previously 16px
+  height: 0.75rem; // Adjusted for better scaling, previously 12px
+  margin-right: 0.5rem; // Adjusted for better scaling, previously 8px
+  vertical-align: middle;
 }
-@media (max-width: 48rem) { // 768px equivalent
-    .navbar {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        padding: 0 $spacing-unit;
-        
-       
-        // Hide elements on smaller screens
-        .navbar-location,
-        .navbar-dropdown {
-            display: none;
-        }
-        
-        // Logo in the center
-        &-logo {
-            display: flex;
-            justify-content: center;
-            margin-bottom: $spacing-unit;
-        }
-        
-        // Search bar directly under the logo
-        &-search {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: $spacing-unit;
+@media (max-width: 48rem) {
+  // 768px equivalent
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0 $spacing-unit;
 
-            input {
-                width: 95%; // Adjust width as needed
-                padding: 0.75rem;
-                margin-top: 0.3rem;
-                border: none;
-                background-color: rgb(212, 202, 202);
-                border-radius: 1.25rem;
-                outline: none;
-            }
-
-            img {
-                display: none; // Hide search icon on mobile
-            }
-        }
-
-        // Login button under the search bar
-        &-button {
-            display: flex;
-            justify-content: flex-end;
-            width: 30%;
-            margin-bottom: $spacing-unit;
-        }
-
-        &-cart {
-            display: flex;
-            justify-content: flex-end;
-            width: 10%;
-            margin-bottom: $spacing-unit;
-        }
-        
-
+    // Hide elements on smaller screens
+    .navbar-location,
+    .navbar-dropdown {
+      display: none;
     }
-}
 
+    // Logo in the center
+    &-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $spacing-unit;
+    }
+
+    // Search bar directly under the logo
+    &-search {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: $spacing-unit;
+
+      input {
+        width: 95%; // Adjust width as needed
+        padding: 0.75rem;
+        margin-top: 0.3rem;
+        border: none;
+        background-color: rgb(212, 202, 202);
+        border-radius: 1.25rem;
+        outline: none;
+      }
+
+      img {
+        display: none; // Hide search icon on mobile
+      }
+    }
+
+    // Login button under the search bar
+    &-button {
+      display: flex;
+      justify-content: flex-end;
+      width: 30%;
+      margin-bottom: $spacing-unit;
+    }
+
+    &-cart {
+      display: flex;
+      justify-content: flex-end;
+      width: 10%;
+      margin-bottom: $spacing-unit;
+    }
+  }
+}
