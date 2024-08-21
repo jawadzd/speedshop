@@ -1,38 +1,43 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    border: var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--background-color);
-    margin: 1rem;
-    max-width: 300px; /* Adjust width as needed */
-  }
-  
-  .card-image {
-    width: 100%;
-    height: auto;
-  }
-  
-  .card-body {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: var(  --navbar-text-color);
-  }
-  
-  .card-price {
-    font-weight: bold;
-    color: var(--price-color);
-    margin-bottom: 0.5rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  border: var(--border-color);
+  border-radius: 0.5rem; 
+  overflow: hidden;
+  background-color: var(--background-color);
+  margin: 1rem;
+  max-width: 18.75rem; 
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem; 
+  margin-bottom: 0.5rem; 
+  color: var(--navbar-text-color);
+}
+
+.card-price {
+  font-weight: bold;
+  color: var(--price-color);
+  margin-bottom: 0.5rem; 
+}
+
+.card-description {
+  color: var(--navbar-text-color);
+  font-size: 0.875rem; 
+  line-height: 1.5;
+}
+
+@media (max-width: 48rem) { 
   .card-description {
-    color: var(  --navbar-text-color);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    display: none;
   }
-  
+}
