@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   position: relative; // Position relative for absolute positioning of dropdown
-  background-color: var(--ham-menu-text-color);
+  background-color: var( --navbar-background-color);
 
   .example-icon {
     margin-right: 0.625rem;
