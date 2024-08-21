@@ -5,7 +5,7 @@ $spacing-unit: 0.625rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0.1);
+  box-shadow: 0 math.div($spacing-unit, 2) $spacing-unit rgba(0, 0, 0, 0);
   width: 100%;
   background-color: var(--navbar-background-color);
   color: var(--navbar-text-color);
