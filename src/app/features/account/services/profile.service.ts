@@ -15,7 +15,6 @@ export class ProfileService {
 
   getUserProfile(): Observable<IUserProfile> {
     return this.http.get<IUserProfile>(this.profileUrl).pipe(
-      tap((profile) => console.log('Profile fetched:', profile)),
       catchError((error) => {
         console.error('Error fetching profile:', error);
         throw error;

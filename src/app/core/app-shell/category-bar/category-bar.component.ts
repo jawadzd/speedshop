@@ -29,16 +29,26 @@ export class CategoryBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isSmallScreen = window.innerWidth <= 768;
+    this.setShowCategoryLinks(); 
+
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd || event instanceof NavigationStart) {
-        const currentUrl = this.router.url;
-        this.showCategoryLinks = !(
-          currentUrl.includes('/shell/feature/account/profile') ||
-          currentUrl.includes('/shell/feature/account/cart')
-        );
+      if (event instanceof NavigationEnd) {
+        this.setShowCategoryLinks(); // Check the URL on route navigation
       }
     });
+
+
+   
   }
+
+  setShowCategoryLinks(): void {
+    const currentUrl = this.router.url;
+    this.showCategoryLinks = !(
+      currentUrl.includes('/shell/feature/account/profile') ||
+      currentUrl.includes('/shell/feature/account/cart')
+    );
+  }
+
 
   onDrawerToggle(isOpen: boolean): void {
     this.isDropdownVisible = !this.isDropdownVisible;
@@ -51,9 +61,6 @@ export class CategoryBarComponent implements OnInit {
   navigateToCategory(category: string): void {
       this.selectedCategory = category;
     this.isDropdownVisible = false;
-    // Update selectedCategory before navigation
-    this.selectedCategory = category;
-
     // Ensure that the route is /shell/feature/product-listing
     if (!this.router.url.includes('/shell/feature/product-listing')) {
       this.router.navigate(['/shell/feature/product-listing']).then(() => {
@@ -66,6 +73,7 @@ export class CategoryBarComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
+  
   private dispatchCategoryAction(category: string): void {
     switch (category) {
       case 'electronics':

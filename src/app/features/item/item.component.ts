@@ -77,8 +77,6 @@ export class ItemComponent implements OnInit {
     // Add the item to the cart
     if (this.item && this.isAuthenticated) {
       const userId = this.authService.getUserId();
-      console.log(userId);
-
       if (userId !== null) {
         try {
           await this.cartService.addItemToCart(userId, {
