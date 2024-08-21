@@ -63,7 +63,7 @@ export class SidenavComponent {
     if (this.isAuthenticated) {
       this.router.navigate(['/shell/feature/account/cart']);
     } else {
-      this.showLoginPrompt();
+     
     }
   }
 
@@ -71,25 +71,11 @@ export class SidenavComponent {
     if (this.isAuthenticated) {
       this.router.navigate(['/shell/feature/account/profile']);
     } else {
-      Swal.fire({
-        title: 'Not Logged In',
-        text: 'You need to log in first.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Login',
-        cancelButtonText: 'Back',
-        allowOutsideClick: false,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Store the current URL and redirect to login
-          const returnUrl = '/shell/feature/account/profile'; // Current URL
-          this.router.navigate(['/login'], { queryParams: { returnUrl } });
-        }
-      });
+      this.showLoginPrompt('/shell/feature/account/profile');
     }
   }
 
-  showLoginPrompt() {
+  showLoginPrompt(returnUrl:string): void {
     // Show the login prompt when not logged in to restrict access
     Swal.fire({
       title: 'Not Logged In',
@@ -101,8 +87,7 @@ export class SidenavComponent {
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        // Store the current URL and redirect to login
-        const returnUrl = this.router.url; // Current URL
+
         this.router.navigate(['/login'], { queryParams: { returnUrl } });
       }
     });
